@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@kayvan/markdown-tree-parser": "^1.6.0"
+  }
+}
