@@ -1,5 +1,5 @@
-from .ner_chinese import one_shot_ner_paragraph, one_shot_ner_output
 from ...utils.llm_utils import convert_format_to_template
+from .ner_chinese import one_shot_ner_output, one_shot_ner_paragraph
 
 ner_conditioned_re_system = """您的任务是基于给定的中文段落和命名实体列表构建RDF（资源描述框架）图。
 请以JSON格式返回三元组列表，每个三元组表示RDF图中的一个关系。

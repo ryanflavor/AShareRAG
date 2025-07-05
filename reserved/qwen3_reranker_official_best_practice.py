@@ -5,17 +5,17 @@ Qwen3-Reranker-4B 官方方法最佳实践
 支持批处理、OOM 恢复、性能监控等生产级功能
 """
 
-import torch
-from transformers import AutoModelForCausalLM, AutoTokenizer
-from typing import List, Tuple, Optional, Dict, Any
-from dataclasses import dataclass
-import time
+import gc
 import logging
 import sys
-import os
-import gc
+import time
 from contextlib import contextmanager
+from dataclasses import dataclass
+from typing import Any
+
 import numpy as np
+import torch
+from transformers import AutoModelForCausalLM, AutoTokenizer
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # 数据类定义
@@ -32,7 +32,7 @@ class RerankerConfig:
     max_length: int = 8192
     batch_size: int = 8
     use_bf16: bool = True
-    cache_dir: Optional[str] = None
+    cache_dir: str | None = None
     log_level: str = "INFO"
 
 
@@ -43,7 +43,7 @@ class RerankResult:
     document: str
     score: float
     original_index: int
-    metadata: Optional[Dict[str, Any]] = None
+    metadata: dict[str, Any] | None = None
 
 
 @dataclass
@@ -55,7 +55,7 @@ class PerformanceMetrics:
     throughput: float
     peak_memory_mb: float
     average_score: float
-    score_range: Tuple[float, float]
+    score_range: tuple[float, float]
 
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -69,7 +69,7 @@ class Qwen3RerankerOfficial:
     使用生成式方法通过 yes/no 概率计算相关性分数
     """
 
-    def __init__(self, config: Optional[RerankerConfig] = None):
+    def __init__(self, config: RerankerConfig | None = None):
         self.config = config or RerankerConfig()
         self.logger = self._setup_logger()
 
@@ -169,7 +169,7 @@ class Qwen3RerankerOfficial:
             torch.cuda.empty_cache()
         gc.collect()
 
-    def _process_batch(self, query: str, documents: List[str]) -> List[float]:
+    def _process_batch(self, query: str, documents: list[str]) -> list[float]:
         """处理单个批次"""
         # 格式化输入
         batch_inputs = [self._format_input(query, doc) for doc in documents]
@@ -205,11 +205,11 @@ class Qwen3RerankerOfficial:
     def rerank(
         self,
         query: str,
-        documents: List[str],
-        batch_size: Optional[int] = None,
-        top_k: Optional[int] = None,
+        documents: list[str],
+        batch_size: int | None = None,
+        top_k: int | None = None,
         return_metrics: bool = False,
-    ) -> Tuple[List[RerankResult], Optional[PerformanceMetrics]]:
+    ) -> tuple[list[RerankResult], PerformanceMetrics | None]:
         """
         重排序文档
 
@@ -256,7 +256,7 @@ class Qwen3RerankerOfficial:
 
                     except RuntimeError as e:
                         if "out of memory" in str(e):
-                            self.logger.warning(f"OOM 错误，尝试单文档处理")
+                            self.logger.warning("OOM 错误，尝试单文档处理")
                             # 清理内存
                             if torch.cuda.is_available():
                                 torch.cuda.empty_cache()
@@ -269,12 +269,12 @@ class Qwen3RerankerOfficial:
                             raise
 
         except Exception as e:
-            self.logger.error(f"重排序失败: {str(e)}")
+            self.logger.error(f"重排序失败: {e!s}")
             raise
 
         # 创建结果
         results = []
-        for i, (doc, score) in enumerate(zip(documents, all_scores)):
+        for i, (doc, score) in enumerate(zip(documents, all_scores, strict=False)):
             results.append(RerankResult(document=doc, score=score, original_index=i))
 
         # 按分数排序
@@ -311,10 +311,10 @@ class Qwen3RerankerOfficial:
     def rerank_with_metadata(
         self,
         query: str,
-        documents: List[Dict[str, Any]],
+        documents: list[dict[str, Any]],
         text_key: str = "text",
         **kwargs,
-    ) -> List[Dict[str, Any]]:
+    ) -> list[dict[str, Any]]:
         """
         重排序带元数据的文档
 
@@ -343,7 +343,7 @@ class Qwen3RerankerOfficial:
 
         return ranked_docs
 
-    def get_stats(self) -> Dict[str, Any]:
+    def get_stats(self) -> dict[str, Any]:
         """获取统计信息"""
         return {
             "total_documents_processed": self.total_processed,
@@ -402,7 +402,7 @@ def main():
 
     # 显示性能指标
     if metrics:
-        print(f"\n📊 性能指标:")
+        print("\n📊 性能指标:")
         print(f"- 处理文档数: {metrics.total_documents}")
         print(f"- 处理时间: {metrics.processing_time:.2f}秒")
         print(f"- 吞吐量: {metrics.throughput:.1f} docs/秒")
@@ -433,7 +433,7 @@ def main():
 
     # 显示统计信息
     stats = reranker.get_stats()
-    print(f"\n📈 总体统计:")
+    print("\n📈 总体统计:")
     print(f"- 总处理文档数: {stats['total_documents_processed']}")
     print(f"- 平均吞吐量: {stats['average_throughput']:.1f} docs/秒")
 

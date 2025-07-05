@@ -5,10 +5,11 @@
 因此采用简化方案：直接使用整个文档，无需分块处理
 """
 
-import tiktoken
-from typing import List, Dict, Any, Optional
 import re
 from datetime import datetime
+from typing import Any
+
+import tiktoken
 
 
 class DocumentChunk:
@@ -21,7 +22,7 @@ class DocumentChunk:
         parent_idx: int,
         chunk_index: int = 0,
         tokens: int = 0,
-        metadata: Optional[Dict] = None,
+        metadata: dict | None = None,
     ):
         self.chunk_text = chunk_text
         self.parent_title = parent_title
@@ -67,7 +68,7 @@ class ChineseTextSplitter:
         """计算文本token数量"""
         return len(self.tokenizer.encode(text))
 
-    def analyze_document_size(self, text: str, title: str) -> Dict[str, Any]:
+    def analyze_document_size(self, text: str, title: str) -> dict[str, Any]:
         """分析文档大小和特征"""
         token_count = self.count_tokens(text)
         char_count = len(text)
@@ -88,7 +89,7 @@ class ChineseTextSplitter:
 
     def process_single_document(
         self, text: str, title: str, idx: int
-    ) -> List[DocumentChunk]:
+    ) -> list[DocumentChunk]:
         """
         处理单个文档
         根据enable_chunking设置决定是否分块
@@ -116,7 +117,7 @@ class ChineseTextSplitter:
             )
             return [chunk]
 
-    def _smart_split(self, text: str, title: str, idx: int) -> List[DocumentChunk]:
+    def _smart_split(self, text: str, title: str, idx: int) -> list[DocumentChunk]:
         """智能分块（备用方案，当前不需要）"""
         # 基于语义边界的分块逻辑
         boundaries = self._find_semantic_boundaries(text)
@@ -162,7 +163,7 @@ class ChineseTextSplitter:
 
         return chunks
 
-    def _find_semantic_boundaries(self, text: str) -> List[int]:
+    def _find_semantic_boundaries(self, text: str) -> list[int]:
         """识别语义边界位置"""
         boundaries = []
 
@@ -180,7 +181,7 @@ class ChineseTextSplitter:
 
         return sorted(set(boundaries))
 
-    def split_documents(self, documents: List[Dict[str, Any]]) -> List[str]:
+    def split_documents(self, documents: list[dict[str, Any]]) -> list[str]:
         """
         处理文档列表，返回HippoRAG兼容的字符串列表
         支持两种输入格式：
@@ -235,13 +236,13 @@ class ChineseTextSplitter:
 
         return processed_texts
 
-    def get_processing_stats(self) -> Dict[str, Any]:
+    def get_processing_stats(self) -> dict[str, Any]:
         """获取处理统计信息"""
         return self.processing_stats.copy()
 
     def generate_analysis_report(
-        self, documents: List[Dict[str, Any]]
-    ) -> Dict[str, Any]:
+        self, documents: list[dict[str, Any]]
+    ) -> dict[str, Any]:
         """生成文档分析报告"""
         analyses = []
 

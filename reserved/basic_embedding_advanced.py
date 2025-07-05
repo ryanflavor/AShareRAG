@@ -16,23 +16,21 @@ Qwen3-Embedding-4B 高级使用示例
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 """
 
+import gc
+import logging
 import os
 import sys
 import time
-import gc
-import json
-from typing import List, Dict, Optional, Union, Tuple, Any
-from dataclasses import dataclass
 from contextlib import contextmanager
+from dataclasses import dataclass
 from functools import wraps
-import logging
+from typing import Any
 
 import numpy as np
+import psutil
 import torch
 from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
-import psutil
-from tqdm import tqdm
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # 配置和数据类
@@ -62,7 +60,7 @@ class PerformanceMetrics:
 
     processing_time: float
     texts_count: int
-    embeddings_shape: Tuple[int, int]
+    embeddings_shape: tuple[int, int]
     throughput: float
     memory_before: MemoryInfo
     memory_after: MemoryInfo
@@ -143,7 +141,7 @@ def auto_retry_on_oom(
             for attempt in range(max_retries):
                 try:
                     return func(*args, **kwargs)
-                except torch.cuda.OutOfMemoryError as e:
+                except torch.cuda.OutOfMemoryError:
                     logging.warning(f"⚠️  CUDA OOM (尝试 {attempt + 1}/{max_retries})")
 
                     mem_info = get_memory_info()
@@ -216,8 +214,8 @@ class Qwen3EmbeddingManager:
     def __init__(
         self,
         model_name: str = "Qwen/Qwen3-Embedding-4B",
-        device: Optional[str] = None,
-        embedding_dim: Optional[int] = None,
+        device: str | None = None,
+        embedding_dim: int | None = None,
     ):
         """
         初始化嵌入模型管理器
@@ -292,11 +290,11 @@ class Qwen3EmbeddingManager:
     @auto_retry_on_oom(max_retries=3)
     def encode_texts(
         self,
-        texts: List[str],
+        texts: list[str],
         batch_size: int = 32,
         show_progress: bool = True,
         is_query: bool = False,
-    ) -> Optional[np.ndarray]:
+    ) -> np.ndarray | None:
         """
         编码文本为嵌入向量
 
@@ -356,8 +354,8 @@ class Qwen3EmbeddingManager:
         return cosine_similarity(embeddings1, embeddings2)
 
     def search(
-        self, query: str, documents: List[str], top_k: int = 5
-    ) -> List[Dict[str, Any]]:
+        self, query: str, documents: list[str], top_k: int = 5
+    ) -> list[dict[str, Any]]:
         """
         语义搜索
 
@@ -400,7 +398,7 @@ class Qwen3EmbeddingManager:
 
         return results
 
-    def get_performance_summary(self) -> Dict[str, Any]:
+    def get_performance_summary(self) -> dict[str, Any]:
         """获取性能统计摘要"""
         if not self.performance_history:
             return {}
@@ -597,7 +595,7 @@ def demo_dimension_comparison():
                     print(f"  ✅ 吞吐量: {metric.throughput:.1f} texts/秒")
                     print(f"  💾 GPU内存: {metric.memory_after.gpu_used:.2f}GB")
                 else:
-                    print(f"  ❌ 测试失败")
+                    print("  ❌ 测试失败")
 
             # 清理模型
             del manager
