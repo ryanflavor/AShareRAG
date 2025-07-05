@@ -7,26 +7,23 @@ one_shot_rag_qa_docs = (
 )
 
 one_shot_ircot_demo = (
-    f'{one_shot_rag_qa_docs}'
-    '\n\n问题: '
+    f"{one_shot_rag_qa_docs}"
+    "\n\n问题: "
     f"哪些公司生产Micro LED相关产品？"
-    '\n分析: '
+    "\n分析: "
     f"根据提供的信息，聚飞光电在Micro LED技术方面有重要布局，联得装备在Micro LED制造设备方面有技术积累，明微电子为Micro LED显示提供驱动芯片。Answer: 聚飞光电、联得装备、明微电子。"
-    '\n\n'
+    "\n\n"
 )
 
 rag_qa_system = (
-    '作为一个专业的企业信息分析助手，你需要仔细分析提供的公司资料和相关问题。'
+    "作为一个专业的企业信息分析助手，你需要仔细分析提供的公司资料和相关问题。"
     '请在"分析："后详细说明你的推理过程，展示如何从文本中得出结论。'
     '最后用"Answer："给出简洁、准确的回答，专注于公司名称和相关业务信息。'
-    '请用中文回答所有问题。'
+    "请用中文回答所有问题。"
 )
 
 one_shot_rag_qa_input = (
-    f"{one_shot_rag_qa_docs}"
-    "\n\n问题: "
-    "哪些公司生产Micro LED相关产品？"
-    '\n分析: '
+    f"{one_shot_rag_qa_docs}\n\n问题: 哪些公司生产Micro LED相关产品？\n分析: "
 )
 
 one_shot_rag_qa_output = (
@@ -38,5 +35,5 @@ prompt_template = [
     {"role": "system", "content": rag_qa_system},
     {"role": "user", "content": one_shot_rag_qa_input},
     {"role": "assistant", "content": one_shot_rag_qa_output},
-    {"role": "user", "content": "${prompt_user}"}
+    {"role": "user", "content": "${prompt_user}"},
 ]

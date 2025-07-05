@@ -21,7 +21,9 @@ ner_conditioned_re_frame = """将段落转换为JSON字典，包含命名实体�
 """
 
 
-ner_conditioned_re_input = ner_conditioned_re_frame.format(passage=one_shot_ner_paragraph, named_entity_json=one_shot_ner_output)
+ner_conditioned_re_input = ner_conditioned_re_frame.format(
+    passage=one_shot_ner_paragraph, named_entity_json=one_shot_ner_output
+)
 
 
 ner_conditioned_re_output = """{"triples": [
@@ -74,5 +76,12 @@ prompt_template = [
     {"role": "system", "content": ner_conditioned_re_system},
     {"role": "user", "content": ner_conditioned_re_input},
     {"role": "assistant", "content": ner_conditioned_re_output},
-    {"role": "user", "content": convert_format_to_template(original_string=ner_conditioned_re_frame, placeholder_mapping=None, static_values=None)}
+    {
+        "role": "user",
+        "content": convert_format_to_template(
+            original_string=ner_conditioned_re_frame,
+            placeholder_mapping=None,
+            static_values=None,
+        ),
+    },
 ]

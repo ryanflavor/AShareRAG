@@ -1,0 +1,11 @@
+# Prompt templates for the AShareRAG system
+# This file will be populated with prompt templates as we implement various components
+
+# Example structure:
+# ner_prompt:
+#   system: "You are an expert in Named Entity Recognition..."
+#   user: "Extract entities from the following text: {text}"
+
+# relation_extraction_prompt:
+#   system: "You are an expert in extracting relationships..."
+#   user: "Extract relationships from the following entities: {entities}"
