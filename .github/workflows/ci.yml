@@ -40,7 +40,7 @@ jobs:
     
     - name: Install dependencies
       run: |
-        uv sync --frozen
+        uv sync --frozen --group dev
     
     - name: Run ruff format check
       run: |
