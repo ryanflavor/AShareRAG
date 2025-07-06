@@ -5,6 +5,7 @@ import logging
 import time
 from pathlib import Path
 from string import Template
+from typing import TypedDict
 
 import yaml
 from openai import OpenAI
@@ -12,6 +13,26 @@ from openai import OpenAI
 from config.settings import Settings
 
 logger = logging.getLogger(__name__)
+
+# Valid entity types from prompts.yaml
+VALID_ENTITY_TYPES = {
+    "COMPANY",
+    "SUBSIDIARY",
+    "AFFILIATE",
+    "BUSINESS_SEGMENT",
+    "CORE_BUSINESS",
+    "PRODUCT",
+    "TECHNOLOGY",
+    "INDUSTRY_APPLICATION",
+    "COMPANY_CODE",
+}
+
+
+class NamedEntity(TypedDict):
+    """Type definition for named entity with text and type."""
+
+    text: str
+    type: str
 
 
 class LLMAdapter:
@@ -50,16 +71,31 @@ class LLMAdapter:
 
         self.ner_config = self.prompts["ner"]
 
-    def extract_entities(self, text: str, max_retries: int = 3) -> list[str]:
+    def extract_entities(
+        self, text: str, max_retries: int = 3, include_types: bool = True
+    ) -> list[str] | list[dict[str, str]]:
         """
         Extract named entities from text using LLM.
 
         Args:
             text: Input text to extract entities from
             max_retries: Maximum number of retry attempts for API failures
+            include_types: If True, return entities with types; if False, return only text
 
         Returns:
-            List of extracted entity strings
+            List of extracted entities. If include_types is True (default), returns
+            list of dicts with 'text' and 'type' keys. If False, returns list of strings
+            for backwards compatibility.
+
+        Example:
+            >>> adapter = LLMAdapter()
+            >>> # Get typed entities (default)
+            >>> entities = adapter.extract_entities("综艺股份是一家科技公司")
+            >>> # Returns: [{"text": "综艺股份", "type": "COMPANY"}]
+            >>>
+            >>> # Get string entities (backwards compatible)
+            >>> entities = adapter.extract_entities("综艺股份是一家科技公司", include_types=False)
+            >>> # Returns: ["综艺股份"]
         """
         if not text or not text.strip():
             logger.debug("Empty text provided, returning empty entity list")
@@ -76,7 +112,7 @@ class LLMAdapter:
         for attempt in range(max_retries):
             try:
                 response = self._call_llm(messages)
-                entities = self._parse_response(response)
+                entities = self._parse_response(response, include_types)
                 logger.info(f"Successfully extracted {len(entities)} entities")
                 return entities
 
@@ -126,8 +162,22 @@ class LLMAdapter:
 
         return response.choices[0].message.content
 
-    def _parse_response(self, response: str) -> list[str]:
-        """Parse LLM response to extract entity list."""
+    def _parse_response(
+        self, response: str, include_types: bool = True
+    ) -> list[str] | list[dict[str, str]]:
+        """
+        Parse LLM response to extract entity list.
+
+        Args:
+            response: JSON string response from LLM
+            include_types: If True, parse and validate typed entities; if False, return strings
+
+        Returns:
+            List of entities in requested format
+
+        Raises:
+            Logs errors for malformed JSON or invalid entity types
+        """
         try:
             # Clean response and parse JSON
             response = response.strip()
@@ -142,8 +192,50 @@ class LLMAdapter:
             if isinstance(data, dict) and "named_entities" in data:
                 entities = data["named_entities"]
                 if isinstance(entities, list):
-                    # Filter out empty strings and ensure all are strings
-                    return [str(e).strip() for e in entities if e and str(e).strip()]
+                    if not entities:
+                        return []
+
+                    # Check if we have typed entities (dicts) or simple strings
+                    first_entity = entities[0] if entities else None
+                    if isinstance(first_entity, dict) and include_types:
+                        # Process typed entities
+                        valid_entities = []
+                        for entity in entities:
+                            if (
+                                isinstance(entity, dict)
+                                and "text" in entity
+                                and "type" in entity
+                                and entity["text"]
+                                and str(entity["text"]).strip()
+                                and entity["type"] in VALID_ENTITY_TYPES
+                            ):
+                                valid_entities.append(
+                                    {
+                                        "text": str(entity["text"]).strip(),
+                                        "type": entity["type"],
+                                    }
+                                )
+                            elif (
+                                isinstance(entity, dict)
+                                and "text" in entity
+                                and "type" in entity
+                            ):
+                                # Log invalid entity type
+                                logger.warning(
+                                    f"Skipping entity with invalid type: {entity.get('type')}"
+                                )
+                        return valid_entities
+                    else:
+                        # Process as simple strings (backwards compatibility)
+                        if include_types:
+                            # Convert strings to typed format with default type
+                            logger.warning(
+                                "Received string entities when typed entities expected. "
+                                "Consider updating the prompt to return typed entities."
+                            )
+                        return [
+                            str(e).strip() for e in entities if e and str(e).strip()
+                        ]
 
             logger.warning(f"Unexpected response format: {response}")
             return []

@@ -74,11 +74,18 @@ class TestLLMAdapter:
         mock_client = Mock()
         mock_openai_class.return_value = mock_client
 
-        # Mock API response
+        # Mock API response with typed entities (new default format)
         mock_response = Mock()
         mock_response.choices = [
             Mock(
-                message=Mock(content='{"named_entities": ["公司A", "产品B", "技术C"]}')
+                message=Mock(
+                    content=""
+                    '{"named_entities": ['
+                    '{"text": "公司A", "type": "COMPANY"}, '
+                    '{"text": "产品B", "type": "PRODUCT"}, '
+                    '{"text": "技术C", "type": "TECHNOLOGY"}'
+                    "]}"
+                )
             )
         ]
         mock_client.chat.completions.create.return_value = mock_response
@@ -89,7 +96,12 @@ class TestLLMAdapter:
         adapter = LLMAdapter()
         result = adapter.extract_entities("这是一段包含公司A、产品B和技术C的文本。")
 
-        assert result == ["公司A", "产品B", "技术C"]
+        expected = [
+            {"text": "公司A", "type": "COMPANY"},
+            {"text": "产品B", "type": "PRODUCT"},
+            {"text": "技术C", "type": "TECHNOLOGY"},
+        ]
+        assert result == expected
         mock_client.chat.completions.create.assert_called_once()
 
     @patch("src.adapters.llm_adapter.Settings")
@@ -160,7 +172,11 @@ class TestLLMAdapter:
         # First call fails, second succeeds
         mock_response = Mock()
         mock_response.choices = [
-            Mock(message=Mock(content='{"named_entities": ["entity1"]}'))
+            Mock(
+                message=Mock(
+                    content='{"named_entities": [{"text": "entity1", "type": "COMPANY"}]}'
+                )
+            )
         ]
         mock_client.chat.completions.create.side_effect = [
             Exception("API error"),
@@ -172,7 +188,7 @@ class TestLLMAdapter:
         adapter = LLMAdapter()
         result = adapter.extract_entities("some text")
 
-        assert result == ["entity1"]
+        assert result == [{"text": "entity1", "type": "COMPANY"}]
         assert mock_client.chat.completions.create.call_count == 2
 
     @patch("src.adapters.llm_adapter.time.sleep")
@@ -242,3 +258,163 @@ class TestLLMAdapter:
                 LLMAdapter()
         finally:
             os.unlink(temp_path)
+
+    @patch("src.adapters.llm_adapter.Settings")
+    @patch("src.adapters.llm_adapter.OpenAI")
+    def test_extract_entities_string_format_with_include_types_false(
+        self, mock_openai_class, mock_settings_class, mock_prompts_file
+    ):
+        """Test extracting entities as simple strings when include_types=False."""
+        # Mock settings
+        mock_settings = Mock()
+        mock_settings.prompts_path = mock_prompts_file
+        mock_settings.deepseek_api_key = "test-key"
+        mock_settings.deepseek_api_base = "https://api.deepseek.com/v1"
+        mock_settings.deepseek_model = "deepseek-chat"
+        mock_settings_class.return_value = mock_settings
+
+        # Mock OpenAI client
+        mock_client = Mock()
+        mock_openai_class.return_value = mock_client
+
+        # Mock API response with simple string entities
+        mock_response = Mock()
+        mock_response.choices = [
+            Mock(
+                message=Mock(content='{"named_entities": ["公司A", "产品B", "技术C"]}')
+            )
+        ]
+        mock_client.chat.completions.create.return_value = mock_response
+
+        # Test with include_types=False
+        from src.adapters.llm_adapter import LLMAdapter
+
+        adapter = LLMAdapter()
+        result = adapter.extract_entities(
+            "这是一段包含公司A、产品B和技术C的文本。", include_types=False
+        )
+
+        assert result == ["公司A", "产品B", "技术C"]
+        mock_client.chat.completions.create.assert_called_once()
+
+    @patch("src.adapters.llm_adapter.Settings")
+    @patch("src.adapters.llm_adapter.OpenAI")
+    def test_extract_entities_validates_types(
+        self, mock_openai_class, mock_settings_class, mock_prompts_file
+    ):
+        """Test that entity types are validated against predefined set."""
+        # Mock settings
+        mock_settings = Mock()
+        mock_settings.prompts_path = mock_prompts_file
+        mock_settings.deepseek_api_key = "test-key"
+        mock_settings.deepseek_api_base = "https://api.deepseek.com/v1"
+        mock_settings.deepseek_model = "deepseek-chat"
+        mock_settings_class.return_value = mock_settings
+
+        # Mock OpenAI client
+        mock_client = Mock()
+        mock_openai_class.return_value = mock_client
+
+        # Mock API response with invalid entity type
+        mock_response = Mock()
+        mock_response.choices = [
+            Mock(
+                message=Mock(
+                    content=""
+                    '{"named_entities": ['
+                    '{"text": "公司A", "type": "INVALID_TYPE"}, '
+                    '{"text": "产品B", "type": "PRODUCT"}'
+                    "]}"
+                )
+            )
+        ]
+        mock_client.chat.completions.create.return_value = mock_response
+
+        # Test - should only return entities with valid types
+        from src.adapters.llm_adapter import LLMAdapter
+
+        adapter = LLMAdapter()
+        result = adapter.extract_entities("测试文本")
+
+        # Only the entity with valid type should be returned
+        expected = [{"text": "产品B", "type": "PRODUCT"}]
+        assert result == expected
+
+    @patch("src.adapters.llm_adapter.Settings")
+    @patch("src.adapters.llm_adapter.OpenAI")
+    def test_extract_entities_handles_malformed_entity_objects(
+        self, mock_openai_class, mock_settings_class, mock_prompts_file
+    ):
+        """Test handling of malformed entity objects."""
+        # Mock settings
+        mock_settings = Mock()
+        mock_settings.prompts_path = mock_prompts_file
+        mock_settings.deepseek_api_key = "test-key"
+        mock_settings.deepseek_api_base = "https://api.deepseek.com/v1"
+        mock_settings.deepseek_model = "deepseek-chat"
+        mock_settings_class.return_value = mock_settings
+
+        # Mock OpenAI client
+        mock_client = Mock()
+        mock_openai_class.return_value = mock_client
+
+        # Mock API response with malformed entities
+        mock_response = Mock()
+        mock_response.choices = [
+            Mock(
+                message=Mock(
+                    content=""
+                    '{"named_entities": ['
+                    '{"text": "公司A"},'
+                    '{"type": "COMPANY"},'
+                    '{"text": "产品B", "type": "PRODUCT"},'
+                    '{"invalid_key": "value"}'
+                    "]}"
+                )
+            )
+        ]
+        mock_client.chat.completions.create.return_value = mock_response
+
+        # Test - should only return well-formed entities
+        from src.adapters.llm_adapter import LLMAdapter
+
+        adapter = LLMAdapter()
+        result = adapter.extract_entities("测试文本")
+
+        # Only the well-formed entity should be returned
+        expected = [{"text": "产品B", "type": "PRODUCT"}]
+        assert result == expected
+
+    @patch("src.adapters.llm_adapter.Settings")
+    @patch("src.adapters.llm_adapter.OpenAI")
+    def test_extract_entities_backwards_compatibility(
+        self, mock_openai_class, mock_settings_class, mock_prompts_file
+    ):
+        """Test backwards compatibility with old format."""
+        # Mock settings
+        mock_settings = Mock()
+        mock_settings.prompts_path = mock_prompts_file
+        mock_settings.deepseek_api_key = "test-key"
+        mock_settings.deepseek_api_base = "https://api.deepseek.com/v1"
+        mock_settings.deepseek_model = "deepseek-chat"
+        mock_settings_class.return_value = mock_settings
+
+        # Mock OpenAI client
+        mock_client = Mock()
+        mock_openai_class.return_value = mock_client
+
+        # Mock API response with old format (list of strings)
+        mock_response = Mock()
+        mock_response.choices = [
+            Mock(message=Mock(content='{"named_entities": ["公司A", "产品B"]}'))
+        ]
+        mock_client.chat.completions.create.return_value = mock_response
+
+        # Test with include_types=False for backwards compatibility
+        from src.adapters.llm_adapter import LLMAdapter
+
+        adapter = LLMAdapter()
+        result = adapter.extract_entities("测试文本", include_types=False)
+
+        # Should return simple string list
+        assert result == ["公司A", "产品B"]

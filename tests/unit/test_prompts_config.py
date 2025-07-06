@@ -1,8 +1,8 @@
 """Unit tests for prompts configuration."""
 
-import pytest
-import yaml
 from pathlib import Path
+
+import yaml
 
 
 def test_ner_prompt_exists():
@@ -10,7 +10,7 @@ def test_ner_prompt_exists():
     prompts_file = Path("config/prompts.yaml")
     assert prompts_file.exists(), "prompts.yaml file should exist"
 
-    with open(prompts_file, "r", encoding="utf-8") as f:
+    with open(prompts_file, encoding="utf-8") as f:
         prompts = yaml.safe_load(f)
 
     assert "ner" in prompts, "NER prompt section should exist"
@@ -21,7 +21,7 @@ def test_ner_prompt_exists():
 
 def test_ner_prompt_structure():
     """Test NER prompt has correct structure."""
-    with open("config/prompts.yaml", "r", encoding="utf-8") as f:
+    with open("config/prompts.yaml", encoding="utf-8") as f:
         prompts = yaml.safe_load(f)
 
     ner_prompt = prompts["ner"]
@@ -45,7 +45,7 @@ def test_ner_prompt_structure():
 
 def test_ner_one_shot_example():
     """Test that one-shot example is properly structured."""
-    with open("config/prompts.yaml", "r", encoding="utf-8") as f:
+    with open("config/prompts.yaml", encoding="utf-8") as f:
         prompts = yaml.safe_load(f)
 
     example = prompts["ner"]["examples"][0]
@@ -65,4 +65,13 @@ def test_ner_one_shot_example():
     assert "named_entities" in parsed_output
     assert isinstance(parsed_output["named_entities"], list)
     assert len(parsed_output["named_entities"]) > 0
-    assert "综艺股份" in parsed_output["named_entities"]
+
+    # Check that entities are dictionaries with text and type
+    first_entity = parsed_output["named_entities"][0]
+    assert isinstance(first_entity, dict)
+    assert "text" in first_entity
+    assert "type" in first_entity
+
+    # Check that 综艺股份 is in the entities
+    entity_texts = [e["text"] for e in parsed_output["named_entities"]]
+    assert "综艺股份" in entity_texts

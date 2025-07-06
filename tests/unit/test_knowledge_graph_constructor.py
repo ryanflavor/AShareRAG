@@ -20,7 +20,11 @@ class TestKnowledgeGraphConstructor:
         # Mock LLM adapter
         mock_adapter = Mock()
         mock_llm_adapter_class.return_value = mock_adapter
-        mock_adapter.extract_entities.return_value = ["公司A", "产品B", "技术C"]
+        mock_adapter.extract_entities.return_value = [
+            {"text": "公司A", "type": "COMPANY"},
+            {"text": "产品B", "type": "PRODUCT"},
+            {"text": "技术C", "type": "TECHNOLOGY"},
+        ]
 
         # Test document
         documents = [{"id": "doc1", "text": "这是一段包含公司A、产品B和技术C的文本。"}]
@@ -28,7 +32,14 @@ class TestKnowledgeGraphConstructor:
         constructor = KnowledgeGraphConstructor()
         result = constructor.process_documents(documents)
 
-        assert result == {"doc1": ["公司A", "产品B", "技术C"]}
+        expected = {
+            "doc1": [
+                {"text": "公司A", "type": "COMPANY"},
+                {"text": "产品B", "type": "PRODUCT"},
+                {"text": "技术C", "type": "TECHNOLOGY"},
+            ]
+        }
+        assert result == expected
         mock_adapter.extract_entities.assert_called_once_with(
             "这是一段包含公司A、产品B和技术C的文本。"
         )
@@ -40,9 +51,15 @@ class TestKnowledgeGraphConstructor:
         mock_adapter = Mock()
         mock_llm_adapter_class.return_value = mock_adapter
         mock_adapter.extract_entities.side_effect = [
-            ["公司A", "产品B"],
-            ["技术C", "服务D"],
-            ["行业E"],
+            [
+                {"text": "公司A", "type": "COMPANY"},
+                {"text": "产品B", "type": "PRODUCT"},
+            ],
+            [
+                {"text": "技术C", "type": "TECHNOLOGY"},
+                {"text": "服务D", "type": "PRODUCT"},
+            ],
+            [{"text": "行业E", "type": "INDUSTRY_APPLICATION"}],
         ]
 
         # Test documents
@@ -56,9 +73,15 @@ class TestKnowledgeGraphConstructor:
         result = constructor.process_documents(documents)
 
         assert result == {
-            "doc1": ["公司A", "产品B"],
-            "doc2": ["技术C", "服务D"],
-            "doc3": ["行业E"],
+            "doc1": [
+                {"text": "公司A", "type": "COMPANY"},
+                {"text": "产品B", "type": "PRODUCT"},
+            ],
+            "doc2": [
+                {"text": "技术C", "type": "TECHNOLOGY"},
+                {"text": "服务D", "type": "PRODUCT"},
+            ],
+            "doc3": [{"text": "行业E", "type": "INDUSTRY_APPLICATION"}],
         }
         assert mock_adapter.extract_entities.call_count == 3
 
@@ -76,7 +99,9 @@ class TestKnowledgeGraphConstructor:
         # Mock LLM adapter
         mock_adapter = Mock()
         mock_llm_adapter_class.return_value = mock_adapter
-        mock_adapter.extract_entities.return_value = ["entity1"]
+        mock_adapter.extract_entities.return_value = [
+            {"text": "entity1", "type": "COMPANY"}
+        ]
 
         documents = [{"id": "doc1", "text": "text"}]
 
@@ -110,9 +135,9 @@ class TestKnowledgeGraphConstructor:
         mock_adapter = Mock()
         mock_llm_adapter_class.return_value = mock_adapter
         mock_adapter.extract_entities.side_effect = [
-            ["entity1"],
-            ["entity2"],
-            ["entity3"],
+            [{"text": "entity1", "type": "COMPANY"}],
+            [{"text": "entity2", "type": "PRODUCT"}],
+            [{"text": "entity3", "type": "TECHNOLOGY"}],
         ]
 
         # Test documents with missing IDs
@@ -129,9 +154,9 @@ class TestKnowledgeGraphConstructor:
         assert "doc1" in result
         assert "doc_1" in result  # Fallback ID for second doc
         assert "" in result  # Empty ID is kept as-is
-        assert result["doc1"] == ["entity1"]
-        assert result["doc_1"] == ["entity2"]
-        assert result[""] == ["entity3"]
+        assert result["doc1"] == [{"text": "entity1", "type": "COMPANY"}]
+        assert result["doc_1"] == [{"text": "entity2", "type": "PRODUCT"}]
+        assert result[""] == [{"text": "entity3", "type": "TECHNOLOGY"}]
 
     @patch("src.components.knowledge_graph_constructor.LLMAdapter")
     def test_process_documents_missing_text_field(self, mock_llm_adapter_class):
@@ -158,4 +183,77 @@ class TestKnowledgeGraphConstructor:
             "doc3": [],
         }
         # Adapter should be called with empty string for missing text
+        assert mock_adapter.extract_entities.call_count == 3
+
+    @patch("src.components.knowledge_graph_constructor.LLMAdapter")
+    def test_process_documents_with_typed_entities(self, mock_llm_adapter_class):
+        """Test processing documents with typed entities."""
+        # Mock LLM adapter
+        mock_adapter = Mock()
+        mock_llm_adapter_class.return_value = mock_adapter
+        mock_adapter.extract_entities.return_value = [
+            {"text": "公司A", "type": "COMPANY"},
+            {"text": "产品B", "type": "PRODUCT"},
+            {"text": "技术C", "type": "TECHNOLOGY"},
+        ]
+
+        # Test document
+        documents = [{"id": "doc1", "text": "这是一段包含公司A、产品B和技术C的文本。"}]
+
+        constructor = KnowledgeGraphConstructor()
+        result = constructor.process_documents(documents)
+
+        expected = {
+            "doc1": [
+                {"text": "公司A", "type": "COMPANY"},
+                {"text": "产品B", "type": "PRODUCT"},
+                {"text": "技术C", "type": "TECHNOLOGY"},
+            ]
+        }
+        assert result == expected
+        mock_adapter.extract_entities.assert_called_once_with(
+            "这是一段包含公司A、产品B和技术C的文本。"
+        )
+
+    @patch("src.components.knowledge_graph_constructor.LLMAdapter")
+    def test_process_documents_multiple_with_typed_entities(
+        self, mock_llm_adapter_class
+    ):
+        """Test processing multiple documents with typed entities."""
+        # Mock LLM adapter
+        mock_adapter = Mock()
+        mock_llm_adapter_class.return_value = mock_adapter
+        mock_adapter.extract_entities.side_effect = [
+            [
+                {"text": "公司A", "type": "COMPANY"},
+                {"text": "产品B", "type": "PRODUCT"},
+            ],
+            [
+                {"text": "技术C", "type": "TECHNOLOGY"},
+                {"text": "服务D", "type": "PRODUCT"},
+            ],
+            [{"text": "行业E", "type": "INDUSTRY_APPLICATION"}],
+        ]
+
+        # Test documents
+        documents = [
+            {"id": "doc1", "text": "文本1"},
+            {"id": "doc2", "text": "文本2"},
+            {"id": "doc3", "text": "文本3"},
+        ]
+
+        constructor = KnowledgeGraphConstructor()
+        result = constructor.process_documents(documents)
+
+        assert result == {
+            "doc1": [
+                {"text": "公司A", "type": "COMPANY"},
+                {"text": "产品B", "type": "PRODUCT"},
+            ],
+            "doc2": [
+                {"text": "技术C", "type": "TECHNOLOGY"},
+                {"text": "服务D", "type": "PRODUCT"},
+            ],
+            "doc3": [{"text": "行业E", "type": "INDUSTRY_APPLICATION"}],
+        }
         assert mock_adapter.extract_entities.call_count == 3
