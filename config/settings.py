@@ -11,6 +11,16 @@ class Settings(BaseSettings):
     # API Keys and Authentication
     openai_api_key: str | None = Field(default=None, description="OpenAI API key")
     deepseek_api_key: str | None = Field(default=None, description="DeepSeek API key")
+    
+    # DeepSeek Configuration
+    deepseek_api_base: str = Field(
+        default="https://api.deepseek.com/v1",
+        description="Base URL for DeepSeek API"
+    )
+    deepseek_model: str = Field(
+        default="deepseek-chat",
+        description="DeepSeek model name"
+    )
 
     # Model Configuration
     embedding_model_name: str = Field(
