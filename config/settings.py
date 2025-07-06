@@ -9,17 +9,14 @@ class Settings(BaseSettings):
     """Application settings loaded from environment variables."""
 
     # API Keys and Authentication
-    openai_api_key: str | None = Field(default=None, description="OpenAI API key")
     deepseek_api_key: str | None = Field(default=None, description="DeepSeek API key")
-    
+
     # DeepSeek Configuration
     deepseek_api_base: str = Field(
-        default="https://api.deepseek.com/v1",
-        description="Base URL for DeepSeek API"
+        default="https://api.deepseek.com/v1", description="Base URL for DeepSeek API"
     )
     deepseek_model: str = Field(
-        default="deepseek-chat",
-        description="DeepSeek model name"
+        default="deepseek-chat", description="DeepSeek model name"
     )
 
     # Model Configuration
@@ -32,7 +29,10 @@ class Settings(BaseSettings):
         description="Name of the reranker model to use",
     )
     llm_model_name: str = Field(
-        default="deepseek-v3", description="Name of the LLM model to use"
+        default="deepseek-chat", description="Name of the LLM model to use"
+    )
+    llm_adapter_type: str = Field(
+        default="deepseek", description="Type of LLM adapter to use (deepseek, deepseek_reasoner, openai, etc.)"
     )
 
     # System Configuration
@@ -46,6 +46,17 @@ class Settings(BaseSettings):
     )
     vector_storage_path: Path = Field(
         default=Path("output/vector_store"), description="Path to store vector data"
+    )
+    
+    # Vector Storage Configuration
+    vector_db_path: Path = Field(
+        default=Path("./output/vector_store"), description="LanceDB storage location"
+    )
+    embedding_batch_size: int = Field(
+        default=32, description="Batch size for embedding generation"
+    )
+    vector_table_name: str = Field(
+        default="ashare_documents", description="LanceDB table name"
     )
 
     # Server Configuration
@@ -91,7 +102,7 @@ class Settings(BaseSettings):
             raise ValueError("Port must be between 1 and 65535")
         return v
 
-    @field_validator("batch_size", "max_workers")
+    @field_validator("batch_size", "max_workers", "embedding_batch_size")
     @classmethod
     def validate_positive(cls, v: int) -> int:
         """Validate value is positive."""

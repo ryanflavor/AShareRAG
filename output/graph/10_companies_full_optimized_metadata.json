@@ -1,0 +1,9 @@
+{
+  "creation_timestamp": "2025-07-06T17:11:24.840921+00:00",
+  "graph_file": "10_companies_full_optimized.graphml",
+  "vertices_count": 325,
+  "edges_count": 301,
+  "is_directed": true,
+  "connected_components": "N/A",
+  "format_version": "1.0"
+}

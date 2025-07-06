@@ -14,7 +14,6 @@ sys.path.insert(0, str(project_root))
 def test_env_file():
     """Create a temporary .env file for testing."""
     with tempfile.NamedTemporaryFile(mode="w", delete=False, suffix=".env") as f:
-        f.write("OPENAI_API_KEY=test_openai_key\n")
         f.write("DEEPSEEK_API_KEY=test_deepseek_key\n")
         f.write("EMBEDDING_MODEL_NAME=test/embedding-model\n")
         f.write("RERANKER_MODEL_NAME=test/reranker-model\n")

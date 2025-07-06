@@ -1,0 +1,3471 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns
+         http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+<!-- Created by igraph -->
+  <key id="v_entity_type" for="node" attr.name="entity_type" attr.type="string"/>
+  <key id="v_first_seen" for="node" attr.name="first_seen" attr.type="string"/>
+  <key id="v_occurrence_count" for="node" attr.name="occurrence_count" attr.type="double"/>
+  <key id="v_name" for="node" attr.name="name" attr.type="string"/>
+  <key id="e_relation" for="edge" attr.name="relation" attr.type="string"/>
+  <key id="e_confidence" for="edge" attr.name="confidence" attr.type="double"/>
+  <key id="e_first_seen" for="edge" attr.name="first_seen" attr.type="string"/>
+  <graph id="G" edgedefault="directed">
+    <node id="n0">
+      <data key="v_entity_type">COMPANY</data>
+      <data key="v_first_seen">company_000</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">GQY视讯</data>
+    </node>
+    <node id="n1">
+      <data key="v_entity_type">COMPANY_CODE</data>
+      <data key="v_first_seen">company_000</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">300076</data>
+    </node>
+    <node id="n2">
+      <data key="v_entity_type">BUSINESS_SEGMENT</data>
+      <data key="v_first_seen">company_000</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">智能显示整体解决方案</data>
+    </node>
+    <node id="n3">
+      <data key="v_entity_type">TECHNOLOGY</data>
+      <data key="v_first_seen">company_000</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">专业音视频</data>
+    </node>
+    <node id="n4">
+      <data key="v_entity_type">TECHNOLOGY</data>
+      <data key="v_first_seen">company_000</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">高分可视化信息技术</data>
+    </node>
+    <node id="n5">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_000</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">Mini LED/Micro LED拼接显示单元</data>
+    </node>
+    <node id="n6">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_000</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">DLP拼接显示单元</data>
+    </node>
+    <node id="n7">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_000</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">液晶拼接显示单元</data>
+    </node>
+    <node id="n8">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_000</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">图像拼接处理器</data>
+    </node>
+    <node id="n9">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_000</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">DMS屏显操作系统</data>
+    </node>
+    <node id="n10">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_000</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">全矩阵数字运维系统</data>
+    </node>
+    <node id="n11">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_000</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">应急作业指挥</data>
+    </node>
+    <node id="n12">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_000</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">生产控制</data>
+    </node>
+    <node id="n13">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_000</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">安防监控</data>
+    </node>
+    <node id="n14">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_000</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">多媒体视听会议</data>
+    </node>
+    <node id="n15">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_000</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">模拟仿真</data>
+    </node>
+    <node id="n16">
+      <data key="v_entity_type">BUSINESS_SEGMENT</data>
+      <data key="v_first_seen">company_000</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">系统集成业务</data>
+    </node>
+    <node id="n17">
+      <data key="v_entity_type">CORE_BUSINESS</data>
+      <data key="v_first_seen">company_000</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">数字化、信息化、智能化领域一体化的解决方案</data>
+    </node>
+    <node id="n18">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_000</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">服务器设备</data>
+    </node>
+    <node id="n19">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_000</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">存储设备</data>
+    </node>
+    <node id="n20">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_000</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">网络设备</data>
+    </node>
+    <node id="n21">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_000</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">音视频设备</data>
+    </node>
+    <node id="n22">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_000</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">智慧城市</data>
+    </node>
+    <node id="n23">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_000</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">智慧校园</data>
+    </node>
+    <node id="n24">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_000</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">智慧应急</data>
+    </node>
+    <node id="n25">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_000</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">智慧政务</data>
+    </node>
+    <node id="n26">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_000</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">智慧交通</data>
+    </node>
+    <node id="n27">
+      <data key="v_entity_type">TECHNOLOGY</data>
+      <data key="v_first_seen">company_000</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">智能拼接显示</data>
+    </node>
+    <node id="n28">
+      <data key="v_entity_type">TECHNOLOGY</data>
+      <data key="v_first_seen">company_000</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">音视频技术</data>
+    </node>
+    <node id="n29">
+      <data key="v_entity_type">TECHNOLOGY</data>
+      <data key="v_first_seen">company_000</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">可视化信息技术</data>
+    </node>
+    <node id="n30">
+      <data key="v_entity_type">TECHNOLOGY</data>
+      <data key="v_first_seen">company_000</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">Mini LED</data>
+    </node>
+    <node id="n31">
+      <data key="v_entity_type">TECHNOLOGY</data>
+      <data key="v_first_seen">company_000</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">Micro LED</data>
+    </node>
+    <node id="n32">
+      <data key="v_entity_type">TECHNOLOGY</data>
+      <data key="v_first_seen">company_000</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">DLP拼接</data>
+    </node>
+    <node id="n33">
+      <data key="v_entity_type">TECHNOLOGY</data>
+      <data key="v_first_seen">company_000</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">液晶拼接</data>
+    </node>
+    <node id="n34">
+      <data key="v_entity_type">TECHNOLOGY</data>
+      <data key="v_first_seen">company_000</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">系统集成</data>
+    </node>
+    <node id="n35">
+      <data key="v_entity_type">COMPANY</data>
+      <data key="v_first_seen">company_001</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">ST 三圣</data>
+    </node>
+    <node id="n36">
+      <data key="v_entity_type">COMPANY_CODE</data>
+      <data key="v_first_seen">company_001</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">002742</data>
+    </node>
+    <node id="n37">
+      <data key="v_entity_type">BUSINESS_SEGMENT</data>
+      <data key="v_first_seen">company_001</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">建材化工板块</data>
+    </node>
+    <node id="n38">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_001</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">商品混凝土</data>
+    </node>
+    <node id="n39">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_001</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">减水剂</data>
+    </node>
+    <node id="n40">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_001</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">膨胀剂</data>
+    </node>
+    <node id="n41">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_001</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">硫酸</data>
+    </node>
+    <node id="n42">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_001</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">工业与民用建筑</data>
+    </node>
+    <node id="n43">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_001</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">高速公路</data>
+    </node>
+    <node id="n44">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_001</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">铁路</data>
+    </node>
+    <node id="n45">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_001</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">桥梁</data>
+    </node>
+    <node id="n46">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_001</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">隧道</data>
+    </node>
+    <node id="n47">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_001</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">机场</data>
+    </node>
+    <node id="n48">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_001</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">水利水电</data>
+    </node>
+    <node id="n49">
+      <data key="v_entity_type">BUSINESS_SEGMENT</data>
+      <data key="v_first_seen">company_001</data>
+      <data key="v_occurrence_count">2</data>
+      <data key="v_name">医药制造板块</data>
+    </node>
+    <node id="n50">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_001</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">医药中间体</data>
+    </node>
+    <node id="n51">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_001</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">盐酸普鲁卡因</data>
+    </node>
+    <node id="n52">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_001</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">头孢西丁酸中间体</data>
+    </node>
+    <node id="n53">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_001</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">氯霉素中间体</data>
+    </node>
+    <node id="n54">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_001</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">氨曲南中间体</data>
+    </node>
+    <node id="n55">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_001</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">奥利司他中间体</data>
+    </node>
+    <node id="n56">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_001</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">原料药</data>
+    </node>
+    <node id="n57">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_001</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">对乙酰氨基酚</data>
+    </node>
+    <node id="n58">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_001</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">盐酸氯哌丁</data>
+    </node>
+    <node id="n59">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_001</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">甲磺酸左氧氟沙星</data>
+    </node>
+    <node id="n60">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_001</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">贝诺酯</data>
+    </node>
+    <node id="n61">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_001</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">盐酸苯海拉明</data>
+    </node>
+    <node id="n62">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_001</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">制剂产品</data>
+    </node>
+    <node id="n63">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_001</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">复方氨酚苯海拉明片</data>
+    </node>
+    <node id="n64">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_001</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">盐酸氯哌丁片</data>
+    </node>
+    <node id="n65">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_001</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">克拉霉素缓释片</data>
+    </node>
+    <node id="n66">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_001</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">双氯酚酸钠肠溶片</data>
+    </node>
+    <node id="n67">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_001</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">对乙酰氨基酚片</data>
+    </node>
+    <node id="n68">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_001</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">法莫替丁片</data>
+    </node>
+    <node id="n69">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_001</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">抗生素药</data>
+    </node>
+    <node id="n70">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_001</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">抗丙肝药物索非布韦</data>
+    </node>
+    <node id="n71">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_001</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">糖尿病药物坎格列净</data>
+    </node>
+    <node id="n72">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_001</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">苄星青霉素</data>
+    </node>
+    <node id="n73">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_001</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">头孢西丁</data>
+    </node>
+    <node id="n74">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_001</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">普鲁卡因青霉素</data>
+    </node>
+    <node id="n75">
+      <data key="v_entity_type">UNKNOWN</data>
+      <data key="v_first_seen">company_001</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">生产建筑材料产品</data>
+    </node>
+    <node id="n76">
+      <data key="v_entity_type">UNKNOWN</data>
+      <data key="v_first_seen">company_001</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">生产医药产品</data>
+    </node>
+    <node id="n77">
+      <data key="v_entity_type">COMPANY</data>
+      <data key="v_first_seen">company_002</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">ST世龙</data>
+    </node>
+    <node id="n78">
+      <data key="v_entity_type">COMPANY_CODE</data>
+      <data key="v_first_seen">company_002</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">002748</data>
+    </node>
+    <node id="n79">
+      <data key="v_entity_type">BUSINESS_SEGMENT</data>
+      <data key="v_first_seen">company_002</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">化工产品板块</data>
+    </node>
+    <node id="n80">
+      <data key="v_entity_type">BUSINESS_SEGMENT</data>
+      <data key="v_first_seen">company_002</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">AC发泡剂业务单元</data>
+    </node>
+    <node id="n81">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_002</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">AC发泡剂</data>
+    </node>
+    <node id="n82">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_002</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">十水碳酸钠</data>
+    </node>
+    <node id="n83">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_002</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">氨水</data>
+    </node>
+    <node id="n84">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_002</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">水合肼</data>
+    </node>
+    <node id="n85">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_002</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">聚氯乙烯</data>
+    </node>
+    <node id="n86">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_002</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">聚乙烯</data>
+    </node>
+    <node id="n87">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_002</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">天然橡胶</data>
+    </node>
+    <node id="n88">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_002</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">合成橡胶</data>
+    </node>
+    <node id="n89">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_002</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">面粉改良剂</data>
+    </node>
+    <node id="n90">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_002</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">熏蒸剂</data>
+    </node>
+    <node id="n91">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_002</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">安全气囊的产气剂</data>
+    </node>
+    <node id="n92">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_002</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">制鞋</data>
+    </node>
+    <node id="n93">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_002</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">制革</data>
+    </node>
+    <node id="n94">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_002</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">建材</data>
+    </node>
+    <node id="n95">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_002</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">家电</data>
+    </node>
+    <node id="n96">
+      <data key="v_entity_type">BUSINESS_SEGMENT</data>
+      <data key="v_first_seen">company_002</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">氯化亚砜业务单元</data>
+    </node>
+    <node id="n97">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_002</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">氯化亚砜</data>
+    </node>
+    <node id="n98">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_002</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">丁酯</data>
+    </node>
+    <node id="n99">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_002</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">氯醚</data>
+    </node>
+    <node id="n100">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_002</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">染料</data>
+    </node>
+    <node id="n101">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_002</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">医药</data>
+    </node>
+    <node id="n102">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_002</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">农药</data>
+    </node>
+    <node id="n103">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_002</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">三氯蔗糖</data>
+    </node>
+    <node id="n104">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_002</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">锂电池</data>
+    </node>
+    <node id="n105">
+      <data key="v_entity_type">BUSINESS_SEGMENT</data>
+      <data key="v_first_seen">company_002</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">氯碱业务单元</data>
+    </node>
+    <node id="n106">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_002</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">烧碱</data>
+    </node>
+    <node id="n107">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_002</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">液氯</data>
+    </node>
+    <node id="n108">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_002</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">氯气</data>
+    </node>
+    <node id="n109">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_002</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">污水处理剂</data>
+    </node>
+    <node id="n110">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_002</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">基本分析试剂</data>
+    </node>
+    <node id="n111">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_002</data>
+      <data key="v_occurrence_count">2</data>
+      <data key="v_name">造纸</data>
+    </node>
+    <node id="n112">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_002</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">印染</data>
+    </node>
+    <node id="n113">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_002</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">废水处理</data>
+    </node>
+    <node id="n114">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_002</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">电镀</data>
+    </node>
+    <node id="n115">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_002</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">化工钻探</data>
+    </node>
+    <node id="n116">
+      <data key="v_entity_type">BUSINESS_SEGMENT</data>
+      <data key="v_first_seen">company_002</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">双氧水业务单元</data>
+    </node>
+    <node id="n117">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_002</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">双氧水</data>
+    </node>
+    <node id="n118">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_002</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">纺织</data>
+    </node>
+    <node id="n119">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_002</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">化工</data>
+    </node>
+    <node id="n120">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_002</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">环保</data>
+    </node>
+    <node id="n121">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_002</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">已内酰胺</data>
+    </node>
+    <node id="n122">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_002</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">污水处理</data>
+    </node>
+    <node id="n123">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_002</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">医药化工</data>
+    </node>
+    <node id="n124">
+      <data key="v_entity_type">BUSINESS_SEGMENT</data>
+      <data key="v_first_seen">company_002</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">医、农药中间体业务单元</data>
+    </node>
+    <node id="n125">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_002</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">对氯苯甲醛</data>
+    </node>
+    <node id="n126">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_002</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">对氯苯甲酸</data>
+    </node>
+    <node id="n127">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_002</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">邻氯苯腈</data>
+    </node>
+    <node id="n128">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_002</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">医、农药行业</data>
+    </node>
+    <node id="n129">
+      <data key="v_entity_type">COMPANY</data>
+      <data key="v_first_seen">company_003</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">*ST 东园</data>
+    </node>
+    <node id="n130">
+      <data key="v_entity_type">COMPANY_CODE</data>
+      <data key="v_first_seen">company_003</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">002310</data>
+    </node>
+    <node id="n131">
+      <data key="v_entity_type">BUSINESS_SEGMENT</data>
+      <data key="v_first_seen">company_003</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">生态建设板块</data>
+    </node>
+    <node id="n132">
+      <data key="v_entity_type">CORE_BUSINESS</data>
+      <data key="v_first_seen">company_003</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">水环境综合治理</data>
+    </node>
+    <node id="n133">
+      <data key="v_entity_type">CORE_BUSINESS</data>
+      <data key="v_first_seen">company_003</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">市政园林</data>
+    </node>
+    <node id="n134">
+      <data key="v_entity_type">CORE_BUSINESS</data>
+      <data key="v_first_seen">company_003</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">全域旅游</data>
+    </node>
+    <node id="n135">
+      <data key="v_entity_type">TECHNOLOGY</data>
+      <data key="v_first_seen">company_003</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">EPC</data>
+    </node>
+    <node id="n136">
+      <data key="v_entity_type">TECHNOLOGY</data>
+      <data key="v_first_seen">company_003</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">PPP模式</data>
+    </node>
+    <node id="n137">
+      <data key="v_entity_type">TECHNOLOGY</data>
+      <data key="v_first_seen">company_003</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">EOD模式</data>
+    </node>
+    <node id="n138">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_003</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">城乡高质量发展全套解决方案</data>
+    </node>
+    <node id="n139">
+      <data key="v_entity_type">BUSINESS_SEGMENT</data>
+      <data key="v_first_seen">company_003</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">固废处置板块</data>
+    </node>
+    <node id="n140">
+      <data key="v_entity_type">CORE_BUSINESS</data>
+      <data key="v_first_seen">company_003</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">工业危废综合处置服务</data>
+    </node>
+    <node id="n141">
+      <data key="v_entity_type">TECHNOLOGY</data>
+      <data key="v_first_seen">company_003</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">无害化处理</data>
+    </node>
+    <node id="n142">
+      <data key="v_entity_type">TECHNOLOGY</data>
+      <data key="v_first_seen">company_003</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">资源化利用</data>
+    </node>
+    <node id="n143">
+      <data key="v_entity_type">TECHNOLOGY</data>
+      <data key="v_first_seen">company_003</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">驻场服务</data>
+    </node>
+    <node id="n144">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_003</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">工业废弃物处置与资源回收</data>
+    </node>
+    <node id="n145">
+      <data key="v_entity_type">BUSINESS_SEGMENT</data>
+      <data key="v_first_seen">company_003</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">循环经济板块</data>
+    </node>
+    <node id="n146">
+      <data key="v_entity_type">CORE_BUSINESS</data>
+      <data key="v_first_seen">company_003</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">工业废弃物循环再生业务</data>
+    </node>
+    <node id="n147">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_003</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">区域低碳、循环发展</data>
+    </node>
+    <node id="n148">
+      <data key="v_entity_type">BUSINESS_SEGMENT</data>
+      <data key="v_first_seen">company_003</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">新能源板块</data>
+    </node>
+    <node id="n149">
+      <data key="v_entity_type">CORE_BUSINESS</data>
+      <data key="v_first_seen">company_003</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">集中式电站开发和运营</data>
+    </node>
+    <node id="n150">
+      <data key="v_entity_type">CORE_BUSINESS</data>
+      <data key="v_first_seen">company_003</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">分布式能源项目开发和运营</data>
+    </node>
+    <node id="n151">
+      <data key="v_entity_type">CORE_BUSINESS</data>
+      <data key="v_first_seen">company_003</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">新能源资源证券化运营</data>
+    </node>
+    <node id="n152">
+      <data key="v_entity_type">TECHNOLOGY</data>
+      <data key="v_first_seen">company_003</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">项目收(并)购</data>
+    </node>
+    <node id="n153">
+      <data key="v_entity_type">TECHNOLOGY</data>
+      <data key="v_first_seen">company_003</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">自主开发</data>
+    </node>
+    <node id="n154">
+      <data key="v_entity_type">TECHNOLOGY</data>
+      <data key="v_first_seen">company_003</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">合作开发</data>
+    </node>
+    <node id="n155">
+      <data key="v_entity_type">TECHNOLOGY</data>
+      <data key="v_first_seen">company_003</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">电站资产证券化</data>
+    </node>
+    <node id="n156">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_003</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">可再生能源领域</data>
+    </node>
+    <node id="n157">
+      <data key="v_entity_type">UNKNOWN</data>
+      <data key="v_first_seen">company_003</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">资源—产品—废弃物—再生资源闭环经济模式</data>
+    </node>
+    <node id="n158">
+      <data key="v_entity_type">COMPANY</data>
+      <data key="v_first_seen">company_004</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">ST东时</data>
+    </node>
+    <node id="n159">
+      <data key="v_entity_type">COMPANY_CODE</data>
+      <data key="v_first_seen">company_004</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">603377</data>
+    </node>
+    <node id="n160">
+      <data key="v_entity_type">BUSINESS_SEGMENT</data>
+      <data key="v_first_seen">company_004</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">机动车驾驶人培训板块</data>
+    </node>
+    <node id="n161">
+      <data key="v_entity_type">TECHNOLOGY</data>
+      <data key="v_first_seen">company_004</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">VR+AI+实际道路训练</data>
+    </node>
+    <node id="n162">
+      <data key="v_entity_type">TECHNOLOGY</data>
+      <data key="v_first_seen">company_004</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">智慧驾驶培训模式</data>
+    </node>
+    <node id="n163">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_004</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">智能化驾驶培训课程</data>
+    </node>
+    <node id="n164">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_004</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">实际道路驾驶训练</data>
+    </node>
+    <node id="n165">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_004</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">个人机动车驾驶执照考取</data>
+    </node>
+    <node id="n166">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_004</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">交通安全教育</data>
+    </node>
+    <node id="n167">
+      <data key="v_entity_type">BUSINESS_SEGMENT</data>
+      <data key="v_first_seen">company_004</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">民用航空器驾驶员培训板块</data>
+    </node>
+    <node id="n168">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_004</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">商用驾驶员执照培训</data>
+    </node>
+    <node id="n169">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_004</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">私人飞行驾照培训</data>
+    </node>
+    <node id="n170">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_004</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">民航飞行员培养</data>
+    </node>
+    <node id="n171">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_004</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">私人飞行爱好者培训</data>
+    </node>
+    <node id="n172">
+      <data key="v_entity_type">UNKNOWN</data>
+      <data key="v_first_seen">company_004</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">驾驶培训服务行业领先地位</data>
+    </node>
+    <node id="n173">
+      <data key="v_entity_type">UNKNOWN</data>
+      <data key="v_first_seen">company_004</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">科技驱动和创新服务理念</data>
+    </node>
+    <node id="n174">
+      <data key="v_entity_type">COMPANY</data>
+      <data key="v_first_seen">company_005</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">*ST中利</data>
+    </node>
+    <node id="n175">
+      <data key="v_entity_type">COMPANY_CODE</data>
+      <data key="v_first_seen">company_005</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">002309</data>
+    </node>
+    <node id="n176">
+      <data key="v_entity_type">BUSINESS_SEGMENT</data>
+      <data key="v_first_seen">company_005</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">光伏业务</data>
+    </node>
+    <node id="n177">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_005</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">单晶高效光伏电池</data>
+    </node>
+    <node id="n178">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_005</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">大尺寸光伏组件</data>
+    </node>
+    <node id="n179">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_005</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">P型组件</data>
+    </node>
+    <node id="n180">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_005</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">全系N型TOPCon组件</data>
+    </node>
+    <node id="n181">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_005</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">182mm</data>
+    </node>
+    <node id="n182">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_005</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">210mm</data>
+    </node>
+    <node id="n183">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_005</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">全黑组件</data>
+    </node>
+    <node id="n184">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_005</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">光伏市场</data>
+    </node>
+    <node id="n185">
+      <data key="v_entity_type">BUSINESS_SEGMENT</data>
+      <data key="v_first_seen">company_005</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">光伏电站业务</data>
+    </node>
+    <node id="n186">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_005</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">工商业分布式电站</data>
+    </node>
+    <node id="n187">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_005</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">户用分布式电站</data>
+    </node>
+    <node id="n188">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_005</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">集中式地面电站</data>
+    </node>
+    <node id="n189">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_005</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">光伏发电系统整体解决方案</data>
+    </node>
+    <node id="n190">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_005</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">光储一体化解决方案</data>
+    </node>
+    <node id="n191">
+      <data key="v_entity_type">BUSINESS_SEGMENT</data>
+      <data key="v_first_seen">company_005</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">线缆业务</data>
+    </node>
+    <node id="n192">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_005</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">阻燃耐火软电缆</data>
+    </node>
+    <node id="n193">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_005</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">舰船用电缆</data>
+    </node>
+    <node id="n194">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_005</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">高铁用电缆</data>
+    </node>
+    <node id="n195">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_005</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">铁路信号线缆</data>
+    </node>
+    <node id="n196">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_005</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">光伏线缆</data>
+    </node>
+    <node id="n197">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_005</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">风机线缆</data>
+    </node>
+    <node id="n198">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_005</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">新能源汽车及充电桩线缆</data>
+    </node>
+    <node id="n199">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_005</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">液冷电缆</data>
+    </node>
+    <node id="n200">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_005</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">电力储能系统用电池连接电缆</data>
+    </node>
+    <node id="n201">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_005</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">UL电子线缆</data>
+    </node>
+    <node id="n202">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_005</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">数据通信线缆</data>
+    </node>
+    <node id="n203">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_005</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">矿用电缆</data>
+    </node>
+    <node id="n204">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_005</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">海洋工程平台用电缆</data>
+    </node>
+    <node id="n205">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_005</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">服务器用电缆</data>
+    </node>
+    <node id="n206">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_005</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">光纤预制棒及光纤</data>
+    </node>
+    <node id="n207">
+      <data key="v_entity_type">UNKNOWN</data>
+      <data key="v_first_seen">company_005</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">光伏制造业务</data>
+    </node>
+    <node id="n208">
+      <data key="v_entity_type">UNKNOWN</data>
+      <data key="v_first_seen">company_005</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">光伏+线缆双核心业务</data>
+    </node>
+    <node id="n209">
+      <data key="v_entity_type">UNKNOWN</data>
+      <data key="v_first_seen">company_005</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">全球化布局</data>
+    </node>
+    <node id="n210">
+      <data key="v_entity_type">UNKNOWN</data>
+      <data key="v_first_seen">company_005</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">技术创新</data>
+    </node>
+    <node id="n211">
+      <data key="v_entity_type">COMPANY</data>
+      <data key="v_first_seen">company_006</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">ST 中嘉</data>
+    </node>
+    <node id="n212">
+      <data key="v_entity_type">COMPANY_CODE</data>
+      <data key="v_first_seen">company_006</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">000889</data>
+    </node>
+    <node id="n213">
+      <data key="v_entity_type">BUSINESS_SEGMENT</data>
+      <data key="v_first_seen">company_006</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">信息智能传输板块</data>
+    </node>
+    <node id="n214">
+      <data key="v_entity_type">SUBSIDIARY</data>
+      <data key="v_first_seen">company_006</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">北京创世漫道科技有限公司</data>
+    </node>
+    <node id="n215">
+      <data key="v_entity_type">CORE_BUSINESS</data>
+      <data key="v_first_seen">company_006</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">移动信息发送服务</data>
+    </node>
+    <node id="n216">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_006</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">触发类移动信息服务</data>
+    </node>
+    <node id="n217">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_006</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">电子商务</data>
+    </node>
+    <node id="n218">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_006</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">互联网</data>
+    </node>
+    <node id="n219">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_006</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">金融</data>
+    </node>
+    <node id="n220">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_006</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">物流快递</data>
+    </node>
+    <node id="n221">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_006</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">第三方支付</data>
+    </node>
+    <node id="n222">
+      <data key="v_entity_type">BUSINESS_SEGMENT</data>
+      <data key="v_first_seen">company_006</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">通信网络维护板块</data>
+    </node>
+    <node id="n223">
+      <data key="v_entity_type">SUBSIDIARY</data>
+      <data key="v_first_seen">company_006</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">广东长实通信科技有限公司</data>
+    </node>
+    <node id="n224">
+      <data key="v_entity_type">CORE_BUSINESS</data>
+      <data key="v_first_seen">company_006</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">通信网络优化</data>
+    </node>
+    <node id="n225">
+      <data key="v_entity_type">CORE_BUSINESS</data>
+      <data key="v_first_seen">company_006</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">通信设备维护</data>
+    </node>
+    <node id="n226">
+      <data key="v_entity_type">CORE_BUSINESS</data>
+      <data key="v_first_seen">company_006</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">通信线路维护</data>
+    </node>
+    <node id="n227">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_006</data>
+      <data key="v_occurrence_count">3</data>
+      <data key="v_name">通信网络维护</data>
+    </node>
+    <node id="n228">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_006</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">计算机系统集成</data>
+    </node>
+    <node id="n229">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_006</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">计算机系统信息安全服务</data>
+    </node>
+    <node id="n230">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_006</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">电信运营商</data>
+    </node>
+    <node id="n231">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_006</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">铁塔公司</data>
+    </node>
+    <node id="n232">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_006</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">企事业单位大客户</data>
+    </node>
+    <node id="n233">
+      <data key="v_entity_type">SUBSIDIARY</data>
+      <data key="v_first_seen">company_006</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">创世漫道</data>
+    </node>
+    <node id="n234">
+      <data key="v_entity_type">CORE_BUSINESS</data>
+      <data key="v_first_seen">company_006</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">企业短信服务</data>
+    </node>
+    <node id="n235">
+      <data key="v_entity_type">SUBSIDIARY</data>
+      <data key="v_first_seen">company_006</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">长实通信</data>
+    </node>
+    <node id="n236">
+      <data key="v_entity_type">BUSINESS_SEGMENT</data>
+      <data key="v_first_seen">company_006</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">信息智能传输</data>
+    </node>
+    <node id="n237">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_006</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">企业短信</data>
+    </node>
+    <node id="n238">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_006</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">移动信息服务</data>
+    </node>
+    <node id="n239">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_006</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">通信技术服务</data>
+    </node>
+    <node id="n240">
+      <data key="v_entity_type">COMPANY</data>
+      <data key="v_first_seen">company_007</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">ST中泰</data>
+    </node>
+    <node id="n241">
+      <data key="v_entity_type">COMPANY_CODE</data>
+      <data key="v_first_seen">company_007</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">002092</data>
+    </node>
+    <node id="n242">
+      <data key="v_entity_type">BUSINESS_SEGMENT</data>
+      <data key="v_first_seen">company_007</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">氯碱化工板块</data>
+    </node>
+    <node id="n243">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_007</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">聚氯乙烯树脂</data>
+    </node>
+    <node id="n244">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_007</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">PVC</data>
+    </node>
+    <node id="n245">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_007</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">离子膜烧碱</data>
+    </node>
+    <node id="n246">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_007</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">软5型PVC</data>
+    </node>
+    <node id="n247">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_007</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">PB1000</data>
+    </node>
+    <node id="n248">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_007</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">R1069F</data>
+    </node>
+    <node id="n249">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_007</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">工业、建筑、农业、日常生活、包装、电力、公用事业</data>
+    </node>
+    <node id="n250">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_007</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">有机化学、无机化学、纸浆及造纸、氧化铝、纺织/人造丝、皂业及洗涤剂</data>
+    </node>
+    <node id="n251">
+      <data key="v_entity_type">BUSINESS_SEGMENT</data>
+      <data key="v_first_seen">company_007</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">粘胶纺织板块</data>
+    </node>
+    <node id="n252">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_007</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">粘胶纤维</data>
+    </node>
+    <node id="n253">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_007</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">粘胶纱</data>
+    </node>
+    <node id="n254">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_007</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">高白粘胶纤维</data>
+    </node>
+    <node id="n255">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_007</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">聚苯硫醚</data>
+    </node>
+    <node id="n256">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_007</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">工业、农业、生活衣着等纺织品领域</data>
+    </node>
+    <node id="n257">
+      <data key="v_entity_type">BUSINESS_SEGMENT</data>
+      <data key="v_first_seen">company_007</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">技术创新板块</data>
+    </node>
+    <node id="n258">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_007</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">高性能医用级PVC</data>
+    </node>
+    <node id="n259">
+      <data key="v_entity_type">TECHNOLOGY</data>
+      <data key="v_first_seen">company_007</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">电石炉烟道激冷装置</data>
+    </node>
+    <node id="n260">
+      <data key="v_entity_type">TECHNOLOGY</data>
+      <data key="v_first_seen">company_007</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">炭材低温烘干系统</data>
+    </node>
+    <node id="n261">
+      <data key="v_entity_type">TECHNOLOGY</data>
+      <data key="v_first_seen">company_007</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">工业互联网+危化安全生产</data>
+    </node>
+    <node id="n262">
+      <data key="v_entity_type">TECHNOLOGY</data>
+      <data key="v_first_seen">company_007</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">智慧矿山</data>
+    </node>
+    <node id="n263">
+      <data key="v_entity_type">CORE_BUSINESS</data>
+      <data key="v_first_seen">company_007</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">循环经济</data>
+    </node>
+    <node id="n264">
+      <data key="v_entity_type">UNKNOWN</data>
+      <data key="v_first_seen">company_007</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">生产聚氯乙烯树脂</data>
+    </node>
+    <node id="n265">
+      <data key="v_entity_type">UNKNOWN</data>
+      <data key="v_first_seen">company_007</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">生产离子膜烧碱</data>
+    </node>
+    <node id="n266">
+      <data key="v_entity_type">UNKNOWN</data>
+      <data key="v_first_seen">company_007</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">PVC树脂</data>
+    </node>
+    <node id="n267">
+      <data key="v_entity_type">UNKNOWN</data>
+      <data key="v_first_seen">company_007</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">生产粘胶纤维</data>
+    </node>
+    <node id="n268">
+      <data key="v_entity_type">UNKNOWN</data>
+      <data key="v_first_seen">company_007</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">生产粘胶纱</data>
+    </node>
+    <node id="n269">
+      <data key="v_entity_type">UNKNOWN</data>
+      <data key="v_first_seen">company_007</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">高性能医用级PVC开发</data>
+    </node>
+    <node id="n270">
+      <data key="v_entity_type">UNKNOWN</data>
+      <data key="v_first_seen">company_007</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">电石炉烟道激冷装置升级</data>
+    </node>
+    <node id="n271">
+      <data key="v_entity_type">UNKNOWN</data>
+      <data key="v_first_seen">company_007</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">炭材低温烘干系统应用</data>
+    </node>
+    <node id="n272">
+      <data key="v_entity_type">COMPANY</data>
+      <data key="v_first_seen">company_008</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">*ST 中润</data>
+    </node>
+    <node id="n273">
+      <data key="v_entity_type">COMPANY_CODE</data>
+      <data key="v_first_seen">company_008</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">000506</data>
+    </node>
+    <node id="n274">
+      <data key="v_entity_type">BUSINESS_SEGMENT</data>
+      <data key="v_first_seen">company_008</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">黄金勘探开采板块</data>
+    </node>
+    <node id="n275">
+      <data key="v_entity_type">SUBSIDIARY</data>
+      <data key="v_first_seen">company_008</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">斐济瓦图科拉金矿公司</data>
+    </node>
+    <node id="n276">
+      <data key="v_entity_type">CORE_BUSINESS</data>
+      <data key="v_first_seen">company_008</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">黄金的勘探、开采、冶炼及矿产品的销售</data>
+    </node>
+    <node id="n277">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_008</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">合质金</data>
+    </node>
+    <node id="n278">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_008</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">精炼厂进一步加工</data>
+    </node>
+    <node id="n279">
+      <data key="v_entity_type">BUSINESS_SEGMENT</data>
+      <data key="v_first_seen">company_008</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">探矿权业务</data>
+    </node>
+    <node id="n280">
+      <data key="v_entity_type">CORE_BUSINESS</data>
+      <data key="v_first_seen">company_008</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">黄金矿勘探</data>
+    </node>
+    <node id="n281">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_008</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">斐济北岛卡西山探矿权</data>
+    </node>
+    <node id="n282">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_008</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">黄金开采</data>
+    </node>
+    <node id="n283">
+      <data key="v_entity_type">UNKNOWN</data>
+      <data key="v_first_seen">company_008</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">黄金矿产领域</data>
+    </node>
+    <node id="n284">
+      <data key="v_entity_type">UNKNOWN</data>
+      <data key="v_first_seen">company_008</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">勘探、开采和销售合质金</data>
+    </node>
+    <node id="n285">
+      <data key="v_entity_type">UNKNOWN</data>
+      <data key="v_first_seen">company_008</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">新的探矿权</data>
+    </node>
+    <node id="n286">
+      <data key="v_entity_type">COMPANY</data>
+      <data key="v_first_seen">company_009</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">ST中珠</data>
+    </node>
+    <node id="n287">
+      <data key="v_entity_type">COMPANY_CODE</data>
+      <data key="v_first_seen">company_009</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">600568</data>
+    </node>
+    <node id="n288">
+      <data key="v_entity_type">SUBSIDIARY</data>
+      <data key="v_first_seen">company_009</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">潜江制药</data>
+    </node>
+    <node id="n289">
+      <data key="v_entity_type">CORE_BUSINESS</data>
+      <data key="v_first_seen">company_009</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">眼科领域专用药品的制造和销售</data>
+    </node>
+    <node id="n290">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_009</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">珍珠明目滴眼液</data>
+    </node>
+    <node id="n291">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_009</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">阿昔洛韦滴眼液</data>
+    </node>
+    <node id="n292">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_009</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">色甘酸钠滴眼液</data>
+    </node>
+    <node id="n293">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_009</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">氧氟沙星滴眼液</data>
+    </node>
+    <node id="n294">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_009</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">双氯芬酸钠滴眼液</data>
+    </node>
+    <node id="n295">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_009</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">复方西吡氯铵含片</data>
+    </node>
+    <node id="n296">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_009</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">曲昔匹特片</data>
+    </node>
+    <node id="n297">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_009</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">阿奇霉素颗粒</data>
+    </node>
+    <node id="n298">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_009</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">注射用克林霉素磷酸酯</data>
+    </node>
+    <node id="n299">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_009</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">眼科疾病治疗</data>
+    </node>
+    <node id="n300">
+      <data key="v_entity_type">BUSINESS_SEGMENT</data>
+      <data key="v_first_seen">company_009</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">医疗服务板块</data>
+    </node>
+    <node id="n301">
+      <data key="v_entity_type">SUBSIDIARY</data>
+      <data key="v_first_seen">company_009</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">桂南医院</data>
+    </node>
+    <node id="n302">
+      <data key="v_entity_type">CORE_BUSINESS</data>
+      <data key="v_first_seen">company_009</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">医疗卫生、健康管理、职业健康与防护</data>
+    </node>
+    <node id="n303">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_009</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">桂南阿康互联网医院</data>
+    </node>
+    <node id="n304">
+      <data key="v_entity_type">SUBSIDIARY</data>
+      <data key="v_first_seen">company_009</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">六安开发区医院</data>
+    </node>
+    <node id="n305">
+      <data key="v_entity_type">CORE_BUSINESS</data>
+      <data key="v_first_seen">company_009</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">区域基本医疗、预防保健、急救应急</data>
+    </node>
+    <node id="n306">
+      <data key="v_entity_type">BUSINESS_SEGMENT</data>
+      <data key="v_first_seen">company_009</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">医疗器械板块</data>
+    </node>
+    <node id="n307">
+      <data key="v_entity_type">SUBSIDIARY</data>
+      <data key="v_first_seen">company_009</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">深圳一体医疗</data>
+    </node>
+    <node id="n308">
+      <data key="v_entity_type">CORE_BUSINESS</data>
+      <data key="v_first_seen">company_009</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">医疗器械的研发、生产和销售</data>
+    </node>
+    <node id="n309">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_009</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">超声肝硬化检测仪(ET-CD-I/VI)</data>
+    </node>
+    <node id="n310">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_009</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">全身热疗系统(ET-SPACE-I)</data>
+    </node>
+    <node id="n311">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_009</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">输液加热器(ET-TF-II)</data>
+    </node>
+    <node id="n312">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_009</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">肿瘤诊疗</data>
+    </node>
+    <node id="n313">
+      <data key="v_entity_type">SUBSIDIARY</data>
+      <data key="v_first_seen">company_009</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">西安一体</data>
+    </node>
+    <node id="n314">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_009</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">伽玛射线立体定向回转聚焦放疗机</data>
+    </node>
+    <node id="n315">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_009</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">LUNATM-260</data>
+    </node>
+    <node id="n316">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_009</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">IGRT图像引导系统</data>
+    </node>
+    <node id="n317">
+      <data key="v_entity_type">INDUSTRY_APPLICATION</data>
+      <data key="v_first_seen">company_009</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">肿瘤放射治疗</data>
+    </node>
+    <node id="n318">
+      <data key="v_entity_type">BUSINESS_SEGMENT</data>
+      <data key="v_first_seen">company_009</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">房地产板块</data>
+    </node>
+    <node id="n319">
+      <data key="v_entity_type">SUBSIDIARY</data>
+      <data key="v_first_seen">company_009</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">珠海地产项目</data>
+    </node>
+    <node id="n320">
+      <data key="v_entity_type">CORE_BUSINESS</data>
+      <data key="v_first_seen">company_009</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">普通商住用地开发</data>
+    </node>
+    <node id="n321">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_009</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">中珠上郡</data>
+    </node>
+    <node id="n322">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_009</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">中珠山海间二期</data>
+    </node>
+    <node id="n323">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_009</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">中珠领域花苑</data>
+    </node>
+    <node id="n324">
+      <data key="v_entity_type">PRODUCT</data>
+      <data key="v_first_seen">company_009</data>
+      <data key="v_occurrence_count">1</data>
+      <data key="v_name">春晓悦居二期</data>
+    </node>
+    <edge source="n0" target="n1">
+      <data key="e_relation">公司代码是</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_000</data>
+    </edge>
+    <edge source="n0" target="n2">
+      <data key="e_relation">主营业务包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_000</data>
+    </edge>
+    <edge source="n0" target="n16">
+      <data key="e_relation">主营业务包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_000</data>
+    </edge>
+    <edge source="n2" target="n3">
+      <data key="e_relation">核心技术包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_000</data>
+    </edge>
+    <edge source="n2" target="n4">
+      <data key="e_relation">核心技术包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_000</data>
+    </edge>
+    <edge source="n2" target="n5">
+      <data key="e_relation">主要产品包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_000</data>
+    </edge>
+    <edge source="n2" target="n6">
+      <data key="e_relation">主要产品包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_000</data>
+    </edge>
+    <edge source="n2" target="n7">
+      <data key="e_relation">主要产品包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_000</data>
+    </edge>
+    <edge source="n2" target="n8">
+      <data key="e_relation">主要产品包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_000</data>
+    </edge>
+    <edge source="n2" target="n9">
+      <data key="e_relation">主要产品包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_000</data>
+    </edge>
+    <edge source="n2" target="n10">
+      <data key="e_relation">主要产品包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_000</data>
+    </edge>
+    <edge source="n2" target="n11">
+      <data key="e_relation">应用于</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_000</data>
+    </edge>
+    <edge source="n2" target="n12">
+      <data key="e_relation">应用于</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_000</data>
+    </edge>
+    <edge source="n2" target="n13">
+      <data key="e_relation">应用于</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_000</data>
+    </edge>
+    <edge source="n2" target="n14">
+      <data key="e_relation">应用于</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_000</data>
+    </edge>
+    <edge source="n2" target="n15">
+      <data key="e_relation">应用于</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_000</data>
+    </edge>
+    <edge source="n16" target="n17">
+      <data key="e_relation">核心业务是</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_000</data>
+    </edge>
+    <edge source="n16" target="n18">
+      <data key="e_relation">主要产品包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_000</data>
+    </edge>
+    <edge source="n16" target="n19">
+      <data key="e_relation">主要产品包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_000</data>
+    </edge>
+    <edge source="n16" target="n20">
+      <data key="e_relation">主要产品包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_000</data>
+    </edge>
+    <edge source="n16" target="n21">
+      <data key="e_relation">主要产品包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_000</data>
+    </edge>
+    <edge source="n16" target="n22">
+      <data key="e_relation">应用于</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_000</data>
+    </edge>
+    <edge source="n16" target="n23">
+      <data key="e_relation">应用于</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_000</data>
+    </edge>
+    <edge source="n16" target="n24">
+      <data key="e_relation">应用于</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_000</data>
+    </edge>
+    <edge source="n16" target="n25">
+      <data key="e_relation">应用于</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_000</data>
+    </edge>
+    <edge source="n16" target="n26">
+      <data key="e_relation">应用于</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_000</data>
+    </edge>
+    <edge source="n0" target="n27">
+      <data key="e_relation">专注于</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_000</data>
+    </edge>
+    <edge source="n0" target="n28">
+      <data key="e_relation">核心技术包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_000</data>
+    </edge>
+    <edge source="n0" target="n29">
+      <data key="e_relation">核心技术包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_000</data>
+    </edge>
+    <edge source="n0" target="n30">
+      <data key="e_relation">产品涉及</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_000</data>
+    </edge>
+    <edge source="n0" target="n31">
+      <data key="e_relation">产品涉及</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_000</data>
+    </edge>
+    <edge source="n0" target="n32">
+      <data key="e_relation">产品涉及</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_000</data>
+    </edge>
+    <edge source="n0" target="n33">
+      <data key="e_relation">产品涉及</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_000</data>
+    </edge>
+    <edge source="n0" target="n34">
+      <data key="e_relation">业务包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_000</data>
+    </edge>
+    <edge source="n35" target="n36">
+      <data key="e_relation">公司代码是</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_001</data>
+    </edge>
+    <edge source="n35" target="n37">
+      <data key="e_relation">主营业务包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_001</data>
+    </edge>
+    <edge source="n35" target="n49">
+      <data key="e_relation">主营业务包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_001</data>
+    </edge>
+    <edge source="n37" target="n75">
+      <data key="e_relation">核心业务是</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_001</data>
+    </edge>
+    <edge source="n37" target="n38">
+      <data key="e_relation">主要产品包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_001</data>
+    </edge>
+    <edge source="n37" target="n39">
+      <data key="e_relation">主要产品包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_001</data>
+    </edge>
+    <edge source="n37" target="n40">
+      <data key="e_relation">主要产品包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_001</data>
+    </edge>
+    <edge source="n37" target="n41">
+      <data key="e_relation">主要产品包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_001</data>
+    </edge>
+    <edge source="n37" target="n42">
+      <data key="e_relation">应用于</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_001</data>
+    </edge>
+    <edge source="n37" target="n43">
+      <data key="e_relation">应用于</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_001</data>
+    </edge>
+    <edge source="n37" target="n44">
+      <data key="e_relation">应用于</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_001</data>
+    </edge>
+    <edge source="n37" target="n45">
+      <data key="e_relation">应用于</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_001</data>
+    </edge>
+    <edge source="n37" target="n46">
+      <data key="e_relation">应用于</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_001</data>
+    </edge>
+    <edge source="n37" target="n47">
+      <data key="e_relation">应用于</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_001</data>
+    </edge>
+    <edge source="n37" target="n48">
+      <data key="e_relation">应用于</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_001</data>
+    </edge>
+    <edge source="n49" target="n76">
+      <data key="e_relation">核心业务是</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_001</data>
+    </edge>
+    <edge source="n49" target="n50">
+      <data key="e_relation">主要产品包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_001</data>
+    </edge>
+    <edge source="n50" target="n51">
+      <data key="e_relation">包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_001</data>
+    </edge>
+    <edge source="n50" target="n52">
+      <data key="e_relation">包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_001</data>
+    </edge>
+    <edge source="n50" target="n53">
+      <data key="e_relation">包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_001</data>
+    </edge>
+    <edge source="n50" target="n54">
+      <data key="e_relation">包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_001</data>
+    </edge>
+    <edge source="n50" target="n55">
+      <data key="e_relation">包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_001</data>
+    </edge>
+    <edge source="n49" target="n56">
+      <data key="e_relation">主要产品包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_001</data>
+    </edge>
+    <edge source="n56" target="n57">
+      <data key="e_relation">包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_001</data>
+    </edge>
+    <edge source="n56" target="n58">
+      <data key="e_relation">包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_001</data>
+    </edge>
+    <edge source="n56" target="n59">
+      <data key="e_relation">包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_001</data>
+    </edge>
+    <edge source="n56" target="n60">
+      <data key="e_relation">包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_001</data>
+    </edge>
+    <edge source="n56" target="n61">
+      <data key="e_relation">包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_001</data>
+    </edge>
+    <edge source="n49" target="n62">
+      <data key="e_relation">主要产品包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_001</data>
+    </edge>
+    <edge source="n62" target="n63">
+      <data key="e_relation">包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_001</data>
+    </edge>
+    <edge source="n62" target="n64">
+      <data key="e_relation">包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_001</data>
+    </edge>
+    <edge source="n62" target="n65">
+      <data key="e_relation">包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_001</data>
+    </edge>
+    <edge source="n62" target="n66">
+      <data key="e_relation">包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_001</data>
+    </edge>
+    <edge source="n62" target="n67">
+      <data key="e_relation">包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_001</data>
+    </edge>
+    <edge source="n62" target="n68">
+      <data key="e_relation">包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_001</data>
+    </edge>
+    <edge source="n49" target="n69">
+      <data key="e_relation">应用于</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_001</data>
+    </edge>
+    <edge source="n49" target="n70">
+      <data key="e_relation">应用于</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_001</data>
+    </edge>
+    <edge source="n49" target="n71">
+      <data key="e_relation">应用于</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_001</data>
+    </edge>
+    <edge source="n49" target="n72">
+      <data key="e_relation">应用于</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_001</data>
+    </edge>
+    <edge source="n49" target="n73">
+      <data key="e_relation">应用于</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_001</data>
+    </edge>
+    <edge source="n49" target="n74">
+      <data key="e_relation">应用于</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_001</data>
+    </edge>
+    <edge source="n77" target="n78">
+      <data key="e_relation">公司代码是</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_002</data>
+    </edge>
+    <edge source="n77" target="n79">
+      <data key="e_relation">主营业务是</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_002</data>
+    </edge>
+    <edge source="n79" target="n80">
+      <data key="e_relation">包含业务单元</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_002</data>
+    </edge>
+    <edge source="n79" target="n96">
+      <data key="e_relation">包含业务单元</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_002</data>
+    </edge>
+    <edge source="n79" target="n105">
+      <data key="e_relation">包含业务单元</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_002</data>
+    </edge>
+    <edge source="n79" target="n116">
+      <data key="e_relation">包含业务单元</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_002</data>
+    </edge>
+    <edge source="n79" target="n124">
+      <data key="e_relation">包含业务单元</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_002</data>
+    </edge>
+    <edge source="n80" target="n81">
+      <data key="e_relation">主要产品包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_002</data>
+    </edge>
+    <edge source="n80" target="n82">
+      <data key="e_relation">主要产品包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_002</data>
+    </edge>
+    <edge source="n80" target="n83">
+      <data key="e_relation">主要产品包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_002</data>
+    </edge>
+    <edge source="n80" target="n84">
+      <data key="e_relation">主要产品包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_002</data>
+    </edge>
+    <edge source="n81" target="n85">
+      <data key="e_relation">应用于</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_002</data>
+    </edge>
+    <edge source="n81" target="n86">
+      <data key="e_relation">应用于</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_002</data>
+    </edge>
+    <edge source="n81" target="n87">
+      <data key="e_relation">应用于</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_002</data>
+    </edge>
+    <edge source="n81" target="n88">
+      <data key="e_relation">应用于</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_002</data>
+    </edge>
+    <edge source="n81" target="n89">
+      <data key="e_relation">应用于</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_002</data>
+    </edge>
+    <edge source="n81" target="n90">
+      <data key="e_relation">应用于</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_002</data>
+    </edge>
+    <edge source="n81" target="n91">
+      <data key="e_relation">应用于</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_002</data>
+    </edge>
+    <edge source="n96" target="n97">
+      <data key="e_relation">主要产品包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_002</data>
+    </edge>
+    <edge source="n96" target="n98">
+      <data key="e_relation">主要产品包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_002</data>
+    </edge>
+    <edge source="n96" target="n99">
+      <data key="e_relation">主要产品包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_002</data>
+    </edge>
+    <edge source="n97" target="n100">
+      <data key="e_relation">应用于</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_002</data>
+    </edge>
+    <edge source="n97" target="n101">
+      <data key="e_relation">应用于</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_002</data>
+    </edge>
+    <edge source="n97" target="n102">
+      <data key="e_relation">应用于</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_002</data>
+    </edge>
+    <edge source="n97" target="n103">
+      <data key="e_relation">应用于</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_002</data>
+    </edge>
+    <edge source="n97" target="n104">
+      <data key="e_relation">应用于</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_002</data>
+    </edge>
+    <edge source="n105" target="n106">
+      <data key="e_relation">主要产品包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_002</data>
+    </edge>
+    <edge source="n105" target="n107">
+      <data key="e_relation">主要产品包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_002</data>
+    </edge>
+    <edge source="n105" target="n108">
+      <data key="e_relation">主要产品包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_002</data>
+    </edge>
+    <edge source="n106" target="n109">
+      <data key="e_relation">应用于</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_002</data>
+    </edge>
+    <edge source="n106" target="n110">
+      <data key="e_relation">应用于</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_002</data>
+    </edge>
+    <edge source="n106" target="n111">
+      <data key="e_relation">应用于</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_002</data>
+    </edge>
+    <edge source="n106" target="n112">
+      <data key="e_relation">应用于</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_002</data>
+    </edge>
+    <edge source="n106" target="n113">
+      <data key="e_relation">应用于</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_002</data>
+    </edge>
+    <edge source="n106" target="n114">
+      <data key="e_relation">应用于</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_002</data>
+    </edge>
+    <edge source="n106" target="n115">
+      <data key="e_relation">应用于</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_002</data>
+    </edge>
+    <edge source="n116" target="n117">
+      <data key="e_relation">主要产品是</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_002</data>
+    </edge>
+    <edge source="n117" target="n111">
+      <data key="e_relation">应用于</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_002</data>
+    </edge>
+    <edge source="n117" target="n118">
+      <data key="e_relation">应用于</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_002</data>
+    </edge>
+    <edge source="n117" target="n119">
+      <data key="e_relation">应用于</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_002</data>
+    </edge>
+    <edge source="n117" target="n120">
+      <data key="e_relation">应用于</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_002</data>
+    </edge>
+    <edge source="n117" target="n121">
+      <data key="e_relation">应用于</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_002</data>
+    </edge>
+    <edge source="n117" target="n122">
+      <data key="e_relation">应用于</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_002</data>
+    </edge>
+    <edge source="n117" target="n123">
+      <data key="e_relation">应用于</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_002</data>
+    </edge>
+    <edge source="n124" target="n125">
+      <data key="e_relation">主要产品包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_002</data>
+    </edge>
+    <edge source="n124" target="n126">
+      <data key="e_relation">主要产品包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_002</data>
+    </edge>
+    <edge source="n124" target="n127">
+      <data key="e_relation">主要产品包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_002</data>
+    </edge>
+    <edge source="n125" target="n128">
+      <data key="e_relation">应用于</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_002</data>
+    </edge>
+    <edge source="n126" target="n128">
+      <data key="e_relation">应用于</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_002</data>
+    </edge>
+    <edge source="n127" target="n128">
+      <data key="e_relation">应用于</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_002</data>
+    </edge>
+    <edge source="n129" target="n130">
+      <data key="e_relation">公司代码是</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_003</data>
+    </edge>
+    <edge source="n129" target="n131">
+      <data key="e_relation">主营业务包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_003</data>
+    </edge>
+    <edge source="n129" target="n139">
+      <data key="e_relation">主营业务包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_003</data>
+    </edge>
+    <edge source="n129" target="n145">
+      <data key="e_relation">主营业务包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_003</data>
+    </edge>
+    <edge source="n129" target="n148">
+      <data key="e_relation">主营业务包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_003</data>
+    </edge>
+    <edge source="n131" target="n132">
+      <data key="e_relation">核心业务包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_003</data>
+    </edge>
+    <edge source="n131" target="n133">
+      <data key="e_relation">核心业务包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_003</data>
+    </edge>
+    <edge source="n131" target="n134">
+      <data key="e_relation">核心业务包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_003</data>
+    </edge>
+    <edge source="n131" target="n135">
+      <data key="e_relation">主要业务模式包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_003</data>
+    </edge>
+    <edge source="n131" target="n136">
+      <data key="e_relation">主要业务模式包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_003</data>
+    </edge>
+    <edge source="n131" target="n137">
+      <data key="e_relation">主要业务模式包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_003</data>
+    </edge>
+    <edge source="n131" target="n138">
+      <data key="e_relation">目标应用领域是</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_003</data>
+    </edge>
+    <edge source="n139" target="n140">
+      <data key="e_relation">核心业务是</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_003</data>
+    </edge>
+    <edge source="n139" target="n141">
+      <data key="e_relation">主要业务模式包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_003</data>
+    </edge>
+    <edge source="n139" target="n142">
+      <data key="e_relation">主要业务模式包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_003</data>
+    </edge>
+    <edge source="n139" target="n143">
+      <data key="e_relation">主要业务模式包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_003</data>
+    </edge>
+    <edge source="n139" target="n144">
+      <data key="e_relation">目标应用领域是</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_003</data>
+    </edge>
+    <edge source="n145" target="n146">
+      <data key="e_relation">核心业务是</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_003</data>
+    </edge>
+    <edge source="n145" target="n157">
+      <data key="e_relation">主要业务模式是</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_003</data>
+    </edge>
+    <edge source="n145" target="n147">
+      <data key="e_relation">目标应用领域是</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_003</data>
+    </edge>
+    <edge source="n148" target="n149">
+      <data key="e_relation">核心业务包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_003</data>
+    </edge>
+    <edge source="n148" target="n150">
+      <data key="e_relation">核心业务包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_003</data>
+    </edge>
+    <edge source="n148" target="n151">
+      <data key="e_relation">核心业务包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_003</data>
+    </edge>
+    <edge source="n148" target="n152">
+      <data key="e_relation">主要业务模式包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_003</data>
+    </edge>
+    <edge source="n148" target="n153">
+      <data key="e_relation">主要业务模式包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_003</data>
+    </edge>
+    <edge source="n148" target="n154">
+      <data key="e_relation">主要业务模式包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_003</data>
+    </edge>
+    <edge source="n148" target="n155">
+      <data key="e_relation">主要业务模式包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_003</data>
+    </edge>
+    <edge source="n148" target="n156">
+      <data key="e_relation">目标应用领域是</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_003</data>
+    </edge>
+    <edge source="n158" target="n159">
+      <data key="e_relation">公司代码是</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_004</data>
+    </edge>
+    <edge source="n158" target="n160">
+      <data key="e_relation">主营业务包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_004</data>
+    </edge>
+    <edge source="n158" target="n167">
+      <data key="e_relation">主营业务包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_004</data>
+    </edge>
+    <edge source="n160" target="n161">
+      <data key="e_relation">采用培训模式</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_004</data>
+    </edge>
+    <edge source="n160" target="n162">
+      <data key="e_relation">提供培训服务</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_004</data>
+    </edge>
+    <edge source="n160" target="n163">
+      <data key="e_relation">主要产品包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_004</data>
+    </edge>
+    <edge source="n160" target="n164">
+      <data key="e_relation">主要产品包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_004</data>
+    </edge>
+    <edge source="n160" target="n165">
+      <data key="e_relation">目标应用领域</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_004</data>
+    </edge>
+    <edge source="n160" target="n166">
+      <data key="e_relation">目标应用领域</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_004</data>
+    </edge>
+    <edge source="n167" target="n168">
+      <data key="e_relation">核心业务是</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_004</data>
+    </edge>
+    <edge source="n167" target="n169">
+      <data key="e_relation">核心业务是</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_004</data>
+    </edge>
+    <edge source="n167" target="n170">
+      <data key="e_relation">目标应用领域</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_004</data>
+    </edge>
+    <edge source="n167" target="n171">
+      <data key="e_relation">目标应用领域</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_004</data>
+    </edge>
+    <edge source="n158" target="n172">
+      <data key="e_relation">行业地位</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_004</data>
+    </edge>
+    <edge source="n158" target="n173">
+      <data key="e_relation">业务特点</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_004</data>
+    </edge>
+    <edge source="n174" target="n175">
+      <data key="e_relation">公司代码是</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_005</data>
+    </edge>
+    <edge source="n174" target="n176">
+      <data key="e_relation">主营业务包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_005</data>
+    </edge>
+    <edge source="n174" target="n191">
+      <data key="e_relation">主营业务包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_005</data>
+    </edge>
+    <edge source="n176" target="n207">
+      <data key="e_relation">包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_005</data>
+    </edge>
+    <edge source="n176" target="n185">
+      <data key="e_relation">包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_005</data>
+    </edge>
+    <edge source="n207" target="n177">
+      <data key="e_relation">核心业务是</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_005</data>
+    </edge>
+    <edge source="n207" target="n178">
+      <data key="e_relation">核心业务是</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_005</data>
+    </edge>
+    <edge source="n207" target="n179">
+      <data key="e_relation">主要产品包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_005</data>
+    </edge>
+    <edge source="n207" target="n180">
+      <data key="e_relation">主要产品包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_005</data>
+    </edge>
+    <edge source="n180" target="n181">
+      <data key="e_relation">包括规格</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_005</data>
+    </edge>
+    <edge source="n180" target="n182">
+      <data key="e_relation">包括规格</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_005</data>
+    </edge>
+    <edge source="n180" target="n183">
+      <data key="e_relation">包括类型</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_005</data>
+    </edge>
+    <edge source="n185" target="n186">
+      <data key="e_relation">核心业务是</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_005</data>
+    </edge>
+    <edge source="n185" target="n187">
+      <data key="e_relation">核心业务是</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_005</data>
+    </edge>
+    <edge source="n185" target="n188">
+      <data key="e_relation">核心业务是</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_005</data>
+    </edge>
+    <edge source="n185" target="n189">
+      <data key="e_relation">提供</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_005</data>
+    </edge>
+    <edge source="n185" target="n190">
+      <data key="e_relation">提供</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_005</data>
+    </edge>
+    <edge source="n191" target="n192">
+      <data key="e_relation">核心产品是</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_005</data>
+    </edge>
+    <edge source="n191" target="n193">
+      <data key="e_relation">核心产品是</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_005</data>
+    </edge>
+    <edge source="n191" target="n194">
+      <data key="e_relation">核心产品是</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_005</data>
+    </edge>
+    <edge source="n191" target="n196">
+      <data key="e_relation">核心产品是</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_005</data>
+    </edge>
+    <edge source="n191" target="n198">
+      <data key="e_relation">核心产品是</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_005</data>
+    </edge>
+    <edge source="n191" target="n200">
+      <data key="e_relation">核心产品是</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_005</data>
+    </edge>
+    <edge source="n191" target="n206">
+      <data key="e_relation">核心产品是</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_005</data>
+    </edge>
+    <edge source="n174" target="n208">
+      <data key="e_relation">业务模式是</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_005</data>
+    </edge>
+    <edge source="n174" target="n209">
+      <data key="e_relation">发展战略是</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_005</data>
+    </edge>
+    <edge source="n174" target="n210">
+      <data key="e_relation">发展战略是</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_005</data>
+    </edge>
+    <edge source="n211" target="n212">
+      <data key="e_relation">公司代码是</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_006</data>
+    </edge>
+    <edge source="n211" target="n213">
+      <data key="e_relation">主营业务包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_006</data>
+    </edge>
+    <edge source="n211" target="n222">
+      <data key="e_relation">主营业务包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_006</data>
+    </edge>
+    <edge source="n214" target="n211">
+      <data key="e_relation">是子公司</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_006</data>
+    </edge>
+    <edge source="n214" target="n215">
+      <data key="e_relation">核心业务是</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_006</data>
+    </edge>
+    <edge source="n214" target="n216">
+      <data key="e_relation">主要产品是</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_006</data>
+    </edge>
+    <edge source="n214" target="n217">
+      <data key="e_relation">服务领域包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_006</data>
+    </edge>
+    <edge source="n214" target="n218">
+      <data key="e_relation">服务领域包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_006</data>
+    </edge>
+    <edge source="n214" target="n219">
+      <data key="e_relation">服务领域包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_006</data>
+    </edge>
+    <edge source="n214" target="n220">
+      <data key="e_relation">服务领域包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_006</data>
+    </edge>
+    <edge source="n214" target="n221">
+      <data key="e_relation">服务领域包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_006</data>
+    </edge>
+    <edge source="n223" target="n211">
+      <data key="e_relation">是子公司</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_006</data>
+    </edge>
+    <edge source="n223" target="n224">
+      <data key="e_relation">核心业务包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_006</data>
+    </edge>
+    <edge source="n223" target="n225">
+      <data key="e_relation">核心业务包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_006</data>
+    </edge>
+    <edge source="n223" target="n226">
+      <data key="e_relation">核心业务包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_006</data>
+    </edge>
+    <edge source="n223" target="n227">
+      <data key="e_relation">主要产品包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_006</data>
+    </edge>
+    <edge source="n223" target="n228">
+      <data key="e_relation">主要产品包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_006</data>
+    </edge>
+    <edge source="n223" target="n229">
+      <data key="e_relation">主要产品包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_006</data>
+    </edge>
+    <edge source="n223" target="n230">
+      <data key="e_relation">服务对象包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_006</data>
+    </edge>
+    <edge source="n223" target="n231">
+      <data key="e_relation">服务对象包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_006</data>
+    </edge>
+    <edge source="n223" target="n232">
+      <data key="e_relation">服务对象包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_006</data>
+    </edge>
+    <edge source="n213" target="n234">
+      <data key="e_relation">主要业务是</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_006</data>
+    </edge>
+    <edge source="n222" target="n227">
+      <data key="e_relation">主要业务是</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_006</data>
+    </edge>
+    <edge source="n211" target="n236">
+      <data key="e_relation">业务领域包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_006</data>
+    </edge>
+    <edge source="n211" target="n227">
+      <data key="e_relation">业务领域包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_006</data>
+    </edge>
+    <edge source="n211" target="n237">
+      <data key="e_relation">提供产品包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_006</data>
+    </edge>
+    <edge source="n211" target="n238">
+      <data key="e_relation">提供产品包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_006</data>
+    </edge>
+    <edge source="n211" target="n239">
+      <data key="e_relation">提供产品包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_006</data>
+    </edge>
+    <edge source="n240" target="n241">
+      <data key="e_relation">公司代码是</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_007</data>
+    </edge>
+    <edge source="n240" target="n242">
+      <data key="e_relation">主营业务包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_007</data>
+    </edge>
+    <edge source="n240" target="n251">
+      <data key="e_relation">主营业务包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_007</data>
+    </edge>
+    <edge source="n240" target="n257">
+      <data key="e_relation">主营业务包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_007</data>
+    </edge>
+    <edge source="n242" target="n264">
+      <data key="e_relation">核心业务是</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_007</data>
+    </edge>
+    <edge source="n242" target="n265">
+      <data key="e_relation">核心业务是</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_007</data>
+    </edge>
+    <edge source="n242" target="n266">
+      <data key="e_relation">主要产品包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_007</data>
+    </edge>
+    <edge source="n266" target="n246">
+      <data key="e_relation">包括型号</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_007</data>
+    </edge>
+    <edge source="n266" target="n247">
+      <data key="e_relation">包括型号</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_007</data>
+    </edge>
+    <edge source="n266" target="n248">
+      <data key="e_relation">包括型号</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_007</data>
+    </edge>
+    <edge source="n242" target="n245">
+      <data key="e_relation">主要产品包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_007</data>
+    </edge>
+    <edge source="n244" target="n249">
+      <data key="e_relation">应用领域</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_007</data>
+    </edge>
+    <edge source="n245" target="n250">
+      <data key="e_relation">应用领域</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_007</data>
+    </edge>
+    <edge source="n251" target="n267">
+      <data key="e_relation">核心业务是</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_007</data>
+    </edge>
+    <edge source="n251" target="n268">
+      <data key="e_relation">核心业务是</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_007</data>
+    </edge>
+    <edge source="n251" target="n252">
+      <data key="e_relation">主要产品包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_007</data>
+    </edge>
+    <edge source="n251" target="n253">
+      <data key="e_relation">主要产品包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_007</data>
+    </edge>
+    <edge source="n251" target="n254">
+      <data key="e_relation">主要产品包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_007</data>
+    </edge>
+    <edge source="n251" target="n255">
+      <data key="e_relation">主要产品包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_007</data>
+    </edge>
+    <edge source="n252" target="n256">
+      <data key="e_relation">应用领域</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_007</data>
+    </edge>
+    <edge source="n257" target="n269">
+      <data key="e_relation">重点项目包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_007</data>
+    </edge>
+    <edge source="n257" target="n270">
+      <data key="e_relation">重点项目包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_007</data>
+    </edge>
+    <edge source="n257" target="n271">
+      <data key="e_relation">重点项目包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_007</data>
+    </edge>
+    <edge source="n257" target="n261">
+      <data key="e_relation">重点项目包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_007</data>
+    </edge>
+    <edge source="n257" target="n262">
+      <data key="e_relation">重点项目包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_007</data>
+    </edge>
+    <edge source="n240" target="n263">
+      <data key="e_relation">采用模式</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_007</data>
+    </edge>
+    <edge source="n272" target="n273">
+      <data key="e_relation">公司代码是</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_008</data>
+    </edge>
+    <edge source="n272" target="n274">
+      <data key="e_relation">主营业务是</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_008</data>
+    </edge>
+    <edge source="n275" target="n272">
+      <data key="e_relation">是子公司</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_008</data>
+    </edge>
+    <edge source="n275" target="n276">
+      <data key="e_relation">核心业务是</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_008</data>
+    </edge>
+    <edge source="n275" target="n277">
+      <data key="e_relation">主要产品是</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_008</data>
+    </edge>
+    <edge source="n277" target="n278">
+      <data key="e_relation">目标应用领域是</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_008</data>
+    </edge>
+    <edge source="n272" target="n279">
+      <data key="e_relation">拥有业务</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_008</data>
+    </edge>
+    <edge source="n279" target="n280">
+      <data key="e_relation">核心业务是</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_008</data>
+    </edge>
+    <edge source="n279" target="n281">
+      <data key="e_relation">主要资产是</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_008</data>
+    </edge>
+    <edge source="n281" target="n282">
+      <data key="e_relation">目标应用领域是</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_008</data>
+    </edge>
+    <edge source="n272" target="n283">
+      <data key="e_relation">业务集中在</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_008</data>
+    </edge>
+    <edge source="n272" target="n284">
+      <data key="e_relation">通过业务实现收入</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_008</data>
+    </edge>
+    <edge source="n272" target="n285">
+      <data key="e_relation">积极拓展</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_008</data>
+    </edge>
+    <edge source="n286" target="n287">
+      <data key="e_relation">公司代码是</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_009</data>
+    </edge>
+    <edge source="n286" target="n49">
+      <data key="e_relation">主营业务包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_009</data>
+    </edge>
+    <edge source="n286" target="n300">
+      <data key="e_relation">主营业务包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_009</data>
+    </edge>
+    <edge source="n286" target="n306">
+      <data key="e_relation">主营业务包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_009</data>
+    </edge>
+    <edge source="n286" target="n318">
+      <data key="e_relation">主营业务包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_009</data>
+    </edge>
+    <edge source="n288" target="n286">
+      <data key="e_relation">是子公司</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_009</data>
+    </edge>
+    <edge source="n288" target="n289">
+      <data key="e_relation">核心业务是</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_009</data>
+    </edge>
+    <edge source="n288" target="n290">
+      <data key="e_relation">主要产品包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_009</data>
+    </edge>
+    <edge source="n288" target="n291">
+      <data key="e_relation">主要产品包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_009</data>
+    </edge>
+    <edge source="n288" target="n292">
+      <data key="e_relation">主要产品包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_009</data>
+    </edge>
+    <edge source="n288" target="n293">
+      <data key="e_relation">主要产品包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_009</data>
+    </edge>
+    <edge source="n288" target="n294">
+      <data key="e_relation">主要产品包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_009</data>
+    </edge>
+    <edge source="n288" target="n295">
+      <data key="e_relation">主要产品包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_009</data>
+    </edge>
+    <edge source="n288" target="n296">
+      <data key="e_relation">主要产品包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_009</data>
+    </edge>
+    <edge source="n288" target="n297">
+      <data key="e_relation">主要产品包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_009</data>
+    </edge>
+    <edge source="n288" target="n298">
+      <data key="e_relation">主要产品包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_009</data>
+    </edge>
+    <edge source="n288" target="n299">
+      <data key="e_relation">目标应用领域</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_009</data>
+    </edge>
+    <edge source="n301" target="n286">
+      <data key="e_relation">是子公司</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_009</data>
+    </edge>
+    <edge source="n301" target="n302">
+      <data key="e_relation">核心业务是</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_009</data>
+    </edge>
+    <edge source="n301" target="n303">
+      <data key="e_relation">主要服务包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_009</data>
+    </edge>
+    <edge source="n304" target="n286">
+      <data key="e_relation">是子公司</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_009</data>
+    </edge>
+    <edge source="n304" target="n305">
+      <data key="e_relation">核心业务是</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_009</data>
+    </edge>
+    <edge source="n307" target="n286">
+      <data key="e_relation">是子公司</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_009</data>
+    </edge>
+    <edge source="n307" target="n308">
+      <data key="e_relation">核心业务是</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_009</data>
+    </edge>
+    <edge source="n307" target="n309">
+      <data key="e_relation">主要产品包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_009</data>
+    </edge>
+    <edge source="n307" target="n310">
+      <data key="e_relation">主要产品包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_009</data>
+    </edge>
+    <edge source="n307" target="n311">
+      <data key="e_relation">主要产品包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_009</data>
+    </edge>
+    <edge source="n307" target="n312">
+      <data key="e_relation">目标应用领域</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_009</data>
+    </edge>
+    <edge source="n313" target="n286">
+      <data key="e_relation">是子公司</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_009</data>
+    </edge>
+    <edge source="n313" target="n314">
+      <data key="e_relation">核心业务是</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_009</data>
+    </edge>
+    <edge source="n313" target="n315">
+      <data key="e_relation">主要产品包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_009</data>
+    </edge>
+    <edge source="n313" target="n316">
+      <data key="e_relation">主要产品包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_009</data>
+    </edge>
+    <edge source="n313" target="n317">
+      <data key="e_relation">目标应用领域</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_009</data>
+    </edge>
+    <edge source="n319" target="n286">
+      <data key="e_relation">是子公司</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_009</data>
+    </edge>
+    <edge source="n319" target="n320">
+      <data key="e_relation">核心业务是</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_009</data>
+    </edge>
+    <edge source="n319" target="n321">
+      <data key="e_relation">主要项目包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_009</data>
+    </edge>
+    <edge source="n319" target="n322">
+      <data key="e_relation">主要项目包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_009</data>
+    </edge>
+    <edge source="n319" target="n323">
+      <data key="e_relation">主要项目包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_009</data>
+    </edge>
+    <edge source="n319" target="n324">
+      <data key="e_relation">主要项目包括</data>
+      <data key="e_confidence">1</data>
+      <data key="e_first_seen">company_009</data>
+    </edge>
+  </graph>
+</graphml>

@@ -70,7 +70,7 @@
 * **FR-B2: 结果重排序 (Reranking)**
     * 系统使用 `qwen3_reranker_official_best_practice.py` 的逻辑进行重排序。
 * **FR-B3: 事实过滤 (Fact Filtering)**
-    * 系统使用 `filter_deepseek-v3-instruct.json` 的逻辑进行事实过滤。
+    * 系统使用 `filter_deepseek-chat-instruct.json` 的逻辑进行事实过滤。
 * **FR-B4: 结构化答案生成与溯源**
     * 系统使用 `rag_qa_chinse_companies.py` 的逻辑生成结构化的关联公司答案。
     * 最终输出的结构化答案中，除了包含一个0到1之间、用于排序的数字“相似度分数”外，**必须**额外包含一个`relevance_level`（相关性等级）字段。该字段的值应为 `NFR2` 中定义的三个等级之一。

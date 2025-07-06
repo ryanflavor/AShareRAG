@@ -17,7 +17,6 @@ class TestSettings:
         settings = Settings()
 
         # Test API keys
-        assert settings.openai_api_key == "test_openai_key"
         assert settings.deepseek_api_key == "test_deepseek_key"
 
         # Test model configuration
@@ -42,7 +41,6 @@ class TestSettings:
         """Test default settings when no env vars are set."""
         # Clear relevant environment variables
         env_vars_to_clear = [
-            "OPENAI_API_KEY",
             "DEEPSEEK_API_KEY",
             "EMBEDDING_MODEL_NAME",
             "RERANKER_MODEL_NAME",
@@ -64,7 +62,7 @@ class TestSettings:
         # Test default values
         assert settings.embedding_model_name == "Qwen/Qwen3-Embedding-4B"
         assert settings.reranker_model_name == "Qwen/Qwen3-Reranker-4B"
-        assert settings.llm_model_name == "deepseek-v3"
+        assert settings.llm_model_name == "deepseek-chat"
         assert settings.batch_size == 32
         assert settings.max_workers == 4
         assert settings.log_level == "INFO"
