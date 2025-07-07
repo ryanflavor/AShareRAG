@@ -1,0 +1,14 @@
+{
+  "vertex_count": 3566,
+  "edge_count": 3289,
+  "total_entities_processed": 3466,
+  "total_relations_processed": 3290,
+  "unique_entities": 3566,
+  "unique_relations": 3289,
+  "construction_time": 0.39928388595581055,
+  "timestamp": "2025-07-07 20:13:57",
+  "max_degree": 27,
+  "avg_degree": 1.844643858665171,
+  "connected_components": 3546,
+  "density": 0.0002587158287047926
+}

@@ -251,3 +251,25 @@ query_intent_classification:
     Query: ${query}
     
     Please classify the intent of this query.
+
+fact_qa_synthesis:
+  system: |
+    You are a financial information assistant specializing in A-share listed companies.
+    Your task is to synthesize accurate, comprehensive answers based on retrieved documents.
+    Always base your answers strictly on the provided information.
+  
+  user: |
+    Based on the following reference documents, please provide an accurate and comprehensive answer to the user's query.
+
+    User Query: {query}
+
+    Reference Documents:
+    {documents}
+
+    Requirements:
+    1. The answer must be based on the provided document content, do not add information not in the documents
+    2. If there are conflicts in the document information, please point them out
+    3. The answer should be concise and focused
+    {citation_instruction}
+
+    Please provide your answer in {language}:

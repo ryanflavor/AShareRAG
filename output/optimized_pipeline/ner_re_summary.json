@@ -1,0 +1,12 @@
+{
+  "total_documents": 120,
+  "successful_documents": 120,
+  "failed_documents": 0,
+  "wall_clock_time": 78.33673071861267,
+  "total_processing_time": 6922.030442237854,
+  "average_time_per_doc": 57.68358701864879,
+  "parallel_efficiency": 441.8125685575229,
+  "total_entities": 3466,
+  "total_relations": 3290,
+  "timestamp": "2025-07-07 20:11:47"
+}

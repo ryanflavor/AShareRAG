@@ -131,9 +131,7 @@ class KeywordIntentDetector:
 class LLMIntentDetector:
     """LLM-based intent detection."""
 
-    def __init__(
-        self, llm_adapter=None, config: IntentDetectionConfig | None = None
-    ):
+    def __init__(self, llm_adapter=None, config: IntentDetectionConfig | None = None):
         """Initialize LLM intent detector.
 
         Args:
@@ -172,7 +170,9 @@ class LLMIntentDetector:
             )
 
         except FutureTimeoutError:
-            raise TimeoutError(f"LLM query timed out after {self.config.timeout}s") from None
+            raise TimeoutError(
+                f"LLM query timed out after {self.config.timeout}s"
+            ) from None
         except Exception as e:
             # Return unknown intent on error
             return QueryIntent(

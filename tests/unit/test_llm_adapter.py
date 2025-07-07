@@ -353,7 +353,7 @@ class TestLLMAdapter:
         # Current implementation returns all entities regardless of type validity
         expected = [
             {"text": "公司A", "type": "INVALID_TYPE"},
-            {"text": "产品B", "type": "PRODUCT"}
+            {"text": "产品B", "type": "PRODUCT"},
         ]
         assert result == expected
 

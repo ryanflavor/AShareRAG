@@ -1,15 +1,16 @@
 """Integration tests for the complete embedding pipeline."""
 
-import tempfile
 import shutil
+import tempfile
 from pathlib import Path
+from unittest.mock import Mock, patch
+
 import numpy as np
 import pytest
-from unittest.mock import patch, Mock
 
 from src.components.embedding_service import EmbeddingService
-from src.components.vector_storage import VectorStorage
 from src.components.knowledge_graph_constructor import KnowledgeGraphConstructor
+from src.components.vector_storage import VectorStorage
 
 
 class TestEmbeddingPipeline:

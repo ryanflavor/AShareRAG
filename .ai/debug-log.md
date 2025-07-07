@@ -148,3 +148,74 @@ Created comprehensive integration test for Story 2.1 Query Intent Detection:
 - Updated modern Python type hints (dict[str, Any] instead of Dict)
 - All code quality checks pass
 - Component is fully documented and ready for use
+
+## 2025-01-07 - Story 2.2: Fact-based Q&A Implementation
+
+### Task 1: Implement Vector Retrieval Component (COMPLETED)
+- Created `/tests/unit/test_retriever.py` with 11 comprehensive unit tests following TDD
+- Tests cover initialization, basic retrieval, company filtering, error handling, performance logging
+- Created `/src/components/retriever.py` implementing VectorRetriever class
+- Integrated with existing VectorStorage (LanceDB) and EmbeddingService (Qwen3-Embedding-4B)
+- Implemented company entity extraction supporting 100+ A-share companies with abbreviation mapping
+- Added `retriever_top_k` configuration to `/config/settings.py` with validation
+- Created integration tests at `/tests/integration/test_retriever_integration.py`
+- Fixed interface mismatches (top_k vs limit, close vs disconnect)
+- All 14 tests (11 unit + 3 integration) pass successfully
+- Performance verified: retrieval completes within 3s requirement
+- Integration test uses actual populated vector database from output/full_dataset/vector_store/
+
+### Task 2: Create Reranker Adapter and Component (COMPLETED)
+- Created `/tests/unit/test_reranker_adapter.py` with 12 comprehensive unit tests
+- Tests cover initialization, formatting, batch processing, OOM recovery, metadata handling
+- Created `/src/adapters/reranker_adapter.py` implementing Qwen3RerankerAdapter
+- Followed official best practice from `/reserved/qwen3_reranker_official_best_practice.py`
+- Implemented generative scoring using yes/no probability calculation
+- Added batch processing with automatic OOM recovery for production robustness
+- Created `/tests/unit/test_ranker.py` with 12 unit tests for Ranker component
+- Created `/src/components/ranker.py` implementing relevance threshold filtering
+- Added reranker configuration to `/config/settings.py`:
+  - reranker_relevance_threshold (default: 0.5)
+  - reranker_batch_size (default: 8)
+- All 24 tests pass successfully (12 adapter + 12 ranker)
+- Component properly integrates with retriever output for document reranking
+
+### Task 3: Implement Answer Synthesis Component (COMPLETED)
+- Created `/tests/unit/test_answer_synthesizer.py` with 16 comprehensive unit tests
+- Tests cover initialization, basic synthesis, empty docs, custom prompts, token limits, citations
+- Tests cover language modes, error handling, fallback, performance logging, concurrent requests
+- Created `/src/components/answer_synthesizer.py` implementing AnswerSynthesizer class
+- Updated `/src/adapters/llm_adapter.py` to add:
+  - LLMResponse dataclass for structured responses
+  - generate() and generate_async() abstract methods
+- Updated `/src/adapters/deepseek_adapter.py` to implement generate() method
+- Added `fact_qa_synthesis` prompt template to `/config/prompts.yaml`
+- Features implemented:
+  - Configurable max tokens, temperature, language (Chinese/English)
+  - Citation formatting with customizable format
+  - Document truncation to fit token limits
+  - Fallback answer generation on LLM failures
+  - Performance logging and statistics tracking
+  - Metadata field inclusion support
+- All 16 tests pass successfully
+- Component ready for pipeline integration with retriever and ranker outputs
+
+### Task 4: Create Fact-based Q&A Pipeline (COMPLETED)
+- Created `/tests/integration/test_fact_qa_pipeline.py` with 12 comprehensive tests
+- Tests cover initialization, end-to-end processing, error handling, caching, performance
+- Created `/src/pipeline/fact_qa_pipeline.py` implementing FactQAPipeline class
+- Created `/src/pipeline/__init__.py` for module exports
+- Key implementation details:
+  - FactQAPipeline orchestrates retriever, ranker, and synthesizer components
+  - Ranker component creates its own Qwen3RerankerAdapter internally
+  - Pipeline-level caching with SHA256 hash keys and FIFO eviction
+  - Comprehensive error handling and performance logging
+  - Support for custom synthesis prompts
+  - Language configuration (Chinese/English)
+- Fixed integration issues:
+  - VectorRetriever uses generate_embeddings not embed_query
+  - Ranker method is rank_documents not rank
+  - RerankResult is a dataclass with document, score, original_index fields
+  - Added get_statistics() to VectorRetriever for consistency
+  - Connect/disconnect methods work with vector_storage directly
+- All 12 integration tests pass successfully
+- Pipeline ready for API endpoint integration

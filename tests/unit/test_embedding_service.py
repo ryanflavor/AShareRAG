@@ -1,8 +1,9 @@
 """Unit tests for Embedding Service component."""
 
+from unittest.mock import Mock, patch
+
 import numpy as np
 import pytest
-from unittest.mock import Mock, patch, MagicMock
 
 from src.components.embedding_service import EmbeddingService
 

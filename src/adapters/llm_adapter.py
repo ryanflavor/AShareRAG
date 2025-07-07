@@ -1,12 +1,22 @@
 """Abstract base class for LLM adapters."""
 
+import asyncio
 import logging
 from abc import ABC, abstractmethod
+from dataclasses import dataclass
 
 # Import Settings for backward compatibility with tests
-from config.settings import Settings
 
 logger = logging.getLogger(__name__)
+
+
+@dataclass
+class LLMResponse:
+    """Response from LLM API call."""
+
+    content: str
+    model: str
+    usage: dict[str, int]
 
 
 class LLMAdapter(ABC):
@@ -43,6 +53,57 @@ class LLMAdapter(ABC):
             List of relation triples
         """
         pass
+
+    def generate(
+        self,
+        prompt: str,
+        max_tokens: int = 4000,
+        temperature: float = 0.1,
+        top_p: float = 0.9,
+        **kwargs,
+    ) -> LLMResponse:
+        """
+        Generate text completion synchronously.
+
+        Args:
+            prompt: The prompt to generate from
+            max_tokens: Maximum tokens to generate
+            temperature: Sampling temperature
+            top_p: Nucleus sampling parameter
+            **kwargs: Additional parameters
+
+        Returns:
+            LLMResponse with generated text
+        """
+        # Default implementation - subclasses should override
+        raise NotImplementedError("Subclass must implement generate method")
+
+    async def generate_async(
+        self,
+        prompt: str,
+        max_tokens: int = 5000,
+        temperature: float = 0.1,
+        top_p: float = 0.9,
+        **kwargs,
+    ) -> LLMResponse:
+        """
+        Generate text completion asynchronously.
+
+        Args:
+            prompt: The prompt to generate from
+            max_tokens: Maximum tokens to generate
+            temperature: Sampling temperature
+            top_p: Nucleus sampling parameter
+            **kwargs: Additional parameters
+
+        Returns:
+            LLMResponse with generated text
+        """
+        # Default implementation uses sync version in thread pool
+        loop = asyncio.get_event_loop()
+        return await loop.run_in_executor(
+            None, self.generate, prompt, max_tokens, temperature, top_p
+        )
 
     def get_cache_stats(self) -> dict:
         """Get cache statistics (optional implementation)."""

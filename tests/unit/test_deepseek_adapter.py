@@ -3,11 +3,10 @@
 import os
 import tempfile
 import time
-from unittest.mock import Mock, patch, MagicMock
+from unittest.mock import Mock, patch
 
 import pytest
 import yaml
-import sqlite3
 
 from src.adapters.deepseek_adapter import DeepSeekAdapter
 
@@ -330,8 +329,8 @@ class TestDeepSeekAdapter:
         self, mock_openai_class, mock_settings_class, mock_prompts_file, mock_cache_dir
     ):
         """Test thread-safe cache access with FileLock."""
-        import threading
         import queue
+        import threading
 
         # Mock settings
         mock_settings = Mock()

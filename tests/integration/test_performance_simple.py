@@ -1,9 +1,8 @@
 """Simple performance tests that don't require API keys."""
 
-import os
-import time
 import tempfile
-from unittest.mock import patch, Mock
+import time
+from unittest.mock import Mock, patch
 
 import pytest
 
@@ -151,8 +150,8 @@ class TestSimplePerformance:
         self, mock_openai_class, mock_settings_class, mock_settings, mock_api_response
     ):
         """Test thread-safe cache operations."""
-        import threading
         import queue
+        import threading
 
         mock_settings_class.return_value = mock_settings
 

@@ -1,11 +1,12 @@
 """Unit tests for Vector Storage component."""
 
+import shutil
+import tempfile
+from pathlib import Path
+from unittest.mock import Mock, patch
+
 import numpy as np
 import pytest
-from pathlib import Path
-from unittest.mock import Mock, patch, MagicMock, call
-import tempfile
-import shutil
 
 from src.components.vector_storage import VectorStorage
 

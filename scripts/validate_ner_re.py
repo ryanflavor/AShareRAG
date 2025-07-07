@@ -4,19 +4,17 @@
 使用真实的DeepSeek API和corpus.json数据测试一个公司的命名实体识别和关系抽取
 """
 
-import json
 import sys
-import os
 from pathlib import Path
 
 # 添加项目根目录到Python路径
 project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root))
 
-from src.adapters import LLMAdapter
-from src.components.knowledge_graph_constructor import KnowledgeGraphConstructor
-from src.components.data_ingestor import DataIngestor
 from config.settings import Settings
+from src.adapters import LLMAdapter
+from src.components.data_ingestor import DataIngestor
+from src.components.knowledge_graph_constructor import KnowledgeGraphConstructor
 
 
 def main():
@@ -62,7 +60,7 @@ def main():
         print(f"   - 文档预览: {preview_text}")
 
         # 5. 测试NER功能
-        print(f"\n🏷️  5. 测试命名实体识别（NER）...")
+        print("\n🏷️  5. 测试命名实体识别（NER）...")
         print("   发送请求到DeepSeek API...")
 
         entities = llm_adapter.extract_entities(test_company.text, include_types=True)
@@ -74,7 +72,7 @@ def main():
             print(f"     ... 还有 {len(entities) - 10} 个实体")
 
         # 6. 测试RE功能
-        print(f"\n🔗 6. 测试关系抽取（RE）...")
+        print("\n🔗 6. 测试关系抽取（RE）...")
         print("   发送请求到DeepSeek API...")
 
         relations = llm_adapter.extract_relations(test_company.text, entities)
@@ -87,7 +85,7 @@ def main():
             print(f"     ... 还有 {len(relations) - 10} 个关系")
 
         # 7. 测试知识图谱构建
-        print(f"\n🕸️  7. 测试知识图谱构建...")
+        print("\n🕸️  7. 测试知识图谱构建...")
         # 转换Document对象为字典格式
         doc_dict = {
             "id": test_company.idx,
@@ -96,13 +94,13 @@ def main():
         }
         results, graph = kg_constructor.process_documents([doc_dict])
 
-        print(f"   - 图谱统计:")
+        print("   - 图谱统计:")
         print(f"     * 顶点数量: {graph.vcount()}")
         print(f"     * 边数量: {graph.ecount()}")
 
         # 显示一些顶点信息
         if graph.vcount() > 0:
-            print(f"   - 顶点示例 (前5个):")
+            print("   - 顶点示例 (前5个):")
             for i in range(min(5, graph.vcount())):
                 vertex = graph.vs[i]
                 name = vertex["name"]
@@ -111,7 +109,7 @@ def main():
 
         # 显示一些边信息
         if graph.ecount() > 0:
-            print(f"   - 关系示例 (前5个):")
+            print("   - 关系示例 (前5个):")
             for i in range(min(5, graph.ecount())):
                 edge = graph.es[i]
                 source_name = graph.vs[edge.source]["name"]
@@ -120,7 +118,7 @@ def main():
                 print(f"     {i + 1}. {source_name} --[{relation}]--> {target_name}")
 
         # 8. 验证结果质量
-        print(f"\n✅ 8. 结果质量评估:")
+        print("\n✅ 8. 结果质量评估:")
 
         # 检查是否识别到公司名称
         company_names = ["GQY视讯", "GQY", "视讯"]
@@ -164,14 +162,14 @@ def main():
                 subject, predicate, obj = triple
                 print(f"       * ({subject}, {predicate}, {obj})")
 
-        print(f"\n🎉 验证完成！")
+        print("\n🎉 验证完成！")
         print(f"NER成功识别 {len(entities)} 个实体，RE成功抽取 {len(relations)} 个关系")
         print(f"知识图谱包含 {graph.vcount()} 个顶点和 {graph.ecount()} 条边")
 
         return True
 
     except Exception as e:
-        print(f"\n❌ 验证过程中出现错误: {str(e)}")
+        print(f"\n❌ 验证过程中出现错误: {e!s}")
         import traceback
 
         traceback.print_exc()

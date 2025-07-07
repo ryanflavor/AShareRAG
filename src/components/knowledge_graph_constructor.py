@@ -15,8 +15,6 @@ import psutil
 
 from config.settings import Settings
 from src.adapters import LLMAdapter
-from src.components.embedding_service import EmbeddingService
-from src.components.vector_storage import VectorStorage
 
 logger = logging.getLogger(__name__)
 
@@ -24,36 +22,26 @@ logger = logging.getLogger(__name__)
 class KnowledgeGraphConstructor:
     """Orchestrates Named Entity Recognition and Relation Extraction for building knowledge graphs."""
 
-    # Entity type priority (higher number = more specific)
-    ENTITY_TYPE_PRIORITY: ClassVar[dict[str, int]] = {
-        "UNKNOWN": 0,
-        "COMPANY": 1,
-        "SUBSIDIARY": 2,
-        "LISTED_COMPANY": 3,
-        "COMPANY_CODE": 1,
-        "PERSON": 1,
-        "EXECUTIVE": 2,
-        "TECHNOLOGY": 1,
-        "PRODUCT": 1,
-        "INDUSTRY": 1,
-    }
+    # Entity type priority mapping - populated from settings
+    _entity_type_priority_map: ClassVar[dict[str, int]] = None
 
     def __init__(
         self,
-        embedding_service: EmbeddingService | None = None,
-        vector_storage: VectorStorage | None = None,
+        llm_adapter: LLMAdapter,
     ):
         """
-        Initialize Knowledge Graph Constructor with optional embedding components.
+        Initialize Knowledge Graph Constructor with injected LLM adapter.
 
         Args:
-            embedding_service: Optional embedding service for text vectorization
-            vector_storage: Optional vector storage for persisting embeddings
+            llm_adapter: LLM adapter for entity and relation extraction
         """
-        self.llm_adapter = LLMAdapter(enable_cache=True, high_throughput=True)
+        self.llm_adapter = llm_adapter
         self.graph = None
-        self.embedding_service = embedding_service
-        self.vector_storage = vector_storage
+        self.settings = Settings()
+
+        # Initialize entity type priority map if not already done
+        if KnowledgeGraphConstructor._entity_type_priority_map is None:
+            self._init_entity_type_priority()
         self.deduplication_stats = {
             "total_entities": 0,
             "unique_entities": 0,
@@ -62,6 +50,26 @@ class KnowledgeGraphConstructor:
             "unique_relations": 0,
             "merged_relations": 0,
         }
+
+    def _init_entity_type_priority(self):
+        """Initialize entity type priority map from settings."""
+        # Build a priority map with more specific types having higher priority
+        priority_map = {"UNKNOWN": 0}
+
+        # Basic entity types from settings get priority 1
+        for entity_type in self.settings.entity_type_priority:
+            priority_map[entity_type] = 1
+
+        # More specific types get higher priority
+        specific_types = {
+            "SUBSIDIARY": 2,
+            "LISTED_COMPANY": 3,
+            "EXECUTIVE": 2,
+            "COMPANY_CODE": 1,
+        }
+        priority_map.update(specific_types)
+
+        KnowledgeGraphConstructor._entity_type_priority_map = priority_map
 
     def process_documents(
         self, documents: list[dict], batch_size: int | None = None
@@ -123,90 +131,7 @@ class KnowledgeGraphConstructor:
         # Finalize processing
         self._finalize_processing(documents, results)
 
-        # Step 5: Generate and store embeddings if services are configured
-        if self.embedding_service and self.vector_storage:
-            logger.info("Starting embedding generation and storage")
-
-            # Prepare documents for embedding with metadata
-            embedding_docs = self._prepare_documents_for_embedding(documents, results)
-
-            if embedding_docs:
-                # Generate embeddings
-                processed_docs = self.embedding_service.process_documents(
-                    embedding_docs
-                )
-
-                if processed_docs:
-                    # Store in vector database
-                    try:
-                        # Initialize table with first batch if needed
-                        if not self.vector_storage.table:
-                            self.vector_storage.create_table(processed_docs[:1])
-
-                        # Add all documents
-                        self.vector_storage.add_documents(processed_docs)
-                        logger.info(
-                            f"Stored {len(processed_docs)} document embeddings in vector storage"
-                        )
-                    except Exception as e:
-                        logger.error(f"Failed to store embeddings: {e}")
-                else:
-                    logger.warning("Failed to generate embeddings")
-            else:
-                logger.warning("No documents prepared for embedding")
-
         return results, self.graph
-
-    def _prepare_documents_for_embedding(
-        self, documents: list[dict[str, Any]], ner_re_results: dict[str, dict[str, Any]]
-    ) -> list[dict[str, Any]]:
-        """
-        Prepare documents for embedding by adding NER/RE metadata.
-
-        Args:
-            documents: Original documents
-            ner_re_results: Results from NER/RE processing
-
-        Returns:
-            List of documents with metadata for embedding
-        """
-        embedding_docs = []
-
-        for doc in documents:
-            doc_id = doc.get("id", "")
-            text = doc.get("text", "")
-
-            if not text or doc_id not in ner_re_results:
-                continue
-
-            # Get NER/RE results
-            doc_results = ner_re_results[doc_id]
-            entities = doc_results.get("entities", [])
-            triples = doc_results.get("triples", [])
-
-            # Extract company name from title or entities
-            company_name = doc.get("title", "")
-            if not company_name and entities:
-                # Try to find first COMPANY entity
-                for entity in entities:
-                    if entity.get("type") == "COMPANY":
-                        company_name = entity["text"]
-                        break
-
-            # Create document for embedding
-            embedding_doc = {
-                "text": text,
-                "doc_id": doc_id,
-                "chunk_index": 0,  # Single chunk for now
-                "company_name": company_name or "Unknown",
-                "entities": entities,  # Already in typed format from Story 1.2.1
-                "relations": triples,
-                "source_file": doc.get("source_file", "corpus.json"),
-            }
-
-            embedding_docs.append(embedding_doc)
-
-        return embedding_docs
 
     def save_graph(self, file_path: Path | None = None, max_retries: int = 3) -> bool:
         """
@@ -674,10 +599,10 @@ class KnowledgeGraphConstructor:
                         vertex["source_docs"].append(doc_id)
 
                     # Update entity type if more specific
-                    current_priority = self.ENTITY_TYPE_PRIORITY.get(
+                    current_priority = self._entity_type_priority_map.get(
                         vertex["entity_type"], 0
                     )
-                    new_priority = self.ENTITY_TYPE_PRIORITY.get(entity_type, 0)
+                    new_priority = self._entity_type_priority_map.get(entity_type, 0)
 
                     if new_priority > current_priority:
                         logger.debug(
@@ -813,8 +738,8 @@ class KnowledgeGraphConstructor:
         if not self.graph:
             return False
 
-        # Prune if graph has more than 1M edges
-        return self.graph.ecount() > 1_000_000
+        # Prune if graph has more edges than configured threshold
+        return self.graph.ecount() > self.settings.graph_pruning_threshold
 
     def _prune_graph(self) -> None:
         """Prune graph by removing low-degree vertices."""

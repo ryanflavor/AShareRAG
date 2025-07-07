@@ -32,7 +32,8 @@ class Settings(BaseSettings):
         default="deepseek-chat", description="Name of the LLM model to use"
     )
     llm_adapter_type: str = Field(
-        default="deepseek", description="Type of LLM adapter to use (deepseek, deepseek_reasoner, openai, etc.)"
+        default="deepseek",
+        description="Type of LLM adapter to use (deepseek, deepseek_reasoner, openai, etc.)",
     )
 
     # System Configuration
@@ -47,7 +48,7 @@ class Settings(BaseSettings):
     vector_storage_path: Path = Field(
         default=Path("output/vector_store"), description="Path to store vector data"
     )
-    
+
     # Vector Storage Configuration
     vector_db_path: Path = Field(
         default=Path("./output/vector_store"), description="LanceDB storage location"
@@ -59,6 +60,17 @@ class Settings(BaseSettings):
         default="ashare_documents", description="LanceDB table name"
     )
 
+    # Retrieval Configuration
+    retriever_top_k: int = Field(
+        default=10, description="Number of top documents to retrieve"
+    )
+
+    # Reranker Configuration
+    reranker_relevance_threshold: float = Field(
+        default=0.5, description="Minimum relevance score to keep documents"
+    )
+    reranker_batch_size: int = Field(default=8, description="Batch size for reranking")
+
     # Server Configuration
     api_host: str = Field(default="0.0.0.0", description="API server host")
     api_port: int = Field(default=8000, description="API server port")
@@ -67,6 +79,37 @@ class Settings(BaseSettings):
     prompts_path: Path = Field(
         default=Path("config/prompts.yaml"),
         description="Path to prompts configuration file",
+    )
+
+    # Knowledge Graph Configuration
+    entity_type_priority: list[str] = Field(
+        default=[
+            "COMPANY",
+            "PERSON",
+            "LOCATION",
+            "ORGANIZATION",
+            "DATE",
+            "MONEY",
+            "PERCENT",
+            "PRODUCT",
+        ],
+        description="Entity type priority for deduplication",
+    )
+    graph_pruning_threshold: int = Field(
+        default=1_000_000,
+        description="Maximum graph size before pruning",
+    )
+    processing_batch_size: int = Field(
+        default=32,
+        description="Batch size for document processing",
+    )
+    max_retry_attempts: int = Field(
+        default=3,
+        description="Maximum retry attempts for failed operations",
+    )
+    retry_delay_seconds: float = Field(
+        default=1.0,
+        description="Delay between retry attempts in seconds",
     )
 
     model_config = SettingsConfigDict(
@@ -102,10 +145,24 @@ class Settings(BaseSettings):
             raise ValueError("Port must be between 1 and 65535")
         return v
 
-    @field_validator("batch_size", "max_workers", "embedding_batch_size")
+    @field_validator(
+        "batch_size",
+        "max_workers",
+        "embedding_batch_size",
+        "retriever_top_k",
+        "reranker_batch_size",
+    )
     @classmethod
     def validate_positive(cls, v: int) -> int:
         """Validate value is positive."""
         if v <= 0:
             raise ValueError("Value must be positive")
+        return v
+
+    @field_validator("reranker_relevance_threshold")
+    @classmethod
+    def validate_threshold(cls, v: float) -> float:
+        """Validate threshold is between 0 and 1."""
+        if not 0 <= v <= 1:
+            raise ValueError("Threshold must be between 0 and 1")
         return v

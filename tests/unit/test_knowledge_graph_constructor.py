@@ -8,32 +8,83 @@ from unittest.mock import MagicMock, Mock, patch
 
 import igraph as ig
 import numpy as np
+import pytest
 
 from src.components.knowledge_graph_constructor import KnowledgeGraphConstructor
+from src.adapters.llm_adapter import LLMAdapter
 
 
 class TestKnowledgeGraphConstructor:
     """Test cases for Knowledge Graph Constructor."""
 
+    @pytest.fixture
+    def mock_llm_adapter(self):
+        """Create a mock LLM adapter for testing."""
+        return Mock(spec=LLMAdapter)
+
+    def test_dependency_injection_of_llm_adapter(self):
+        """Test LLMAdapter is properly injected through constructor."""
+        from src.adapters.llm_adapter import LLMAdapter
+
+        # Create a mock LLM adapter
+        mock_llm_adapter = Mock(spec=LLMAdapter)
+
+        # Initialize with injected adapter
+        constructor = KnowledgeGraphConstructor(llm_adapter=mock_llm_adapter)
+
+        # Verify the adapter is properly set
+        assert constructor.llm_adapter == mock_llm_adapter
+        assert constructor.llm_adapter is not None
+
+    def test_process_documents_without_embeddings(self):
+        """Test that no embedding operations occur in process_documents."""
+        from src.adapters.llm_adapter import LLMAdapter
+
+        # Create mocks
+        mock_llm_adapter = Mock(spec=LLMAdapter)
+        mock_llm_adapter.extract_entities.return_value = [
+            {"text": "Test Company", "type": "COMPANY"}
+        ]
+        mock_llm_adapter.extract_relations.return_value = [
+            ["Test Company", "located_in", "Shanghai"]
+        ]
+
+        # Initialize without embedding services
+        constructor = KnowledgeGraphConstructor(llm_adapter=mock_llm_adapter)
+
+        # Process a document
+        documents = [{"id": "doc1", "text": "Test Company is located in Shanghai."}]
+        results, graph = constructor.process_documents(documents)
+
+        # Verify that no embedding services are set
+        assert (
+            not hasattr(constructor, "embedding_service")
+            or constructor.embedding_service is None
+        )
+        assert (
+            not hasattr(constructor, "vector_storage")
+            or constructor.vector_storage is None
+        )
+
     def test_knowledge_graph_constructor_initialization(self):
         """Test Knowledge Graph Constructor initializes properly."""
-        constructor = KnowledgeGraphConstructor()
+        from src.adapters.llm_adapter import LLMAdapter
+
+        mock_llm_adapter = Mock(spec=LLMAdapter)
+        constructor = KnowledgeGraphConstructor(llm_adapter=mock_llm_adapter)
         assert constructor is not None
         assert hasattr(constructor, "process_documents")
         assert constructor.graph is None
 
-    @patch("src.components.knowledge_graph_constructor.LLMAdapter")
-    def test_process_documents_single_document(self, mock_llm_adapter_class):
+    def test_process_documents_single_document(self, mock_llm_adapter):
         """Test processing single document with NER and RE."""
-        # Mock LLM adapter
-        mock_adapter = Mock()
-        mock_llm_adapter_class.return_value = mock_adapter
-        mock_adapter.extract_entities.return_value = [
+        # Set up mock response
+        mock_llm_adapter.extract_entities.return_value = [
             {"text": "公司A", "type": "COMPANY"},
             {"text": "产品B", "type": "PRODUCT"},
             {"text": "技术C", "type": "TECHNOLOGY"},
         ]
-        mock_adapter.extract_relations.return_value = [
+        mock_llm_adapter.extract_relations.return_value = [
             ["公司A", "生产", "产品B"],
             ["公司A", "拥有", "技术C"],
         ]
@@ -41,7 +92,7 @@ class TestKnowledgeGraphConstructor:
         # Test document
         documents = [{"id": "doc1", "text": "这是一段包含公司A、产品B和技术C的文本。"}]
 
-        constructor = KnowledgeGraphConstructor()
+        constructor = KnowledgeGraphConstructor(llm_adapter=mock_llm_adapter)
         results, graph = constructor.process_documents(documents)
 
         # Check results structure
@@ -62,16 +113,15 @@ class TestKnowledgeGraphConstructor:
         assert "产品B" in vertex_names
         assert "技术C" in vertex_names
 
-        mock_adapter.extract_entities.assert_called_once_with(
+        mock_llm_adapter.extract_entities.assert_called_once_with(
             "这是一段包含公司A、产品B和技术C的文本。"
         )
 
-    @patch("src.components.knowledge_graph_constructor.LLMAdapter")
-    def test_process_documents_full_ner_re_flow(self, mock_llm_adapter_class):
+    def test_process_documents_full_ner_re_flow(self, mock_llm_adapter):
         """Test full NER+RE processing flow with typed entities."""
         # Mock LLM adapter
-        mock_adapter = Mock()
-        mock_llm_adapter_class.return_value = mock_adapter
+        # Use injected mock
+        # mock_adapter = mock_llm_adapter
 
         # Define entities for doc1
         doc1_entities = [
@@ -86,15 +136,15 @@ class TestKnowledgeGraphConstructor:
             ["南京天悦", "是子公司", "综艺股份"],
         ]
 
-        mock_adapter.extract_entities.return_value = doc1_entities
-        mock_adapter.extract_relations.return_value = doc1_triples
+        mock_llm_adapter.extract_entities.return_value = doc1_entities
+        mock_llm_adapter.extract_relations.return_value = doc1_triples
 
         # Test document
         documents = [
             {"id": "doc1", "text": "综艺股份(600770)旗下的南京天悦是一家子公司。"}
         ]
 
-        constructor = KnowledgeGraphConstructor()
+        constructor = KnowledgeGraphConstructor(llm_adapter=mock_llm_adapter)
         results, graph = constructor.process_documents(documents)
 
         # Verify results structure
@@ -102,7 +152,7 @@ class TestKnowledgeGraphConstructor:
         assert results["doc1"]["triples"] == doc1_triples
 
         # Verify extract_relations was called with typed entities
-        mock_adapter.extract_relations.assert_called_once_with(
+        mock_llm_adapter.extract_relations.assert_called_once_with(
             "综艺股份(600770)旗下的南京天悦是一家子公司。", doc1_entities
         )
 
@@ -118,10 +168,9 @@ class TestKnowledgeGraphConstructor:
         nanjing = graph.vs.find(name="南京天悦")
         assert nanjing["entity_type"] == "SUBSIDIARY"
 
-    @patch("src.components.knowledge_graph_constructor.LLMAdapter")
-    def test_process_documents_empty_list(self, mock_llm_adapter_class):
+    def test_process_documents_empty_list(self, mock_llm_adapter):
         """Test processing empty document list."""
-        constructor = KnowledgeGraphConstructor()
+        constructor = KnowledgeGraphConstructor(llm_adapter=mock_llm_adapter)
         results, graph = constructor.process_documents([])
 
         assert results == {}
@@ -129,12 +178,11 @@ class TestKnowledgeGraphConstructor:
         assert graph.vcount() == 0
         assert graph.ecount() == 0
 
-    @patch("src.components.knowledge_graph_constructor.LLMAdapter")
-    def test_igraph_construction_from_triples(self, mock_llm_adapter_class):
+    def test_igraph_construction_from_triples(self, mock_llm_adapter):
         """Test igraph construction from triples."""
         # Mock LLM adapter
-        mock_adapter = Mock()
-        mock_llm_adapter_class.return_value = mock_adapter
+        # Use injected mock
+        # mock_adapter = mock_llm_adapter
 
         # Define test data
         entities = [
@@ -144,12 +192,12 @@ class TestKnowledgeGraphConstructor:
         ]
         triples = [["A", "produces", "B"], ["A", "uses", "C"], ["B", "requires", "C"]]
 
-        mock_adapter.extract_entities.return_value = entities
-        mock_adapter.extract_relations.return_value = triples
+        mock_llm_adapter.extract_entities.return_value = entities
+        mock_llm_adapter.extract_relations.return_value = triples
 
         documents = [{"id": "doc1", "text": "test text"}]
 
-        constructor = KnowledgeGraphConstructor()
+        constructor = KnowledgeGraphConstructor(llm_adapter=mock_llm_adapter)
         results, graph = constructor.process_documents(documents)
 
         # Check graph has correct structure
@@ -165,25 +213,24 @@ class TestKnowledgeGraphConstructor:
         assert ("A", "C", "uses") in edges
         assert ("B", "C", "requires") in edges
 
-    @patch("src.components.knowledge_graph_constructor.LLMAdapter")
-    def test_handling_of_duplicate_triples(self, mock_llm_adapter_class):
+    def test_handling_of_duplicate_triples(self, mock_llm_adapter):
         """Test handling of duplicate triples."""
         # Mock LLM adapter
-        mock_adapter = Mock()
-        mock_llm_adapter_class.return_value = mock_adapter
+        # Use injected mock
+        # mock_adapter = mock_llm_adapter
 
         entities = [{"text": "A", "type": "COMPANY"}, {"text": "B", "type": "PRODUCT"}]
 
         # Return different triples for different documents
-        mock_adapter.extract_entities.side_effect = [entities, entities]
-        mock_adapter.extract_relations.side_effect = [
+        mock_llm_adapter.extract_entities.side_effect = [entities, entities]
+        mock_llm_adapter.extract_relations.side_effect = [
             [["A", "produces", "B"]],
             [["A", "produces", "B"]],  # Same triple from different doc
         ]
 
         documents = [{"id": "doc1", "text": "text1"}, {"id": "doc2", "text": "text2"}]
 
-        constructor = KnowledgeGraphConstructor()
+        constructor = KnowledgeGraphConstructor(llm_adapter=mock_llm_adapter)
         results, graph = constructor.process_documents(documents)
 
         # Should have only 2 vertices and 1 merged edge
@@ -194,15 +241,14 @@ class TestKnowledgeGraphConstructor:
         edge = graph.es[0]
         assert set(edge["source_docs"]) == {"doc1", "doc2"}
 
-    @patch("src.components.knowledge_graph_constructor.LLMAdapter")
-    def test_graph_vertex_deduplication(self, mock_llm_adapter_class):
+    def test_graph_vertex_deduplication(self, mock_llm_adapter):
         """Test graph vertex deduplication."""
         # Mock LLM adapter
-        mock_adapter = Mock()
-        mock_llm_adapter_class.return_value = mock_adapter
+        # Use injected mock
+        # mock_adapter = mock_llm_adapter
 
         # Return overlapping entities from different documents
-        mock_adapter.extract_entities.side_effect = [
+        mock_llm_adapter.extract_entities.side_effect = [
             [
                 {"text": "公司A", "type": "COMPANY"},
                 {"text": "产品B", "type": "PRODUCT"},
@@ -212,14 +258,14 @@ class TestKnowledgeGraphConstructor:
                 {"text": "技术C", "type": "TECHNOLOGY"},
             ],
         ]
-        mock_adapter.extract_relations.side_effect = [
+        mock_llm_adapter.extract_relations.side_effect = [
             [["公司A", "生产", "产品B"]],
             [["公司A", "研发", "技术C"]],
         ]
 
         documents = [{"id": "doc1", "text": "text1"}, {"id": "doc2", "text": "text2"}]
 
-        constructor = KnowledgeGraphConstructor()
+        constructor = KnowledgeGraphConstructor(llm_adapter=mock_llm_adapter)
         results, graph = constructor.process_documents(documents)
 
         # Should have only 3 unique vertices (公司A appears in both docs)
@@ -231,23 +277,22 @@ class TestKnowledgeGraphConstructor:
         company_a = graph.vs.find(name="公司A")
         assert company_a["first_seen"] == "doc1"
 
-    @patch("src.components.knowledge_graph_constructor.LLMAdapter")
-    def test_self_referential_relations_handling(self, mock_llm_adapter_class):
+    def test_self_referential_relations_handling(self, mock_llm_adapter):
         """Test handling of self-referential relations."""
         # Mock LLM adapter
-        mock_adapter = Mock()
-        mock_llm_adapter_class.return_value = mock_adapter
+        # Use injected mock
+        # mock_adapter = mock_llm_adapter
 
         entities = [{"text": "公司A", "type": "COMPANY"}]
         triples = [["公司A", "合并了", "公司A"]]  # Self-referential
 
-        mock_adapter.extract_entities.return_value = entities
-        mock_adapter.extract_relations.return_value = triples
+        mock_llm_adapter.extract_entities.return_value = entities
+        mock_llm_adapter.extract_relations.return_value = triples
 
         documents = [{"id": "doc1", "text": "公司A合并了自己的一个部门"}]
 
         with patch("src.components.knowledge_graph_constructor.logger") as mock_logger:
-            constructor = KnowledgeGraphConstructor()
+            constructor = KnowledgeGraphConstructor(llm_adapter=mock_llm_adapter)
             results, graph = constructor.process_documents(documents)
 
             # Should create the self-loop edge
@@ -257,18 +302,17 @@ class TestKnowledgeGraphConstructor:
             # Check that it was logged
             mock_logger.debug.assert_called()
 
-    @patch("src.components.knowledge_graph_constructor.LLMAdapter")
-    def test_handling_of_empty_entity_list(self, mock_llm_adapter_class):
+    def test_handling_of_empty_entity_list(self, mock_llm_adapter):
         """Test handling when no entities are extracted."""
         # Mock LLM adapter
-        mock_adapter = Mock()
-        mock_llm_adapter_class.return_value = mock_adapter
-        mock_adapter.extract_entities.return_value = []
-        mock_adapter.extract_relations.return_value = []
+        # Use injected mock
+        # mock_adapter = mock_llm_adapter
+        mock_llm_adapter.extract_entities.return_value = []
+        mock_llm_adapter.extract_relations.return_value = []
 
         documents = [{"id": "doc1", "text": "这是一段没有实体的文本。"}]
 
-        constructor = KnowledgeGraphConstructor()
+        constructor = KnowledgeGraphConstructor(llm_adapter=mock_llm_adapter)
         results, graph = constructor.process_documents(documents)
 
         assert results["doc1"]["entities"] == []
@@ -277,26 +321,25 @@ class TestKnowledgeGraphConstructor:
         assert graph.ecount() == 0
 
         # extract_relations should not be called when no entities
-        mock_adapter.extract_relations.assert_not_called()
+        mock_llm_adapter.extract_relations.assert_not_called()
 
-    @patch("src.components.knowledge_graph_constructor.LLMAdapter")
-    def test_entity_not_in_ner_results_handling(self, mock_llm_adapter_class):
+    def test_entity_not_in_ner_results_handling(self, mock_llm_adapter):
         """Test handling when triple contains entity not in NER results."""
         # Mock LLM adapter
-        mock_adapter = Mock()
-        mock_llm_adapter_class.return_value = mock_adapter
+        # Use injected mock
+        # mock_adapter = mock_llm_adapter
 
         # NER only extracts 公司A
         entities = [{"text": "公司A", "type": "COMPANY"}]
         # But RE returns triple with 产品B not in NER results
         triples = [["公司A", "生产", "产品B"]]
 
-        mock_adapter.extract_entities.return_value = entities
-        mock_adapter.extract_relations.return_value = triples
+        mock_llm_adapter.extract_entities.return_value = entities
+        mock_llm_adapter.extract_relations.return_value = triples
 
         documents = [{"id": "doc1", "text": "公司A生产产品B"}]
 
-        constructor = KnowledgeGraphConstructor()
+        constructor = KnowledgeGraphConstructor(llm_adapter=mock_llm_adapter)
         results, graph = constructor.process_documents(documents)
 
         # Should still create vertex for 产品B with UNKNOWN type
@@ -306,82 +349,18 @@ class TestKnowledgeGraphConstructor:
         assert product_b["entity_type"] == "UNKNOWN"
         assert product_b["first_seen"] == "doc1"
 
-    @patch("src.components.knowledge_graph_constructor.LLMAdapter")
-    def test_process_documents_with_embeddings(self, mock_llm_adapter_class):
-        """Test processing documents with embedding generation."""
-        # Mock LLM adapter
-        mock_adapter = Mock()
-        mock_llm_adapter_class.return_value = mock_adapter
-        mock_adapter.extract_entities.return_value = [
-            {"text": "公司A", "type": "COMPANY"},
-            {"text": "产品B", "type": "PRODUCT"},
-        ]
-        mock_adapter.extract_relations.return_value = [["公司A", "生产", "产品B"]]
-
-        # Mock embedding service
-        mock_embedding_service = Mock()
-        mock_processed_docs = [
-            {
-                "id": "doc1_0",
-                "text": "test text",
-                "vector": np.random.rand(2560).astype(np.float32),
-                "company_name": "公司A",
-                "doc_id": "doc1",
-                "chunk_index": 0,
-                "entities": [
-                    {"text": "公司A", "type": "COMPANY"},
-                    {"text": "产品B", "type": "PRODUCT"},
-                ],
-                "relations": [["公司A", "生产", "产品B"]],
-                "relations_count": 1,
-            }
-        ]
-        mock_embedding_service.process_documents.return_value = mock_processed_docs
-
-        # Mock vector storage
-        mock_vector_storage = Mock()
-        mock_vector_storage.table = None
-
-        # Test document
-        documents = [{"id": "doc1", "text": "test text"}]
-
-        # Create constructor with embedding components
-        constructor = KnowledgeGraphConstructor(
-            embedding_service=mock_embedding_service, vector_storage=mock_vector_storage
-        )
-        results, graph = constructor.process_documents(documents)
-
-        # Verify NER/RE was performed
-        assert "doc1" in results
-        assert graph.vcount() == 2
-
-        # Verify embedding service was called
-        mock_embedding_service.process_documents.assert_called_once()
-        call_args = mock_embedding_service.process_documents.call_args[0][0]
-        assert len(call_args) == 1
-        assert call_args[0]["doc_id"] == "doc1"
-        assert call_args[0]["entities"] == [
-            {"text": "公司A", "type": "COMPANY"},
-            {"text": "产品B", "type": "PRODUCT"},
-        ]
-
-        # Verify vector storage was initialized and documents added
-        mock_vector_storage.create_table.assert_called_once()
-        mock_vector_storage.add_documents.assert_called_once_with(mock_processed_docs)
-
-    @patch("src.components.knowledge_graph_constructor.LLMAdapter")
-    def test_process_documents_without_embeddings(self, mock_llm_adapter_class):
+    def test_process_documents_without_embeddings(self, mock_llm_adapter):
         """Test processing documents without embedding components."""
         # Mock LLM adapter
-        mock_adapter = Mock()
-        mock_llm_adapter_class.return_value = mock_adapter
-        mock_adapter.extract_entities.return_value = [
+        # Use injected mock
+        # mock_adapter = mock_llm_adapter
+        mock_llm_adapter.extract_entities.return_value = [
             {"text": "公司A", "type": "COMPANY"}
         ]
-        mock_adapter.extract_relations.return_value = []
+        mock_llm_adapter.extract_relations.return_value = []
 
         # Create constructor without embedding components
-        constructor = KnowledgeGraphConstructor()
+        constructor = KnowledgeGraphConstructor(llm_adapter=mock_llm_adapter)
 
         documents = [{"id": "doc1", "text": "test text"}]
         results, graph = constructor.process_documents(documents)
@@ -390,123 +369,16 @@ class TestKnowledgeGraphConstructor:
         assert "doc1" in results
         assert graph.vcount() == 1
 
-    @patch("src.components.knowledge_graph_constructor.LLMAdapter")
-    def test_embedding_error_handling(self, mock_llm_adapter_class):
-        """Test error handling when embedding fails."""
-        # Mock LLM adapter
-        mock_adapter = Mock()
-        mock_llm_adapter_class.return_value = mock_adapter
-        mock_adapter.extract_entities.return_value = [
-            {"text": "公司A", "type": "COMPANY"}
-        ]
-        mock_adapter.extract_relations.return_value = []
-
-        # Mock embedding service that fails
-        mock_embedding_service = Mock()
-        mock_embedding_service.process_documents.return_value = None
-
-        # Mock vector storage
-        mock_vector_storage = Mock()
-
-        # Create constructor
-        constructor = KnowledgeGraphConstructor(
-            embedding_service=mock_embedding_service, vector_storage=mock_vector_storage
-        )
-
-        documents = [{"id": "doc1", "text": "test text"}]
-
-        # Should not raise exception
-        results, graph = constructor.process_documents(documents)
-
-        # NER/RE should still succeed
-        assert "doc1" in results
-        assert graph.vcount() == 1
-
-        # Vector storage should not be called
-        mock_vector_storage.add_documents.assert_not_called()
-
-    @patch("src.components.knowledge_graph_constructor.LLMAdapter")
-    def test_prepare_documents_for_embedding(self, mock_llm_adapter_class):
-        """Test document preparation for embedding."""
-        # Mock LLM adapter
-        mock_adapter = Mock()
-        mock_llm_adapter_class.return_value = mock_adapter
-
-        constructor = KnowledgeGraphConstructor()
-
-        # Test documents with various metadata
-        documents = [
-            {"id": "doc1", "text": "text1", "title": "公司A年报"},
-            {"id": "doc2", "text": "text2"},  # No title
-            {"id": "doc3", "text": ""},  # Empty text
-        ]
-
-        ner_re_results = {
-            "doc1": {
-                "entities": [{"text": "公司A", "type": "COMPANY"}],
-                "triples": [["公司A", "发布", "年报"]],
-            },
-            "doc2": {"entities": [{"text": "产品B", "type": "PRODUCT"}], "triples": []},
-            "doc3": {"entities": [], "triples": []},
-        }
-
-        prepared_docs = constructor._prepare_documents_for_embedding(
-            documents, ner_re_results
-        )
-
-        # Should only prepare docs with valid text
-        assert len(prepared_docs) == 2
-
-        # Check doc1 - has title
-        assert prepared_docs[0]["doc_id"] == "doc1"
-        assert prepared_docs[0]["company_name"] == "公司A年报"
-        assert prepared_docs[0]["entities"] == [{"text": "公司A", "type": "COMPANY"}]
-        assert prepared_docs[0]["relations"] == [["公司A", "发布", "年报"]]
-
-        # Check doc2 - no title, no COMPANY entity
-        assert prepared_docs[1]["doc_id"] == "doc2"
-        assert prepared_docs[1]["company_name"] == "Unknown"
-        assert prepared_docs[1]["entities"] == [{"text": "产品B", "type": "PRODUCT"}]
-
-    @patch("src.components.knowledge_graph_constructor.LLMAdapter")
-    def test_company_name_extraction_from_entities(self, mock_llm_adapter_class):
-        """Test extracting company name from entities when no title."""
-        mock_adapter = Mock()
-        mock_llm_adapter_class.return_value = mock_adapter
-
-        constructor = KnowledgeGraphConstructor()
-
-        documents = [{"id": "doc1", "text": "text without title"}]
-
-        ner_re_results = {
-            "doc1": {
-                "entities": [
-                    {"text": "产品A", "type": "PRODUCT"},
-                    {"text": "综艺股份", "type": "COMPANY"},  # Should use this
-                    {"text": "技术B", "type": "TECHNOLOGY"},
-                ],
-                "triples": [],
-            }
-        }
-
-        prepared_docs = constructor._prepare_documents_for_embedding(
-            documents, ner_re_results
-        )
-
-        assert len(prepared_docs) == 1
-        assert prepared_docs[0]["company_name"] == "综艺股份"
-
-    @patch("src.components.knowledge_graph_constructor.LLMAdapter")
-    def test_save_graph_file_io_error(self, mock_llm_adapter_class):
+    def test_save_graph_file_io_error(self, mock_llm_adapter):
         """Test error handling when saving graph fails due to file I/O error."""
         import os
         import tempfile
         from pathlib import Path
 
-        mock_adapter = Mock()
-        mock_llm_adapter_class.return_value = mock_adapter
+        # Use injected mock
+        # mock_adapter = mock_llm_adapter
 
-        constructor = KnowledgeGraphConstructor()
+        constructor = KnowledgeGraphConstructor(llm_adapter=mock_llm_adapter)
         constructor.graph = ig.Graph(directed=True)
         constructor.graph.add_vertex(name="test", entity_type="COMPANY")
 
@@ -528,14 +400,13 @@ class TestKnowledgeGraphConstructor:
                 # Restore permissions for cleanup
                 os.chmod(graph_path.parent, 0o755)
 
-    @patch("src.components.knowledge_graph_constructor.LLMAdapter")
-    def test_save_graph_disk_space_check(self, mock_llm_adapter_class):
+    def test_save_graph_disk_space_check(self, mock_llm_adapter):
         """Test disk space validation before saving graph."""
 
-        mock_adapter = Mock()
-        mock_llm_adapter_class.return_value = mock_adapter
+        # Use injected mock
+        # mock_adapter = mock_llm_adapter
 
-        constructor = KnowledgeGraphConstructor()
+        constructor = KnowledgeGraphConstructor(llm_adapter=mock_llm_adapter)
         constructor.graph = ig.Graph(directed=True)
         constructor.graph.add_vertex(name="test", entity_type="COMPANY")
 
@@ -552,15 +423,14 @@ class TestKnowledgeGraphConstructor:
                     "Insufficient disk space. Required: ~10MB, Available: 0.00MB"
                 )
 
-    @patch("src.components.knowledge_graph_constructor.LLMAdapter")
-    def test_load_graph_corrupted_file(self, mock_llm_adapter_class):
+    def test_load_graph_corrupted_file(self, mock_llm_adapter):
         """Test loading corrupted GraphML file."""
         import tempfile
 
-        mock_adapter = Mock()
-        mock_llm_adapter_class.return_value = mock_adapter
+        # Use injected mock
+        # mock_adapter = mock_llm_adapter
 
-        constructor = KnowledgeGraphConstructor()
+        constructor = KnowledgeGraphConstructor(llm_adapter=mock_llm_adapter)
 
         # Create a corrupted GraphML file
         with tempfile.NamedTemporaryFile(
@@ -579,15 +449,14 @@ class TestKnowledgeGraphConstructor:
         finally:
             os.unlink(temp_path)
 
-    @patch("src.components.knowledge_graph_constructor.LLMAdapter")
-    def test_load_graph_permission_denied(self, mock_llm_adapter_class):
+    def test_load_graph_permission_denied(self, mock_llm_adapter):
         """Test loading graph with permission denied."""
         import tempfile
 
-        mock_adapter = Mock()
-        mock_llm_adapter_class.return_value = mock_adapter
+        # Use injected mock
+        # mock_adapter = mock_llm_adapter
 
-        constructor = KnowledgeGraphConstructor()
+        constructor = KnowledgeGraphConstructor(llm_adapter=mock_llm_adapter)
 
         # Create a file with no read permissions
         with tempfile.NamedTemporaryFile(
@@ -611,13 +480,12 @@ class TestKnowledgeGraphConstructor:
             os.chmod(temp_path, 0o644)
             os.unlink(temp_path)
 
-    @patch("src.components.knowledge_graph_constructor.LLMAdapter")
-    def test_save_graph_with_retry_logic(self, mock_llm_adapter_class):
+    def test_save_graph_with_retry_logic(self, mock_llm_adapter):
         """Test save with retry logic for transient failures."""
-        mock_adapter = Mock()
-        mock_llm_adapter_class.return_value = mock_adapter
+        # Use injected mock
+        # mock_adapter = mock_llm_adapter
 
-        constructor = KnowledgeGraphConstructor()
+        constructor = KnowledgeGraphConstructor(llm_adapter=mock_llm_adapter)
         constructor.graph = ig.Graph(directed=True)
         constructor.graph.add_vertex(name="test", entity_type="COMPANY")
 
@@ -648,13 +516,12 @@ class TestKnowledgeGraphConstructor:
                             for call in mock_logger.info.call_args_list
                         )
 
-    @patch("src.components.knowledge_graph_constructor.LLMAdapter")
-    def test_save_graph_xml_validation(self, mock_llm_adapter_class):
+    def test_save_graph_xml_validation(self, mock_llm_adapter):
         """Test XML structure validation prevents injection."""
-        mock_adapter = Mock()
-        mock_llm_adapter_class.return_value = mock_adapter
+        # Use injected mock
+        # mock_adapter = mock_llm_adapter
 
-        constructor = KnowledgeGraphConstructor()
+        constructor = KnowledgeGraphConstructor(llm_adapter=mock_llm_adapter)
         constructor.graph = ig.Graph(directed=True)
 
         # Try to add vertex with potentially malicious XML content
@@ -676,19 +543,18 @@ class TestKnowledgeGraphConstructor:
                 assert "<script>" not in content
                 assert "&lt;script&gt;" in content or "&quot;" in content
 
-    @patch("src.components.knowledge_graph_constructor.LLMAdapter")
-    def test_enhanced_entity_deduplication_with_metadata(self, mock_llm_adapter_class):
+    def test_enhanced_entity_deduplication_with_metadata(self, mock_llm_adapter):
         """Test entity deduplication tracks occurrence count and preserves most specific type."""
-        mock_adapter = Mock()
-        mock_llm_adapter_class.return_value = mock_adapter
+        # Use injected mock
+        # mock_adapter = mock_llm_adapter
 
         # Doc1 has generic COMPANY type
-        mock_adapter.extract_entities.side_effect = [
+        mock_llm_adapter.extract_entities.side_effect = [
             [{"text": "综艺股份", "type": "COMPANY"}],
             [{"text": "综艺股份", "type": "LISTED_COMPANY"}],  # More specific type
             [{"text": "综艺股份", "type": "COMPANY"}],
         ]
-        mock_adapter.extract_relations.side_effect = [[], [], []]
+        mock_llm_adapter.extract_relations.side_effect = [[], [], []]
 
         documents = [
             {"id": "doc1", "text": "text1"},
@@ -696,7 +562,7 @@ class TestKnowledgeGraphConstructor:
             {"id": "doc3", "text": "text3"},
         ]
 
-        constructor = KnowledgeGraphConstructor()
+        constructor = KnowledgeGraphConstructor(llm_adapter=mock_llm_adapter)
         results, graph = constructor.process_documents(documents)
 
         # Should have only one vertex
@@ -709,13 +575,10 @@ class TestKnowledgeGraphConstructor:
         assert vertex["occurrence_count"] == 3
         assert set(vertex["source_docs"]) == {"doc1", "doc2", "doc3"}
 
-    @patch("src.components.knowledge_graph_constructor.LLMAdapter")
-    def test_enhanced_relation_merging_with_source_tracking(
-        self, mock_llm_adapter_class
-    ):
+    def test_enhanced_relation_merging_with_source_tracking(self, mock_llm_adapter):
         """Test relation merging tracks all source documents."""
-        mock_adapter = Mock()
-        mock_llm_adapter_class.return_value = mock_adapter
+        # Use injected mock
+        # mock_adapter = mock_llm_adapter
 
         entities = [
             {"text": "公司A", "type": "COMPANY"},
@@ -723,8 +586,8 @@ class TestKnowledgeGraphConstructor:
         ]
 
         # Same relation from multiple documents
-        mock_adapter.extract_entities.side_effect = [entities] * 3
-        mock_adapter.extract_relations.side_effect = [
+        mock_llm_adapter.extract_entities.side_effect = [entities] * 3
+        mock_llm_adapter.extract_relations.side_effect = [
             [["公司A", "生产", "产品B"]],
             [["公司A", "生产", "产品B"]],
             [["公司A", "生产", "产品B"]],
@@ -736,7 +599,7 @@ class TestKnowledgeGraphConstructor:
             {"id": "doc3", "text": "text3"},
         ]
 
-        constructor = KnowledgeGraphConstructor()
+        constructor = KnowledgeGraphConstructor(llm_adapter=mock_llm_adapter)
         results, graph = constructor.process_documents(documents)
 
         # Should have 2 vertices
@@ -752,20 +615,19 @@ class TestKnowledgeGraphConstructor:
         assert edge["confidence"] == 1.0
         assert edge["first_seen"] == "doc1"
 
-    @patch("src.components.knowledge_graph_constructor.LLMAdapter")
-    def test_entity_type_priority_resolution(self, mock_llm_adapter_class):
+    def test_entity_type_priority_resolution(self, mock_llm_adapter):
         """Test entity type resolution with priority rules."""
-        mock_adapter = Mock()
-        mock_llm_adapter_class.return_value = mock_adapter
+        # Use injected mock
+        # mock_adapter = mock_llm_adapter
 
         # Define type priority: LISTED_COMPANY > SUBSIDIARY > COMPANY > UNKNOWN
-        mock_adapter.extract_entities.side_effect = [
+        mock_llm_adapter.extract_entities.side_effect = [
             [{"text": "实体A", "type": "COMPANY"}],
             [{"text": "实体A", "type": "SUBSIDIARY"}],
             [{"text": "实体A", "type": "LISTED_COMPANY"}],
             [{"text": "实体A", "type": "UNKNOWN"}],
         ]
-        mock_adapter.extract_relations.side_effect = [[], [], [], []]
+        mock_llm_adapter.extract_relations.side_effect = [[], [], [], []]
 
         documents = [
             {"id": "doc1", "text": "text1"},
@@ -774,27 +636,26 @@ class TestKnowledgeGraphConstructor:
             {"id": "doc4", "text": "text4"},
         ]
 
-        constructor = KnowledgeGraphConstructor()
+        constructor = KnowledgeGraphConstructor(llm_adapter=mock_llm_adapter)
         results, graph = constructor.process_documents(documents)
 
         # Should keep LISTED_COMPANY as the most specific type
         vertex = graph.vs.find(name="实体A")
         assert vertex["entity_type"] == "LISTED_COMPANY"
 
-    @patch("src.components.knowledge_graph_constructor.LLMAdapter")
-    def test_deduplication_statistics_tracking(self, mock_llm_adapter_class):
+    def test_deduplication_statistics_tracking(self, mock_llm_adapter):
         """Test that deduplication statistics are tracked."""
-        mock_adapter = Mock()
-        mock_llm_adapter_class.return_value = mock_adapter
+        # Use injected mock
+        # mock_adapter = mock_llm_adapter
 
         # Multiple entities with duplicates
-        mock_adapter.extract_entities.side_effect = [
+        mock_llm_adapter.extract_entities.side_effect = [
             [{"text": "A", "type": "COMPANY"}, {"text": "B", "type": "PRODUCT"}],
             [{"text": "A", "type": "COMPANY"}, {"text": "C", "type": "TECHNOLOGY"}],
             [{"text": "B", "type": "PRODUCT"}, {"text": "C", "type": "TECHNOLOGY"}],
         ]
 
-        mock_adapter.extract_relations.side_effect = [
+        mock_llm_adapter.extract_relations.side_effect = [
             [["A", "produces", "B"]],
             [["A", "uses", "C"]],
             [["B", "requires", "C"]],
@@ -806,7 +667,7 @@ class TestKnowledgeGraphConstructor:
             {"id": "doc3", "text": "text3"},
         ]
 
-        constructor = KnowledgeGraphConstructor()
+        constructor = KnowledgeGraphConstructor(llm_adapter=mock_llm_adapter)
         with patch("src.components.knowledge_graph_constructor.logger") as mock_logger:
             results, graph = constructor.process_documents(documents)
 
@@ -818,14 +679,13 @@ class TestKnowledgeGraphConstructor:
             # Should log deduplication stats
             assert any("Deduplication statistics" in msg for msg in log_messages)
 
-    @patch("src.components.knowledge_graph_constructor.LLMAdapter")
-    def test_save_graph_with_default_path(self, mock_llm_adapter_class):
+    def test_save_graph_with_default_path(self, mock_llm_adapter):
         """Test saving graph to default configured path."""
-        mock_adapter = Mock()
-        mock_llm_adapter_class.return_value = mock_adapter
+        # Use injected mock
+        # mock_adapter = mock_llm_adapter
 
         # Create constructor and graph
-        constructor = KnowledgeGraphConstructor()
+        constructor = KnowledgeGraphConstructor(llm_adapter=mock_llm_adapter)
         constructor.graph = ig.Graph(directed=True)
         constructor.graph.add_vertex(
             name="test", entity_type="COMPANY", occurrence_count=1, source_docs=["doc1"]
@@ -851,14 +711,13 @@ class TestKnowledgeGraphConstructor:
                 )
                 assert metadata_path.exists()
 
-    @patch("src.components.knowledge_graph_constructor.LLMAdapter")
-    def test_load_graph_integration(self, mock_llm_adapter_class):
+    def test_load_graph_integration(self, mock_llm_adapter):
         """Test loading graph updates internal state correctly."""
-        mock_adapter = Mock()
-        mock_llm_adapter_class.return_value = mock_adapter
+        # Use injected mock
+        # mock_adapter = mock_llm_adapter
 
         # Create and save a graph
-        constructor1 = KnowledgeGraphConstructor()
+        constructor1 = KnowledgeGraphConstructor(llm_adapter=mock_llm_adapter)
         constructor1.graph = ig.Graph(directed=True)
         constructor1.graph.add_vertex(
             name="公司A",
@@ -886,7 +745,7 @@ class TestKnowledgeGraphConstructor:
             assert constructor1.save_graph(graph_path) is True
 
             # Load in new constructor
-            constructor2 = KnowledgeGraphConstructor()
+            constructor2 = KnowledgeGraphConstructor(llm_adapter=mock_llm_adapter)
             loaded_graph = constructor2.load_graph(graph_path)
 
             assert loaded_graph is not None
@@ -903,13 +762,12 @@ class TestKnowledgeGraphConstructor:
             edge = loaded_graph.es[0]
             assert edge["relation"] == "生产"
 
-    @patch("src.components.knowledge_graph_constructor.LLMAdapter")
-    def test_backup_rotation(self, mock_llm_adapter_class):
+    def test_backup_rotation(self, mock_llm_adapter):
         """Test backup rotation when saving graphs."""
-        mock_adapter = Mock()
-        mock_llm_adapter_class.return_value = mock_adapter
+        # Use injected mock
+        # mock_adapter = mock_llm_adapter
 
-        constructor = KnowledgeGraphConstructor()
+        constructor = KnowledgeGraphConstructor(llm_adapter=mock_llm_adapter)
         constructor.graph = ig.Graph(directed=True)
         constructor.graph.add_vertex(
             name="test", entity_type="COMPANY", occurrence_count=1, source_docs=["doc1"]
@@ -931,11 +789,10 @@ class TestKnowledgeGraphConstructor:
                 f"Expected <= 3 backups, found {len(backup_files)}"
             )
 
-    @patch("src.components.knowledge_graph_constructor.LLMAdapter")
-    def test_graph_statistics_calculation(self, mock_llm_adapter_class):
+    def test_graph_statistics_calculation(self, mock_llm_adapter):
         """Test graph statistics calculation."""
-        mock_adapter = Mock()
-        mock_llm_adapter_class.return_value = mock_adapter
+        # Use injected mock
+        # mock_adapter = mock_llm_adapter
 
         # Create a complex graph
         entities = [
@@ -954,10 +811,10 @@ class TestKnowledgeGraphConstructor:
             ["产品Y", "依赖", "技术Z"],
         ]
 
-        mock_adapter.extract_entities.return_value = entities
-        mock_adapter.extract_relations.return_value = triples
+        mock_llm_adapter.extract_entities.return_value = entities
+        mock_llm_adapter.extract_relations.return_value = triples
 
-        constructor = KnowledgeGraphConstructor()
+        constructor = KnowledgeGraphConstructor(llm_adapter=mock_llm_adapter)
         results, graph = constructor.process_documents([{"id": "doc1", "text": "test"}])
 
         # Get graph statistics
@@ -974,11 +831,10 @@ class TestKnowledgeGraphConstructor:
         assert stats["entity_type_distribution"]["PRODUCT"] == 2
         assert stats["entity_type_distribution"]["TECHNOLOGY"] == 1
 
-    @patch("src.components.knowledge_graph_constructor.LLMAdapter")
-    def test_top_entities_by_degree(self, mock_llm_adapter_class):
+    def test_top_entities_by_degree(self, mock_llm_adapter):
         """Test finding top entities by degree."""
-        mock_adapter = Mock()
-        mock_llm_adapter_class.return_value = mock_adapter
+        # Use injected mock
+        # mock_adapter = mock_llm_adapter
 
         # Create a hub-and-spoke pattern
         entities = [{"text": f"Entity{i}", "type": "COMPANY"} for i in range(10)]
@@ -988,10 +844,10 @@ class TestKnowledgeGraphConstructor:
         for i in range(1, 10):
             triples.append(["Entity0", "关联", f"Entity{i}"])
 
-        mock_adapter.extract_entities.return_value = entities
-        mock_adapter.extract_relations.return_value = triples
+        mock_llm_adapter.extract_entities.return_value = entities
+        mock_llm_adapter.extract_relations.return_value = triples
 
-        constructor = KnowledgeGraphConstructor()
+        constructor = KnowledgeGraphConstructor(llm_adapter=mock_llm_adapter)
         results, graph = constructor.process_documents([{"id": "doc1", "text": "test"}])
 
         # Get top entities
@@ -1002,11 +858,10 @@ class TestKnowledgeGraphConstructor:
         assert top_entities[0]["degree"] == 9
         assert top_entities[0]["entity_type"] == "COMPANY"
 
-    @patch("src.components.knowledge_graph_constructor.LLMAdapter")
-    def test_connected_components_analysis(self, mock_llm_adapter_class):
+    def test_connected_components_analysis(self, mock_llm_adapter):
         """Test connected components analysis."""
-        mock_adapter = Mock()
-        mock_llm_adapter_class.return_value = mock_adapter
+        # Use injected mock
+        # mock_adapter = mock_llm_adapter
 
         # Create two disconnected subgraphs
         entities = [
@@ -1023,10 +878,10 @@ class TestKnowledgeGraphConstructor:
             ["B1", "关联", "B2"],
         ]
 
-        mock_adapter.extract_entities.return_value = entities
-        mock_adapter.extract_relations.return_value = triples
+        mock_llm_adapter.extract_entities.return_value = entities
+        mock_llm_adapter.extract_relations.return_value = triples
 
-        constructor = KnowledgeGraphConstructor()
+        constructor = KnowledgeGraphConstructor(llm_adapter=mock_llm_adapter)
         results, graph = constructor.process_documents([{"id": "doc1", "text": "test"}])
 
         # Analyze components
@@ -1037,11 +892,10 @@ class TestKnowledgeGraphConstructor:
         assert components_info["isolated_vertices"] == 0
         assert len(components_info["component_sizes"]) == 2
 
-    @patch("src.components.knowledge_graph_constructor.LLMAdapter")
-    def test_batch_processing(self, mock_llm_adapter_class):
+    def test_batch_processing(self, mock_llm_adapter):
         """Test batch processing for large document sets."""
-        mock_adapter = Mock()
-        mock_llm_adapter_class.return_value = mock_adapter
+        # Use injected mock
+        # mock_adapter = mock_llm_adapter
 
         # Create 250 documents
         documents = [{"id": f"doc{i}", "text": f"text{i}"} for i in range(250)]
@@ -1057,10 +911,10 @@ class TestKnowledgeGraphConstructor:
                 return [[f"Entity{doc_num}", "关联", f"Entity{doc_num - 1}"]]
             return []
 
-        mock_adapter.extract_entities.side_effect = mock_extract_entities
-        mock_adapter.extract_relations.side_effect = mock_extract_relations
+        mock_llm_adapter.extract_entities.side_effect = mock_extract_entities
+        mock_llm_adapter.extract_relations.side_effect = mock_extract_relations
 
-        constructor = KnowledgeGraphConstructor()
+        constructor = KnowledgeGraphConstructor(llm_adapter=mock_llm_adapter)
 
         with patch("src.components.knowledge_graph_constructor.gc") as mock_gc:
             results, graph = constructor.process_documents(documents, batch_size=100)
@@ -1072,17 +926,18 @@ class TestKnowledgeGraphConstructor:
             assert graph.vcount() == 250
             assert graph.ecount() == 249  # Chain of connections
 
-    @patch("src.components.knowledge_graph_constructor.LLMAdapter")
-    def test_memory_monitoring(self, mock_llm_adapter_class):
+    def test_memory_monitoring(self, mock_llm_adapter):
         """Test memory monitoring during processing."""
-        mock_adapter = Mock()
-        mock_llm_adapter_class.return_value = mock_adapter
+        # Use injected mock
+        # mock_adapter = mock_llm_adapter
 
         # Simple entities/relations
-        mock_adapter.extract_entities.return_value = [{"text": "A", "type": "COMPANY"}]
-        mock_adapter.extract_relations.return_value = []
+        mock_llm_adapter.extract_entities.return_value = [
+            {"text": "A", "type": "COMPANY"}
+        ]
+        mock_llm_adapter.extract_relations.return_value = []
 
-        constructor = KnowledgeGraphConstructor()
+        constructor = KnowledgeGraphConstructor(llm_adapter=mock_llm_adapter)
 
         # Mock psutil to simulate high memory usage
         with patch(
@@ -1117,11 +972,10 @@ class TestKnowledgeGraphConstructor:
                             print(f"{method}: {calls}")
                 assert warning_logged
 
-    @patch("src.components.knowledge_graph_constructor.LLMAdapter")
-    def test_graph_pruning_for_large_graphs(self, mock_llm_adapter_class):
+    def test_graph_pruning_for_large_graphs(self, mock_llm_adapter):
         """Test graph pruning when graph becomes too large."""
-        mock_adapter = Mock()
-        mock_llm_adapter_class.return_value = mock_adapter
+        # Use injected mock
+        # mock_adapter = mock_llm_adapter
 
         # Create a graph that will trigger pruning
         all_entities = []
@@ -1139,10 +993,10 @@ class TestKnowledgeGraphConstructor:
             if i < 50:
                 all_triples.append([f"Connected{i}", "关联", f"Connected{i + 1}"])
 
-        mock_adapter.extract_entities.return_value = all_entities
-        mock_adapter.extract_relations.return_value = all_triples
+        mock_llm_adapter.extract_entities.return_value = all_entities
+        mock_llm_adapter.extract_relations.return_value = all_triples
 
-        constructor = KnowledgeGraphConstructor()
+        constructor = KnowledgeGraphConstructor(llm_adapter=mock_llm_adapter)
 
         # Test with batch processing to trigger pruning
         with patch.object(constructor, "_should_prune_graph", return_value=True):

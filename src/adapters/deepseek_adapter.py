@@ -15,7 +15,7 @@ from openai import OpenAI
 from tenacity import retry, stop_after_attempt, wait_exponential
 
 from config.settings import Settings
-from src.adapters.llm_adapter import LLMAdapter
+from src.adapters.llm_adapter import LLMAdapter, LLMResponse
 
 logger = logging.getLogger(__name__)
 
@@ -86,7 +86,8 @@ def cache_response(func):
                 """)
                 result_str = json.dumps(result, default=str, ensure_ascii=False)
                 c.execute(
-                    "INSERT OR REPLACE INTO cache (key, result, timestamp) VALUES (?, ?, ?)",
+                    "INSERT OR REPLACE INTO cache (key, result, timestamp) "
+                    "VALUES (?, ?, ?)",
                     (key_hash, result_str, time.time()),
                 )
                 conn.commit()
@@ -144,6 +145,9 @@ class DeepSeekAdapter(LLMAdapter):
         # 加载提示词
         self._load_prompts()
 
+        # Set model name property
+        self.model_name = self.settings.deepseek_model
+
         logger.info(
             "⚡ DeepSeekAdapter initialized with high-performance configuration"
         )
@@ -184,7 +188,8 @@ class DeepSeekAdapter(LLMAdapter):
 
             logger.info(f"✅ {operation} API success in {api_time:.3f}s")
             logger.debug(
-                f"📊 Tokens - Input: {response.usage.prompt_tokens}, Output: {response.usage.completion_tokens}"
+                f"📊 Tokens - Input: {response.usage.prompt_tokens}, "
+                f"Output: {response.usage.completion_tokens}"
             )
 
             return content
@@ -437,3 +442,68 @@ class DeepSeekAdapter(LLMAdapter):
                 "active_connections": len(getattr(pool, "_connections", [])),
             }
         return {"http_stats": "Not available"}
+
+    @cache_response
+    def generate(
+        self,
+        prompt: str,
+        max_tokens: int = 5000,
+        temperature: float = 0.1,
+        top_p: float = 0.9,
+        **kwargs,
+    ) -> LLMResponse:
+        """
+        Generate text completion using DeepSeek.
+
+        Args:
+            prompt: The prompt to generate from
+            max_tokens: Maximum tokens to generate
+            temperature: Sampling temperature
+            top_p: Nucleus sampling parameter
+            **kwargs: Additional parameters
+
+        Returns:
+            LLMResponse with generated text
+        """
+        try:
+            messages = [{"role": "user", "content": prompt}]
+
+            # Add system message if provided
+            if "system_prompt" in kwargs:
+                messages.insert(
+                    0, {"role": "system", "content": kwargs["system_prompt"]}
+                )
+
+            logger.info("🌐 Generation API call starting...")
+            start_time = time.time()
+
+            response = self.client.chat.completions.create(
+                model=self.settings.deepseek_model,
+                messages=messages,
+                temperature=temperature,
+                top_p=top_p,
+                max_tokens=max_tokens,
+            )
+
+            api_time = time.time() - start_time
+            content = response.choices[0].message.content
+
+            logger.info(f"✅ Generation API success in {api_time:.3f}s")
+            logger.debug(
+                f"📊 Tokens - Input: {response.usage.prompt_tokens}, "
+                f"Output: {response.usage.completion_tokens}"
+            )
+
+            return LLMResponse(
+                content=content,
+                model=self.settings.deepseek_model,
+                usage={
+                    "prompt_tokens": response.usage.prompt_tokens,
+                    "completion_tokens": response.usage.completion_tokens,
+                    "total_tokens": response.usage.total_tokens,
+                },
+            )
+
+        except Exception as e:
+            logger.error(f"❌ Generation API failed: {e}")
+            raise

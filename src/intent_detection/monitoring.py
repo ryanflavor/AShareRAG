@@ -3,9 +3,10 @@
 import json
 import logging
 import time
-from functools import wraps
-from typing import Dict, Any, Callable, Optional
+from collections.abc import Callable
 from datetime import datetime
+from functools import wraps
+from typing import Any
 
 from .types import IntentType, QueryIntent
 
@@ -22,7 +23,7 @@ class StructuredLogger:
         result: QueryIntent,
         latency_ms: float,
         cache_hit: bool = False,
-        error: Optional[Exception] = None,
+        error: Exception | None = None,
     ):
         """Log intent detection with structured format."""
         log_entry = {
@@ -51,7 +52,7 @@ class StructuredLogger:
         intent_type: str,
         route_to: str,
         confidence: float,
-        hint: Optional[str] = None,
+        hint: str | None = None,
     ):
         """Log routing decision with structured format."""
         log_entry = {
@@ -66,7 +67,7 @@ class StructuredLogger:
 
         self.logger.info(json.dumps(log_entry))
 
-    def log_performance_metrics(self, metrics: Dict[str, Any]):
+    def log_performance_metrics(self, metrics: dict[str, Any]):
         """Log performance metrics."""
         log_entry = {
             "timestamp": datetime.utcnow().isoformat(),
@@ -107,7 +108,7 @@ class PerformanceMonitor:
         intent: QueryIntent,
         latency_ms: float,
         cache_hit: bool = False,
-        error: Optional[Exception] = None,
+        error: Exception | None = None,
     ):
         """Record a detection event."""
         self.metrics["total_queries"] += 1
@@ -145,7 +146,7 @@ class PerformanceMonitor:
         else:
             return "0.8-1.0"
 
-    def get_metrics(self) -> Dict[str, Any]:
+    def get_metrics(self) -> dict[str, Any]:
         """Get current metrics."""
         metrics = self.metrics.copy()
 

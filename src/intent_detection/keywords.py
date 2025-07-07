@@ -1,7 +1,5 @@
 """Keyword definitions for intent detection."""
 
-
-
 FACT_QA_KEYWORDS: set[str] = {
     # Financial metrics
     "revenue",
