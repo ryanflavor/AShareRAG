@@ -36,7 +36,7 @@
     * **行动**: 在IDE环境中，将最终的PRD和架构文档分片成更小的、易于处理的Markdown文件，以便AI智能体在创建故事时能精确引用。
     * **产出**: `docs/prd/` 和 `docs/architecture/` 目录及其中文件。
 * [ ] **步骤 5: 故事开发循环 (Story Development Cycle)** - *此步骤将重复执行*
-    * [x] **a. 创建故事**: 由PO/SM代理根据分片文档创建具体的故事文件（Story File）。<!-- current-step: Story 2.2 created -->
+    * [x] **a. 创建故事**: 由PO/SM代理根据分片文档创建具体的故事文件（Story File）。<!-- current-step: Story 2.3 created -->
     * [ ] **b. 开发实现**: 由Dev Agent根据TDD流程实现故事功能。
     * [ ] **c. 代码审核**: (可选) 由QA Agent进行代码质量和功能审核。
 * [ ] **步骤 6: 史诗回顾 (Epic Retrospective)** - *可选*

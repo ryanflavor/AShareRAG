@@ -5,7 +5,9 @@ and ranked documents to generate a comprehensive, coherent answer using
 an LLM (DeepSeek V3).
 """
 
+import asyncio
 import logging
+import re
 import time
 from dataclasses import dataclass
 from typing import Any
@@ -33,15 +35,17 @@ class AnswerSynthesizerConfig:
 class AnswerSynthesizer:
     """Synthesizes comprehensive answers from retrieved documents using LLM."""
 
-    def __init__(self, config: AnswerSynthesizerConfig, llm_adapter: LLMAdapter):
+    def __init__(self, config: AnswerSynthesizerConfig, llm_adapter: LLMAdapter, timeout: float = 30.0):
         """Initialize the AnswerSynthesizer.
 
         Args:
             config: Configuration for the synthesizer
             llm_adapter: LLM adapter instance (e.g., DeepSeekAdapter)
+            timeout: Timeout for synthesis in seconds (default: 30.0)
         """
         self.config = config
         self.llm_adapter = llm_adapter
+        self.timeout = timeout
         self._prompts: dict[str, Any] | None = None
 
         # Statistics
@@ -408,6 +412,134 @@ Please provide your answer:"""
         except Exception as e:
             logger.error(f"Failed to load prompts from {prompts_path}: {e}")
             self._prompts = None
+
+    def synthesize(
+        self,
+        query: str,
+        contexts: list[dict[str, Any]]
+    ) -> dict[str, Any]:
+        """Synchronous wrapper for synthesize_answer.
+
+        Args:
+            query: The user's query
+            contexts: List of retrieved and ranked documents
+
+        Returns:
+            Dictionary containing answer and sources
+        """
+        # Sanitize prompt to prevent injection
+        query = self._sanitize_input(query)
+
+        # Filter out any potentially malicious contexts
+        safe_contexts = []
+        for ctx in contexts:
+            safe_content = self._sanitize_input(ctx.get("content", ""))
+            if self._is_safe_content(safe_content):
+                safe_ctx = ctx.copy()
+                safe_ctx["content"] = safe_content
+                safe_contexts.append(safe_ctx)
+
+        # Run async method in sync context
+        try:
+            # Try to get running loop
+            try:
+                loop = asyncio.get_running_loop()
+                # If we're already in an async context, use run_coroutine_threadsafe
+                future = asyncio.run_coroutine_threadsafe(
+                    asyncio.wait_for(
+                        self.synthesize_answer(query, safe_contexts),
+                        timeout=self.timeout
+                    ),
+                    loop
+                )
+                result = future.result()
+            except RuntimeError:
+                # No running loop, use asyncio.run
+                result = asyncio.run(
+                    asyncio.wait_for(
+                        self.synthesize_answer(query, safe_contexts),
+                        timeout=self.timeout
+                    )
+                )
+            return result
+        except asyncio.TimeoutError:
+            raise TimeoutError(f"Synthesis timed out after {self.timeout} seconds")
+        except Exception as e:
+            logger.error(f"Error in synthesis: {e!s}")
+            # Return fallback answer
+            if not safe_contexts:
+                answer = self._generate_no_results_answer(query)
+            else:
+                answer = "基于提供的信息，我无法生成完整的答案。请尝试重新表述您的问题。"
+
+            return {
+                "answer": answer,
+                "sources": safe_contexts[:3],  # Return top 3 sources
+                "synthesis_time": 0.0,
+                "metadata": {"error": str(e)}
+            }
+
+    def _sanitize_input(self, text: str) -> str:
+        """Sanitize input text to prevent injection attacks.
+
+        Args:
+            text: Input text to sanitize
+
+        Returns:
+            Sanitized text
+        """
+        if not text:
+            return ""
+
+        # Remove potential injection patterns
+        patterns_to_remove = [
+            r"(?i)(system|assistant|human|user):",  # Role indicators
+            r"(?i)ignore\s+(all\s+)?previous\s+instructions?",  # Instruction override
+            r"(?i)you\s+are\s+now",  # Role switching
+            r"(?i)debug\s+mode",  # Debug commands
+            r"(?i)print\s*\(",  # Code execution
+            r"(?i)exec\s*\(",  # Code execution
+            r"(?i)eval\s*\(",  # Code execution
+            r"\{\{.*?\}\}",  # Template injections
+            r"\[\[.*?\]\]",  # Template injections
+        ]
+
+        sanitized = text
+        for pattern in patterns_to_remove:
+            sanitized = re.sub(pattern, "", sanitized)
+
+        # Remove excessive whitespace
+        sanitized = re.sub(r"\s+", " ", sanitized).strip()
+
+        return sanitized
+
+    def _is_safe_content(self, content: str) -> bool:
+        """Check if content is safe to process.
+
+        Args:
+            content: Content to check
+
+        Returns:
+            True if content is safe, False otherwise
+        """
+        if not content:
+            return True
+
+        # Check for suspicious patterns
+        suspicious_patterns = [
+            r"(?i)<script",  # Script tags
+            r"(?i)javascript:",  # JavaScript protocol
+            r"(?i)data:text/html",  # Data URLs
+            r"(?i)vbscript:",  # VBScript protocol
+            r"(?i)on\w+\s*=",  # Event handlers
+        ]
+
+        for pattern in suspicious_patterns:
+            if re.search(pattern, content):
+                logger.warning(f"Suspicious content detected: {pattern}")
+                return False
+
+        return True
 
     def get_statistics(self) -> dict[str, Any]:
         """Get usage statistics.

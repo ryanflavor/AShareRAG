@@ -1,7 +1,7 @@
 """Vector indexer component for generating embeddings and storing in vector database."""
 
 import logging
-from typing import Any, Dict, List
+from typing import Any
 
 from src.components.embedding_service import EmbeddingService
 from src.components.vector_storage import VectorStorage
@@ -26,7 +26,7 @@ class VectorIndexer:
         logger.info("VectorIndexer initialized")
 
     def index_documents(
-        self, documents: List[Dict[str, Any]], ner_re_results: Dict[str, Dict[str, Any]]
+        self, documents: list[dict[str, Any]], ner_re_results: dict[str, dict[str, Any]]
     ) -> None:
         """Generate embeddings and store in vector database.
 
@@ -71,8 +71,8 @@ class VectorIndexer:
             logger.warning("No documents prepared for embedding")
 
     def _prepare_documents_for_embedding(
-        self, documents: List[Dict[str, Any]], ner_re_results: Dict[str, Dict[str, Any]]
-    ) -> List[Dict[str, Any]]:
+        self, documents: list[dict[str, Any]], ner_re_results: dict[str, dict[str, Any]]
+    ) -> list[dict[str, Any]]:
         """
         Prepare documents for embedding by adding NER/RE metadata.
 

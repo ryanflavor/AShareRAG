@@ -166,3 +166,7 @@ class Settings(BaseSettings):
         if not 0 <= v <= 1:
             raise ValueError("Threshold must be between 0 and 1")
         return v
+
+
+# Create global settings instance
+settings = Settings()

@@ -4,6 +4,7 @@ This module implements the end-to-end pipeline for fact-based question answering
 integrating vector retrieval, reranking, and answer synthesis components.
 """
 
+import asyncio
 import hashlib
 import json
 import logging
@@ -63,7 +64,18 @@ class FactQAPipeline:
             vector_storage: Vector storage instance
             embedding_service: Embedding service instance
             llm_adapter: LLM adapter instance
+            
+        Raises:
+            ValueError: If configuration values are invalid
         """
+        # Validate configuration
+        if config.retriever_top_k <= 0:
+            raise ValueError("retriever_top_k must be positive")
+        if config.reranker_top_k <= 0:
+            raise ValueError("reranker_top_k must be positive")
+        if not 0 <= config.relevance_threshold <= 1:
+            raise ValueError("relevance_threshold must be between 0 and 1")
+
         self.config = config
 
         # Initialize components
@@ -290,3 +302,42 @@ class FactQAPipeline:
             self._cache.clear()
             self._cache_stats = {"hits": 0, "misses": 0}
             logger.info("Fact-based Q&A pipeline cache cleared")
+
+    def process(
+        self,
+        query: str,
+        company: str | None = None,
+        top_k: int | None = None,
+        synthesis_prompt: str | None = None
+    ) -> dict[str, Any]:
+        """Synchronous wrapper for process_query.
+
+        Args:
+            query: The user's query
+            company: Optional company filter
+            top_k: Number of documents to retrieve (overrides config)
+            synthesis_prompt: Optional custom prompt for answer synthesis
+
+        Returns:
+            Dictionary containing answer, sources, and metadata
+        """
+        # Run async method in sync context
+        try:
+            # Try to get running loop
+            try:
+                loop = asyncio.get_running_loop()
+                # If we're already in an async context, use run_coroutine_threadsafe
+                future = asyncio.run_coroutine_threadsafe(
+                    self.process_query(query, synthesis_prompt),
+                    loop
+                )
+                return future.result()
+            except RuntimeError:
+                # No running loop, use asyncio.run
+                return asyncio.run(self.process_query(query, synthesis_prompt))
+        except Exception as e:
+            logger.error(f"Error in synchronous process: {e!s}")
+            raise
+
+    # Alias for backwards compatibility
+    run = process

@@ -64,6 +64,7 @@ class Qwen3RerankerAdapter:
         # Pre-compute token IDs
         self.token_yes = self.tokenizer.convert_tokens_to_ids("yes")
         self.token_no = self.tokenizer.convert_tokens_to_ids("no")
+        
 
         # Performance statistics
         self.total_processed = 0

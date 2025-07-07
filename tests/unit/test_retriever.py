@@ -54,7 +54,7 @@ class TestVectorRetriever:
             {
                 "content": "贵州茅台主要从事白酒生产与销售。",
                 "company_name": "贵州茅台",
-                "score": 0.95,
+                "similarity": 0.95,
                 "metadata": {"source": "annual_report_2023"},
             }
         ]
@@ -65,7 +65,7 @@ class TestVectorRetriever:
         # Assert
         assert len(results) == 1
         assert results[0]["content"] == "贵州茅台主要从事白酒生产与销售。"
-        assert results[0]["company_name"] == "贵州茅台"
+        assert results[0]["company"] == "贵州茅台"
         assert results[0]["score"] == 0.95
         mock_embedding_service.generate_embeddings.assert_called_once_with([query])
         mock_vector_storage.search.assert_called_once()
@@ -83,7 +83,7 @@ class TestVectorRetriever:
             {
                 "content": "比亚迪2023年新能源汽车销量突破300万辆。",
                 "company_name": "比亚迪",
-                "score": 0.92,
+                "similarity": 0.92,
                 "metadata": {"source": "annual_report_2023"},
             }
         ]
@@ -93,7 +93,7 @@ class TestVectorRetriever:
 
         # Assert
         assert len(results) == 1
-        assert results[0]["company_name"] == "比亚迪"
+        assert results[0]["company"] == "比亚迪"
         # Verify search was called with company filter
         call_args = mock_vector_storage.search.call_args
         assert call_args[1].get("filter_company") == "比亚迪"
@@ -152,7 +152,7 @@ class TestVectorRetriever:
             {
                 "content": f"公司{i}的信息",
                 "company_name": f"公司{i}",
-                "score": 0.9 - i * 0.01,
+                "similarity": 0.9 - i * 0.01,
                 "metadata": {"source": f"report_{i}"},
             }
             for i in range(20)

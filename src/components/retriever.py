@@ -36,17 +36,39 @@ class VectorRetriever:
         self._total_retrieval_time = 0.0
 
     def retrieve(
-        self, query: str, company_filter: str | None = None
+        self, query: str, company_filter: str | None = None, top_k: int | None = None
     ) -> list[dict[str, Any]]:
         """Retrieve relevant documents for the given query.
 
         Args:
             query: User query in natural language
             company_filter: Optional company name to filter results
+            top_k: Optional override for number of results to retrieve
 
         Returns:
             List of retrieved documents with content, metadata, and scores
+
+        Raises:
+            ValueError: If query is empty or exceeds maximum length
         """
+        # Input validation
+        if not query or not query.strip():
+            raise ValueError("Query cannot be empty")
+
+        # Sanitize query - remove special characters while preserving Chinese
+        query = re.sub(r'[^\w\s\u4e00-\u9fff\u3000-\u303f\uff00-\uffef？！。，、；：""''（）《》【】+*/=\\?-]', '', query)
+        query = query.strip()
+
+        if not query:
+            raise ValueError("Query cannot be empty after sanitization")
+
+        # Check query length
+        if len(query) > 10000:
+            raise ValueError(f"Query exceeds maximum length of 10000 characters (got {len(query)})")
+
+        # Use provided top_k or default
+        retrieval_top_k = top_k or self.top_k
+
         # Log start time
         start_time = time.time()
 
@@ -65,7 +87,7 @@ class VectorRetriever:
 
         # Search vector storage
         search_start = time.time()
-        search_kwargs = {"query_vector": query_embedding, "top_k": self.top_k}
+        search_kwargs = {"query_vector": query_embedding, "top_k": retrieval_top_k}
 
         if company_filter:
             search_kwargs["filter_company"] = company_filter
@@ -74,13 +96,24 @@ class VectorRetriever:
         search_time = time.time() - search_start
         logger.info(f"Vector search time: {search_time:.3f}s")
 
-        # Format results
+        # Format results with deduplication
         formatted_results = []
-        for result in results[: self.top_k]:  # Ensure top_k limit
+        seen_contents = set()
+
+        for result in results[: retrieval_top_k]:  # Ensure top_k limit
+            # Get content from 'text' field (database schema) or 'content' field (fallback)
+            content = result.get("text", result.get("content", ""))
+
+            # Skip duplicates
+            if content in seen_contents:
+                continue
+
+            seen_contents.add(content)
+
             formatted_result = {
-                "content": result.get("content", ""),
-                "company_name": result.get("company_name", ""),
-                "score": result.get("score", 0.0),
+                "content": content,
+                "company": result.get("company_name", ""),
+                "score": result.get("similarity", 0.0),
                 "metadata": result.get("metadata", {}),
             }
             formatted_results.append(formatted_result)

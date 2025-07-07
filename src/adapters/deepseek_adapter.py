@@ -64,7 +64,28 @@ def cache_response(func):
 
                 if row is not None:
                     logger.info(f"🎯 Cache hit for {func.__name__}")
-                    return json.loads(row[0])
+                    cached_data = json.loads(row[0])
+                    
+                    # If this is a generate method, reconstruct LLMResponse object
+                    if func.__name__ == "generate":
+                        from src.adapters.llm_adapter import LLMResponse
+                        
+                        if isinstance(cached_data, str):
+                            # Old cache format: just the content string
+                            return LLMResponse(
+                                content=cached_data,
+                                model=self.settings.deepseek_model,
+                                usage={}
+                            )
+                        elif isinstance(cached_data, dict):
+                            # New cache format: full object
+                            return LLMResponse(
+                                content=cached_data.get("content", ""),
+                                model=cached_data.get("model", ""),
+                                usage=cached_data.get("usage", {})
+                            )
+                    
+                    return cached_data
             except Exception as e:
                 logger.warning(f"Cache read error: {e}")
 
