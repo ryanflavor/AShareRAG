@@ -1,0 +1,13 @@
+{
+  "current_batch": 23,
+  "total_batches": 107,
+  "processed_documents": 1150,
+  "total_documents": 5341,
+  "processing_time": 35548.986461639404,
+  "timestamp": "2025-07-07T12:26:57.593424",
+  "memory_usage": {
+    "memory_gb": 1.7586822509765625,
+    "memory_percent": 0.08725365179257068,
+    "available_gb": 1960.754295349121
+  }
+}

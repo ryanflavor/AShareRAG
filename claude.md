@@ -2,4 +2,4 @@
 
 # 当你需要填写日期时，得先通过命令获取当前时间
 
-# `use context7`获取最新的hipporag的代码细节
+# `use context7` 获取最新的hipporag的代码细节

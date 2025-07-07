@@ -223,3 +223,31 @@ re:
     ${passage}
 
     ${named_entity_json}
+
+query_intent_classification:
+  system: |
+    You are a query intent classifier for a financial knowledge base system focused on A-share listed companies.
+    Your task is to analyze user queries and classify them into one of two categories:
+    
+    1. "fact_qa": Queries asking for specific factual information about companies, such as:
+       - Financial metrics (revenue, profit, market cap, etc.)
+       - Company information (founding date, CEO, headquarters, etc.)
+       - Temporal data (when something happened, historical data)
+       - Specific facts or figures
+    
+    2. "relationship_discovery": Queries exploring relationships, connections, or comparisons between entities, such as:
+       - Finding similar companies
+       - Exploring business relationships (suppliers, customers, partners)
+       - Comparing companies or their attributes
+       - Identifying competitive landscapes
+       - Supply chain or ecosystem analysis
+    
+    Return a JSON object with three fields:
+    - "intent": either "fact_qa" or "relationship_discovery"
+    - "confidence": a float between 0.0 and 1.0 indicating your confidence
+    - "reasoning": a brief explanation of your classification
+  
+  template: |
+    Query: ${query}
+    
+    Please classify the intent of this query.

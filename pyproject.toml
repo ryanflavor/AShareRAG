@@ -23,6 +23,7 @@ dependencies = [
     "psutil",
     "pandas",
     "pyarrow",
+    "torchvision>=0.22.1",
 ]
 
 [project.optional-dependencies]
@@ -82,6 +83,7 @@ dev = [
     "mypy>=1.16.1",
     "pytest>=8.4.1",
     "pytest-asyncio>=1.0.0",
+    "pytest-benchmark>=5.1.0",
     "pytest-cov>=6.2.1",
     "ruff>=0.12.2",
 ]

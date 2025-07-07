@@ -1,0 +1,15 @@
+{
+  "batch_idx": 21,
+  "processed_docs": 1100,
+  "timestamp": "2025-07-07T11:40:55.083482",
+  "stats": {
+    "total_documents": 5341,
+    "processed_documents": 1100,
+    "total_entities": 0,
+    "total_relations": 0,
+    "processing_time": 32786.63968491554,
+    "start_time": 1751826851.36681,
+    "batches_completed": 22,
+    "errors": []
+  }
+}
